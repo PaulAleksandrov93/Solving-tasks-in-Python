@@ -6126,45 +6126,85 @@
 
 # ===
 
-import json
-from zipfile import ZipFile
+# import json
+# from zipfile import ZipFile
 
 
-def is_correct_json(string):
-    try:
-        data = json.dumps(string) 
-        return True
-    except ValueError:
-        return False
+# def is_correct_json(string):
+#     try:
+#         data = json.dumps(string) 
+#         return True
+#     except ValueError:
+#         return False
     
 
-with ZipFile('data.zip') as zip_file:
-    info = ZipFile.infolist(zip_file)
-    files = [file for file in info if file.is_dir() == False]
-    files_with_dirs = list(map(lambda x: x.filename, files))
-    jfiles = []
-    for filewd in files_with_dirs:
-        try:
-            with zip_file.open(filewd) as jfile:
-                interlayer = jfile.read().decode('utf-8')
-                inter = json.loads(interlayer)
-                if is_correct_json(interlayer):
-                    jfiles.append(inter)
-                else:
-                    continue
-        except:
-            # print('ошибка открытия файла')
-            continue
-# print(*jfiles, sep='\n')
-arsenal_players = [[d['first_name'], d['last_name']] for d in jfiles if d['team'] == 'Arsenal']
-result = sorted(arsenal_players, key=lambda x: x[0])
-# print(*result, sep='\n')
-for p in result:
-    print(f'{p[0]} {p[1]}')
+# with ZipFile('data.zip') as zip_file:
+#     info = ZipFile.infolist(zip_file)
+#     files = [file for file in info if file.is_dir() == False]
+#     files_with_dirs = list(map(lambda x: x.filename, files))
+#     jfiles = []
+#     for filewd in files_with_dirs:
+#         try:
+#             with zip_file.open(filewd) as jfile:
+#                 interlayer = jfile.read().decode('utf-8')
+#                 inter = json.loads(interlayer)
+#                 if is_correct_json(interlayer):
+#                     jfiles.append(inter)
+#                 else:
+#                     continue
+#         except:
+#             continue
+# arsenal_players = [[d['first_name'], d['last_name']] for d in jfiles if d['team'] == 'Arsenal']
+# result = sorted(arsenal_players, key=lambda x: x[0])
+
+# for p in result:
+#     print(f'{p[0]} {p[1]}')
+
+# ===
+
+# from zipfile import ZipFile
+
+# with ZipFile('desktop.zip') as zip_file:
+
+# import os
+# import zipfile
 
 
+# def get_size(size):
+#     size_rounded = round(int(size) / 1024, 0)
+#     if size_rounded == 0:
+#         return str(size) + " B"
+#     if size_rounded >= 1024:
+#         size_rounded = round(size / 1024 / 1024, 0)
+#         return str(int(size_rounded)) + " MB"
+#     return str(int(size_rounded)) + " KB"
 
+# with zipfile.ZipFile('desktop.zip', 'r') as zip_ref:
+#     for entry in zip_ref.infolist():
+#         file_path_in_zip = entry.filename
+#         nesting_level = file_path_in_zip.count('/') - 1
+#         file_name = entry.filename
+#         if '.' not in file_name:
+#             file_name = entry.filename
+#             while file_name.count('/') > 1:
+#                 file_name = file_name[file_name.find('/')+1:]
+#             print(' ' * (nesting_level * 2) + file_name[:-1])
+#         else:
+#             while file_name.count('/') > 0:
+#                 file_name = file_name[file_name.find('/')+1:]
+#             try:
+#                 print(' ' * (nesting_level * 2 + 2) + file_name, get_size(entry.file_size))
+#             except FileNotFoundError as e:
+#                 print(' ' * (nesting_level * 2) + file_name, 'File not found in archive:', e.filename) 
 
+# ===
+import pickle
+import sys
+
+with open(input(), 'rb') as file:
+    obj = pickle.load(file) 
+    data = list(map(lambda x: x.strip(), sys.stdin))
+    obj(*data)
 
 
 
