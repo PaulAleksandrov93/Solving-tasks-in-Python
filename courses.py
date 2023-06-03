@@ -6198,32 +6198,219 @@
 #                 print(' ' * (nesting_level * 2) + file_name, 'File not found in archive:', e.filename) 
 
 # ===
-import pickle
-import sys
 
-with open(input(), 'rb') as file:
-    obj = pickle.load(file) 
-    data = list(map(lambda x: x.strip(), sys.stdin))
-    obj(*data)
+# import pickle
+# import sys
 
+# with open(input(), 'rb') as file:
+#     obj = pickle.load(file) 
+#     data = list(map(lambda x: x.strip(), sys.stdin))
+#     obj(*data)
 
+# ===
 
+# import pickle
+# def filter_dump(filename, objects, typename):
+#     data = [x for x in objects if isinstance(x, typename)]
+#     with open(filename, 'wb') as file:
+#         pickle.dump(data, file)
 
+# typename = int
+# object = [1,2,3,"d"]
+# name = "some_file"
+# filter_dump(name, object, typename)
 
+# ===
 
+# import pickle
 
+# file_name, сhecksum = input(), int(input())
+# with open(file_name, 'rb') as file:
+#     data = pickle.load(file)
+# if isinstance(data, dict):
+#     my_keys = [x for x in data.keys() if isinstance(x, int)] 
+#     if my_keys:
+#         my_sum = sum(my_keys)
+#     else:
+#         my_sum = 0    
+# else:
+#     my_lst = [x for x in data if isinstance(x, int)]
+#     if my_lst:
+#         my_sum = min(my_lst) * max(my_lst)
+#     else:
+#         my_sum = 0 
 
+# if сhecksum == my_sum:
+#     print('Контрольные суммы совпадают')
+# else:
+#     print('Контрольные суммы не совпадают')
 
+# ===
 
+# from collections import namedtuple
 
-            
+# Resolution = namedtuple('Resolution', ['horizontal', 'vertical'])
 
+# full_hd = Resolution(1920, 1070)
 
+# full_hd = full_hd._replace(vertical=1080)
+
+# print(full_hd.vertical)
+
+# =
+
+# from collections import namedtuple
+
+# PcHardware = namedtuple('PcHardware', 'cpu,gpu,motherboard,ram', defaults=[None, None])
+
+# print(PcHardware._field_defaults)
+
+# =
+
+# from collections import namedtuple
+
+# App = namedtuple('App', ['name', 'apptype', 'size'])
+
+# app = App._make('Discord messenger 200'.split())
+
+# print(*app)
+
+# =
+
+# from collections import namedtuple
+
+# Device = namedtuple('Device', ['devicetype', 'model'])
+
+# device1 = Device(**{'devicetype': 'keyboard', 'model': 'Logitech G213'})
+# device2 = Device(*{'devicetype': 'keyboard', 'model': 'Logitech G213'})
+
+# print(*device1, sep=', ')
+# print(*device2, sep=', ')
+
+# ===
+
+# from collections import namedtuple
+
+# Fruit = namedtuple('Fruit', ['name', 'color', 'vitamins'])
+
+# ===
+
+# from collections import namedtuple
+
+# Animal = namedtuple('Animal', ['name', 'family', 'sex', 'color'])
+
+# ===
+ 
+# from collections import namedtuple
+# import pickle
+# Animal = namedtuple('Animal', ['name', 'family', 'sex', 'color'])
+# with open('data.pkl', 'rb') as file:
+#     animals = pickle.load(file)
+# for animal in animals:
+#     for field, value in zip(Animal._fields, animal):
+#         print(f'{field}: {value}')
+#     print()
+
+# ===
+
+# from collections import namedtuple
+
+# User = namedtuple('User', ['name', 'surname', 'email', 'plan'])
+
+# users = [User('Mary', 'Griffin', 'sonnen@yahoo.com', 'Basic'),
+#          User('Brenda', 'Young', 'retoh@outlook.com', 'Silver'),
+#          User('Kathleen', 'Lyons', 'balchen@att.net', 'Gold'),
+#          User('Pamela', 'Hicks', 'corrada@sbcglobal.net', 'Silver'),
+#          User('William', 'Townsend', 'kosact@verizon.net', 'Gold'),
+#          User('Clayton', 'Morris', 'berserk@yahoo.com', 'Silver'),
+#          User('Dorothy', 'Dennis', 'sequin@live.com', 'Gold'),
+#          User('Tyler', 'Walker', 'noahb@comcast.net', 'Basic'),
+#          User('Joseph', 'Moore', 'ylchang@sbcglobal.net', 'Silver'),
+#          User('Kenneth', 'Richardson', 'tbusch@me.com', 'Bronze'),
+#          User('Stephanie', 'Bush', 'neuffer@live.com', 'Gold'),
+#          User('Gregory', 'Hughes', 'juliano@att.net', 'Basic'),
+#          User('Tracy', 'Wallace', 'sblack@me.com', 'Silver'),
+#          User('Russell', 'Smith', 'isaacson@comcast.net', 'Bronze'),
+#          User('Megan', 'Patterson', 'hoangle@outlook.com', 'Basic')]
+
+# def sort_function(user):
+#     plan_score = {'Gold': 3, 'Silver': 2, 'Bronze': 1, 'Basic': 0}
+#     return (-plan_score[user.plan], user.email)
+
+# users_sorted = sorted(users, key=sort_function)
+
+# for user in users_sorted:
+#     print(f"{user.name} {user.surname}")
+#     print(f"  Email: {user.email}")
+#     print(f"  Plan: {user.plan}")
+#     print()
+
+# ===
+
+# import csv
+# from datetime import datetime
+
+# def read_meetings(filename):
+#     meetings = []
+#     with open(filename, 'r', encoding='utf-8') as file:
+#         reader = csv.reader(file)
+#         next(reader)  # пропускаем заголовок
+#         for row in reader:
+#             surname = row[0]
+#             name = row[1]
+#             date_time_str = row[2] + ' ' + row[3]  # объединяем дату и время
+#             date_time = datetime.strptime(date_time_str, '%d.%m.%Y %H:%M')
+#             meetings.append((surname, name, date_time))
+#     return meetings
+
+# def print_sorted_meetings(meetings):
+#     sorted_meetings = sorted(meetings, key=lambda x: x[2])  # сортируем по дате и времени
+#     for meeting in sorted_meetings:
+#         print(meeting[0], meeting[1])
+
+# filename = 'meetings.csv'
+# meetings = read_meetings(filename)
+# print_sorted_meetings(meetings)
+
+# ===
+
+# from collections import defaultdict
+
+# data = [('Books', 1343), ('Books', 1166), ('Merch', 616), ('Courses', 966), ('Merch', 1145), ('Courses', 1061), ('Books', 848), ('Courses', 964), ('Tutorials', 832), ('Merch', 642), ('Books', 815), ('Tutorials', 1041), ('Books', 1218), ('Tutorials', 880), ('Books', 1003), ('Merch', 951), ('Books', 920), ('Merch', 729), ('Tutorials', 977), ('Books', 656)]
+
+# product_income = defaultdict(int)
+# for product, income in data:
+#     product_income[product] += income
     
-    
+# for product in sorted(product_income):
+#     print(f"{product}: ${product_income[product]}")
 
+# === 
 
+# from collections import defaultdict
 
+# staff = [('Sales', 'Robert Barnes'), ('Developing', 'Thomas Porter'), ('Accounting', 'James Wilkins'), ('Sales', 'Connie Reid'), ('Accounting', 'Brenda Davis'), ('Developing', 'Miguel Norris'), ('Accounting', 'Linda Hudson'), ('Developing', 'Deborah George'), ('Developing', 'Nicole Watts'), ('Marketing', 'Billy Lloyd'), ('Sales', 'Charlotte Cox'), ('Marketing', 'Bernice Ramos'), ('Sales', 'Jose Taylor'), ('Sales', 'Katie Warner'), ('Accounting', 'Steven Diaz'), ('Accounting', 'Kimberly Reynolds'), ('Accounting', 'John Watts'), ('Accounting', 'Dale Houston'), ('Developing', 'Arlene Gibson'), ('Marketing', 'Joyce Lawrence'), ('Accounting', 'Rosemary Garcia'), ('Marketing', 'Ralph Morgan'), ('Marketing', 'Sam Davis'), ('Marketing', 'Gail Hill'), ('Accounting', 'Michelle Wright'), ('Accounting', 'Casey Jenkins'), ('Sales', 'Evelyn Martin'), ('Accounting', 'Aaron Ferguson'), ('Marketing', 'Andrew Clark'), ('Marketing', 'John Gonzalez'), ('Developing', 'Wilma Woods'), ('Sales', 'Marie Cooper'), ('Accounting', 'Kay Scott'), ('Sales', 'Gladys Taylor'), ('Accounting', 'Ann Bell'), ('Accounting', 'Craig Wood'), ('Accounting', 'Gloria Higgins'), ('Marketing', 'Mario Reynolds'), ('Marketing', 'Helen Taylor'), ('Marketing', 'Mary King'), ('Accounting', 'Jane Jackson'), ('Marketing', 'Carol Peters'), ('Sales', 'Alicia Mendoza'), ('Accounting', 'Edna Cunningham'), ('Developing', 'Joyce Rivera'), ('Sales', 'Joseph Lee'), ('Sales', 'John White'), ('Marketing', 'Charles Bailey'), ('Sales', 'Chester Fernandez'), ('Sales', 'John Washington')]
+
+# depart_employee = defaultdict(int)
+# for depart, employee in staff:
+#     depart_employee[depart] += 1
+
+# for depart in sorted(depart_employee):
+#     print(f'{depart}: {depart_employee[depart]}')
+
+# ===
+
+from collections import defaultdict
+
+staff_broken = [('Developing', 'Miguel Norris'), ('Sales', 'Connie Reid'), ('Sales', 'Joseph Lee'), ('Marketing', 'Carol Peters'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Ann Bell'), ('Marketing', 'Ralph Morgan'), ('Accounting', 'Gloria Higgins'), ('Developing', 'Wilma Woods'), ('Developing', 'Wilma Woods'), ('Marketing', 'Bernice Ramos'), ('Marketing', 'Joyce Lawrence'), ('Accounting', 'Craig Wood'), ('Developing', 'Nicole Watts'), ('Sales', 'Jose Taylor'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Edna Cunningham'), ('Sales', 'Jose Taylor'), ('Marketing', 'Helen Taylor'), ('Accounting', 'Kimberly Reynolds'), ('Marketing', 'Mary King'), ('Sales', 'Joseph Lee'), ('Accounting', 'Gloria Higgins'), ('Marketing', 'Andrew Clark'), ('Accounting', 'John Watts'), ('Accounting', 'Rosemary Garcia'), ('Accounting', 'Steven Diaz'), ('Marketing', 'Mary King'), ('Sales', 'Gladys Taylor'), ('Developing', 'Thomas Porter'), ('Accounting', 'Brenda Davis'), ('Sales', 'Connie Reid'), ('Sales', 'Alicia Mendoza'), ('Marketing', 'Mario Reynolds'), ('Sales', 'John White'), ('Developing', 'Joyce Rivera'), ('Accounting', 'Steven Diaz'), ('Developing', 'Arlene Gibson'), ('Sales', 'Robert Barnes'), ('Sales', 'Charlotte Cox'), ('Accounting', 'Craig Wood'), ('Marketing', 'Carol Peters'), ('Marketing', 'Ralph Morgan'), ('Accounting', 'Kay Scott'), ('Sales', 'Evelyn Martin'), ('Marketing', 'Billy Lloyd'), ('Sales', 'Gladys Taylor'), ('Developing', 'Deborah George'), ('Sales', 'Charlotte Cox'), ('Marketing', 'Sam Davis'), ('Sales', 'John White'), ('Sales', 'Marie Cooper'), ('Marketing', 'John Gonzalez'), ('Sales', 'John Washington'), ('Sales', 'Chester Fernandez'), ('Sales', 'Alicia Mendoza'), ('Sales', 'Katie Warner'), ('Accounting', 'Jane Jackson'), ('Sales', 'Chester Fernandez'), ('Marketing', 'Charles Bailey'), ('Marketing', 'Gail Hill'), ('Accounting', 'Casey Jenkins'), ('Accounting', 'James Wilkins'), ('Accounting', 'Casey Jenkins'), ('Marketing', 'Mario Reynolds'), ('Accounting', 'Aaron Ferguson'), ('Accounting', 'Kimberly Reynolds'), ('Sales', 'Robert Barnes'), ('Accounting', 'Aaron Ferguson'), ('Accounting', 'Jane Jackson'), ('Developing', 'Deborah George'), ('Accounting', 'Michelle Wright'), ('Accounting', 'Dale Houston')]
+
+depart_employee = defaultdict(set)
+for depart, employee in staff_broken:
+    depart_employee[depart].add(employee)
+
+# for depart in sorted(depart_employee):
+#     print(f'{depart}: {depart_employee[depart])}')
+print(depart_employee)
 
 
 
