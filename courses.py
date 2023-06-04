@@ -6400,17 +6400,138 @@
 
 # ===
 
-from collections import defaultdict
+# from collections import defaultdict
 
-staff_broken = [('Developing', 'Miguel Norris'), ('Sales', 'Connie Reid'), ('Sales', 'Joseph Lee'), ('Marketing', 'Carol Peters'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Ann Bell'), ('Marketing', 'Ralph Morgan'), ('Accounting', 'Gloria Higgins'), ('Developing', 'Wilma Woods'), ('Developing', 'Wilma Woods'), ('Marketing', 'Bernice Ramos'), ('Marketing', 'Joyce Lawrence'), ('Accounting', 'Craig Wood'), ('Developing', 'Nicole Watts'), ('Sales', 'Jose Taylor'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Edna Cunningham'), ('Sales', 'Jose Taylor'), ('Marketing', 'Helen Taylor'), ('Accounting', 'Kimberly Reynolds'), ('Marketing', 'Mary King'), ('Sales', 'Joseph Lee'), ('Accounting', 'Gloria Higgins'), ('Marketing', 'Andrew Clark'), ('Accounting', 'John Watts'), ('Accounting', 'Rosemary Garcia'), ('Accounting', 'Steven Diaz'), ('Marketing', 'Mary King'), ('Sales', 'Gladys Taylor'), ('Developing', 'Thomas Porter'), ('Accounting', 'Brenda Davis'), ('Sales', 'Connie Reid'), ('Sales', 'Alicia Mendoza'), ('Marketing', 'Mario Reynolds'), ('Sales', 'John White'), ('Developing', 'Joyce Rivera'), ('Accounting', 'Steven Diaz'), ('Developing', 'Arlene Gibson'), ('Sales', 'Robert Barnes'), ('Sales', 'Charlotte Cox'), ('Accounting', 'Craig Wood'), ('Marketing', 'Carol Peters'), ('Marketing', 'Ralph Morgan'), ('Accounting', 'Kay Scott'), ('Sales', 'Evelyn Martin'), ('Marketing', 'Billy Lloyd'), ('Sales', 'Gladys Taylor'), ('Developing', 'Deborah George'), ('Sales', 'Charlotte Cox'), ('Marketing', 'Sam Davis'), ('Sales', 'John White'), ('Sales', 'Marie Cooper'), ('Marketing', 'John Gonzalez'), ('Sales', 'John Washington'), ('Sales', 'Chester Fernandez'), ('Sales', 'Alicia Mendoza'), ('Sales', 'Katie Warner'), ('Accounting', 'Jane Jackson'), ('Sales', 'Chester Fernandez'), ('Marketing', 'Charles Bailey'), ('Marketing', 'Gail Hill'), ('Accounting', 'Casey Jenkins'), ('Accounting', 'James Wilkins'), ('Accounting', 'Casey Jenkins'), ('Marketing', 'Mario Reynolds'), ('Accounting', 'Aaron Ferguson'), ('Accounting', 'Kimberly Reynolds'), ('Sales', 'Robert Barnes'), ('Accounting', 'Aaron Ferguson'), ('Accounting', 'Jane Jackson'), ('Developing', 'Deborah George'), ('Accounting', 'Michelle Wright'), ('Accounting', 'Dale Houston')]
+# staff_broken = [('Developing', 'Miguel Norris'), ('Sales', 'Connie Reid'), ('Sales', 'Joseph Lee'), ('Marketing', 'Carol Peters'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Ann Bell'), ('Marketing', 'Ralph Morgan'), ('Accounting', 'Gloria Higgins'), ('Developing', 'Wilma Woods'), ('Developing', 'Wilma Woods'), ('Marketing', 'Bernice Ramos'), ('Marketing', 'Joyce Lawrence'), ('Accounting', 'Craig Wood'), ('Developing', 'Nicole Watts'), ('Sales', 'Jose Taylor'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Edna Cunningham'), ('Sales', 'Jose Taylor'), ('Marketing', 'Helen Taylor'), ('Accounting', 'Kimberly Reynolds'), ('Marketing', 'Mary King'), ('Sales', 'Joseph Lee'), ('Accounting', 'Gloria Higgins'), ('Marketing', 'Andrew Clark'), ('Accounting', 'John Watts'), ('Accounting', 'Rosemary Garcia'), ('Accounting', 'Steven Diaz'), ('Marketing', 'Mary King'), ('Sales', 'Gladys Taylor'), ('Developing', 'Thomas Porter'), ('Accounting', 'Brenda Davis'), ('Sales', 'Connie Reid'), ('Sales', 'Alicia Mendoza'), ('Marketing', 'Mario Reynolds'), ('Sales', 'John White'), ('Developing', 'Joyce Rivera'), ('Accounting', 'Steven Diaz'), ('Developing', 'Arlene Gibson'), ('Sales', 'Robert Barnes'), ('Sales', 'Charlotte Cox'), ('Accounting', 'Craig Wood'), ('Marketing', 'Carol Peters'), ('Marketing', 'Ralph Morgan'), ('Accounting', 'Kay Scott'), ('Sales', 'Evelyn Martin'), ('Marketing', 'Billy Lloyd'), ('Sales', 'Gladys Taylor'), ('Developing', 'Deborah George'), ('Sales', 'Charlotte Cox'), ('Marketing', 'Sam Davis'), ('Sales', 'John White'), ('Sales', 'Marie Cooper'), ('Marketing', 'John Gonzalez'), ('Sales', 'John Washington'), ('Sales', 'Chester Fernandez'), ('Sales', 'Alicia Mendoza'), ('Sales', 'Katie Warner'), ('Accounting', 'Jane Jackson'), ('Sales', 'Chester Fernandez'), ('Marketing', 'Charles Bailey'), ('Marketing', 'Gail Hill'), ('Accounting', 'Casey Jenkins'), ('Accounting', 'James Wilkins'), ('Accounting', 'Casey Jenkins'), ('Marketing', 'Mario Reynolds'), ('Accounting', 'Aaron Ferguson'), ('Accounting', 'Kimberly Reynolds'), ('Sales', 'Robert Barnes'), ('Accounting', 'Aaron Ferguson'), ('Accounting', 'Jane Jackson'), ('Developing', 'Deborah George'), ('Accounting', 'Michelle Wright'), ('Accounting', 'Dale Houston')]
 
-depart_employee = defaultdict(set)
-for depart, employee in staff_broken:
-    depart_employee[depart].add(employee)
+# depart_employee = defaultdict(set)
+# for depart, employee in staff_broken:
+#     depart_employee[depart].add(employee)
 
 # for depart in sorted(depart_employee):
-#     print(f'{depart}: {depart_employee[depart])}')
-print(depart_employee)
+#     value = sorted(depart_employee[depart])
+#     print(f"{depart}: {', '.join(value)}")
+
+# ===
+
+# from collections import defaultdict
+# def wins(pairs):
+#     winner_loser = defaultdict(set) 
+#     for winner, loser in pairs:
+#         winner_loser[winner].add(loser)
+#     return winner_loser
+
+# result = wins([('Тимур', 'Артур'), ('Тимур', 'Дима'), ('Дима', 'Артур')])
+
+# for winner, losers in sorted(result.items()):
+#     print(winner, '->', *sorted(losers))
+
+# ===
+
+# from collections import defaultdict
+
+# def flip_dict(dict_of_lists):
+#     dict_flip = defaultdict(list)
+#     for k, v in dict_of_lists.items():
+#         for i in v:
+#             dict_flip[i].append(k)
+#     return dict_flip
+
+# print(flip_dict({'a': [1, 2], 'b': [3, 1], 'c': [2]}))
+
+# ===
+
+# from collections import defaultdict
+
+# def best_sender(messages, senders):
+#     sender_word_count = defaultdict(int)  # словарь со значением по умолчанию 0 для подсчета слов
+
+#     for message, sender in zip(messages, senders):
+#         word_count = len(message.split())
+#         sender_word_count[sender] += word_count
+
+#     max_word_count = max(sender_word_count.values())
+#     best_senders = [sender for sender, count in sender_word_count.items() if count == max_word_count]
+#     best_sender_name = max(best_senders)
+    
+#     return best_sender_name
+
+
+    
+# messages = ['How is Stepik for everyone', 'Stepik is useful for practice']
+# senders = ['Bob', 'Charlie']
+# print(best_sender(messages, senders))
+
+# ===
+
+# from collections import OrderedDict
+
+# data = OrderedDict(key1='value1')
+
+# data['key2'] = 'value2'
+# data['key3'] = 'value3'
+
+# for key, value in data.items():
+#     print(f'{key} -> {value}')
+
+# =
+
+# from collections import OrderedDict
+
+# cloth = OrderedDict({'name': 'pants', 'size': 'm', 'color': 'grey'})
+
+# cloth['name'] = 'shirt'
+# cloth.update(size='s')
+
+# for key, value in cloth.items():
+#     print(f'{key}: {value}')
+
+# =
+
+# country1 = dict(name='Finland', capital='Helsinki', currency='euro')
+# country2 = dict(capital='Helsinki', name='Finland', currency='euro')
+
+# print(country1 == country2)
+
+# =
+
+# from collections import OrderedDict
+
+# planets1 = OrderedDict(Mercury=None, Venues=2, Earth=None, Mars=4, Jupiter=5)
+# planets2 = OrderedDict(Mercury=1, Saturn=6, Uranus=7, Neptune=8, Earth=3)
+
+# solar_system = planets1 | planets2
+
+# print(*solar_system)
+
+# = 
+
+# from collections import OrderedDict
+
+# flower = OrderedDict([('name', 'Rose'), ('family', 'Rosaceae'), ('kingdom', 'Plantae')])
+
+# flower.move_to_end('family')
+
+# for key, value in flower.items():
+#     print(f'{key}: {value}')
+
+# =
+
+# from collections import OrderedDict
+
+# vector = OrderedDict(x=3, y=4, module=5)
+
+# print(*reversed(vector))
+
+# ===
+
+from collections import OrderedDict
+
+data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе', 'AdmArea': 'Центральный административный округ', 'District': 'район Арбат', 'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
+
+reversed_data = OrderedDict(reversed(list(data.items())))
+
+print(reversed_data)
 
 
 
