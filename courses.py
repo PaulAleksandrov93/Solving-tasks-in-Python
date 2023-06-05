@@ -6525,13 +6525,181 @@
 
 # ===
 
-from collections import OrderedDict
+# from collections import OrderedDict
 
-data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе', 'AdmArea': 'Центральный административный округ', 'District': 'район Арбат', 'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
+# data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе', 'AdmArea': 'Центральный административный округ', 'District': 'район Арбат', 'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
 
-reversed_data = OrderedDict(reversed(list(data.items())))
+# reversed_data = OrderedDict(reversed(list(data.items())))
 
-print(reversed_data)
+# print(reversed_data)
+
+# ===
+# from collections import OrderedDict
+
+# grades = OrderedDict(Timur=100, Arthur=84, Anri=94, Dima=98)
+# new_grades = OrderedDict()
+
+# for rule in (True, False, False, True):
+#     name, grade = grades.popitem(last=rule)
+#     new_grades[name] = grade
+    
+# print(*new_grades)
+
+# =
+
+# from collections import OrderedDict
+# data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе', 'AdmArea': 'Центральный административный округ', 'District': 'район Арбат', 'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
+# new_data = OrderedDict()
+# for i in range(1, len(data)+1):
+#     if i % 2 == 0:
+#         key, value = data.popitem(last=True)
+#         new_data[key] = value
+#     else:
+#         key, value = data.popitem(last=False)
+#         new_data[key] = value
+# output_data = OrderedDict(list(new_data.items()))
+# print(output_data)
+
+# ===
+
+# from collections import OrderedDict
+
+# data = OrderedDict({'Law & Order': 1990, 'The Practice': 1997, 'Six Feet Under': 2001, 'Joan of Arcadia': 2003, 'The West Wing': 1999, 'Deadwood': 2004, 'The Sopranos': 1999, 'Boston Legal': 2004, 'ER': 1994, 'Friday Night Lights': 2006, '24': 2001, 'Heroes': 2006, 'Lost': 2004, 'Dexter': 2006, 'Damages': 2007, 'Big Love': 2006, 'House': 2004, 'Downton Abbey': 2010, "Grey's Anatomy": 2005, 'Homeland': 2011, 'Breaking Bad': 2008, 'Game of Thrones': 2011, 'CSI: Crime Scene Investigations': 2000, 'Boardwalk Empire': 2010, 'True Blood': 2008, 'House of Cards': 2013, 'True Detective': 2014})
+
+# data.sorted_keys = lambda reverse=False: sorted(data.keys(), reverse=reverse)
+# data.sorted_values = lambda reverse=False: sorted(data.values(), reverse=reverse)
+# print(data.sorted_values(reverse=True))
+# print(data.sorted_keys())
+
+# ===
+
+# from collections import OrderedDict
+
+# def custom_sort(ordered_dict, by_values=False):
+#     if by_values:
+#         for value in OrderedDict(sorted(ordered_dict.items(), key=lambda item: item[1])):
+#             ordered_dict.move_to_end(value)
+#     else:
+#         for key in sorted(ordered_dict):
+#             ordered_dict.move_to_end(key)
+#     return ordered_dict
+
+# # data = OrderedDict([('Dustin', 29), ('Anabel', 17), ('Brian', 40), ('Carol', 16)])
+# # print(custom_sort(data))
+
+# # print(data)
+
+# data = OrderedDict(Earth=3, Mercury=1, Mars=4, Venus=2)
+# print(custom_sort(data, by_values=True))
+
+# print(*data.items())
+
+# ===
+
+# from collections import Counter
+
+# browsers = Counter(['Firefox', 'Chrome', 'Edge', 'Edge' 'Chrome', 'Firefox', 'Opera', 'Yandex', 'Chrome'])
+
+# print(browsers['Firefox'])
+
+# =
+
+# from collections import Counter
+
+# counter = Counter({1: 11, 2: 22, 3: 33})
+
+# print(max(counter.keys()) + min(counter.values()))
+
+# =
+
+# from collections import Counter
+
+# pets = Counter(cat=3, dog=3, fox=2, hamster=1)
+
+# print(pets['elephant'])
+# print(*pets)
+
+# =
+
+# from collections import Counter
+
+# letters = Counter(set('Beautiful is better than ugly'))
+
+# print(letters['t'])
+
+# = 
+
+# from collections import Counter
+
+# vegetables = Counter({'cabbage': 10, 'pepper': 7, 'pumpkin': 4})
+
+# vegetables.update(['pepper', 'pepper', 'pepper'])
+
+# print(vegetables['pepper'])
+
+# =
+
+# from collections import Counter
+
+# vegetables1 = Counter({'cabbage': 'ten', 'pepper': 'seven', 'pumpkin': 'four'})
+# vegetables2 = Counter({'cabbage': 3, 'pepper': 2})
+
+# vegetables1.update(vegetables2)
+
+# print(vegetables1['pepper'])
+
+# = 
+
+# from collections import Counter
+
+# vegetables = Counter({'cabbage': 10, 'pepper': 'seven', 'pumpkin': 'four'})
+
+# vegetables.update({'cabbage': 5, 'pepper': 'two'})
+
+# print(vegetables['pepper'])
+# print(vegetables['cabbage'])
+
+# =
+
+# from collections import Counter
+
+# clothes = Counter([('shirt', 3), ('dress', 1), ('shirt', 3)])
+
+# print(clothes['shirt'])
+
+# =
+
+# from collections import Counter
+
+# letters1 = Counter('abcd')
+# letters2 = Counter('abcd')
+
+# letters2.update(e=0)
+
+# print(letters1 == letters2)
+
+# ===
+
+from collections import Counter
+
+files = ['emoji_smile.jpeg', 'city-of-the-sun.mp3', 'dhook_hw.json', 'sample.xml',
+         'teamspeak3.exe', 'project_module3.py', 'math_lesson3.mp4', 'old_memories.mp4',
+         'spiritfarer.exe', 'backups.json', 'python_for_beg1.mp4', 'emoji_angry.jpeg',
+         'exam_results.csv', 'project_main.py', 'classes.csv', 'plants.xml',
+         'cant-help-myself.mp3', 'microsoft_edge.exe', 'steam.exe', 'math_lesson4.mp4',
+         'city.jpeg', 'bad-disease.mp3', 'beauty.jpeg', 'hollow_knight_silksong.exe',
+         'whatsapp.exe', 'photoshop.exe', 'telegram.exe', 'yandex_browser.exe',
+         'math_lesson7.mp4', 'students.csv', 'emojis.zip', '7z.zip',
+         'bones.mp3', 'python3.zip', 'dhook_lsns.json', 'carl_backups.json',
+         'forest.jpeg', 'python_for_pro8.mp4', 'yandexdisc.exe', 'but-you.mp3',
+         'project_module1.py', 'nothing.xml', 'flowers.jpeg', 'grades.csv',
+         'nvidia_gf.exe', 'small_txt.zip', 'project_module2.py', 'tab.csv',
+         'note.xml', 'sony_vegas11.exe', 'friends.jpeg', 'data.pkl']
+
+ext_files = list(map(lambda x: x[x.find('.')+1:], files))
+result = Counter(ext_files)
+for k, v in sorted(result.items()):
+    print(f'{k}: {v}')
 
 
 
