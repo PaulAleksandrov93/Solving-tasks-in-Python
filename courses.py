@@ -6680,26 +6680,94 @@
 
 # ===
 
+# from collections import Counter
+
+# files = ['emoji_smile.jpeg', 'city-of-the-sun.mp3', 'dhook_hw.json', 'sample.xml',
+#          'teamspeak3.exe', 'project_module3.py', 'math_lesson3.mp4', 'old_memories.mp4',
+#          'spiritfarer.exe', 'backups.json', 'python_for_beg1.mp4', 'emoji_angry.jpeg',
+#          'exam_results.csv', 'project_main.py', 'classes.csv', 'plants.xml',
+#          'cant-help-myself.mp3', 'microsoft_edge.exe', 'steam.exe', 'math_lesson4.mp4',
+#          'city.jpeg', 'bad-disease.mp3', 'beauty.jpeg', 'hollow_knight_silksong.exe',
+#          'whatsapp.exe', 'photoshop.exe', 'telegram.exe', 'yandex_browser.exe',
+#          'math_lesson7.mp4', 'students.csv', 'emojis.zip', '7z.zip',
+#          'bones.mp3', 'python3.zip', 'dhook_lsns.json', 'carl_backups.json',
+#          'forest.jpeg', 'python_for_pro8.mp4', 'yandexdisc.exe', 'but-you.mp3',
+#          'project_module1.py', 'nothing.xml', 'flowers.jpeg', 'grades.csv',
+#          'nvidia_gf.exe', 'small_txt.zip', 'project_module2.py', 'tab.csv',
+#          'note.xml', 'sony_vegas11.exe', 'friends.jpeg', 'data.pkl']
+
+# ext_files = list(map(lambda x: x[x.find('.')+1:], files))
+# result = Counter(ext_files)
+# for k, v in sorted(result.items()):
+#     print(f'{k}: {v}')
+
+# ===
+
+# from collections import Counter
+
+# def count_occurences(word, words):
+#     counts = Counter(list(map(lambda x: x.lower(), words.split())))
+#     return counts[word.lower()]
+
+# word = 'python'
+# words = 'Python Conferences python training python events'
+
+# print(count_occurences(word, words))
+
+# ===
+
+# from collections import Counter
+
+# products = Counter(input().split(','))
+# for product, count in sorted(products.items()):
+#     print(f'{product}: {count}')
+
+# ===
+
+# from collections import Counter
+
+# products = Counter(input().split(','))
+# max_len = max(list(map(lambda x: len(x), products.keys())))
+# for key, value in sorted(products.items()):
+#     price_per_item = [ord(letter) for letter in key if letter != ' ']
+#     total_price = sum(price_per_item) * value
+#     print(f"{key + ' ' * (max_len - len(key))}: {sum(price_per_item)} UC x {value} = {total_price} UC")
+
+# ===
+
+# import string
+# from collections import Counter
+
+# with open('pythonzen.txt', 'r', encoding='UTF-8') as file:
+#     edit_text = [x.strip() for x in file.readlines()]
+# letters = [letter.lower() for letter in ' '.join(edit_text) if letter in string.ascii_letters]
+# number_of_letters = Counter(''.join(letters))
+# for letter, count in sorted(number_of_letters.items()):
+#     print(f"{letter}: {count}")
+
+# ===
+
+# from collections import Counter
+
+# money = Counter({'rub': 1000, 'eur': 2000, 'usd': 2000, 'uah': 1900, 'cad': 2100})
+
+# print(*money.most_common())
+
+# = 
+
+# from collections import Counter
+
+# money = Counter({'rub': 900, 'eur': 1100, 'usd': 500, 'uah': 990, 'cad': 100, 'jpy': 1120})
+
+# print(*money.most_common(3))
+
+# =
+
 from collections import Counter
 
-files = ['emoji_smile.jpeg', 'city-of-the-sun.mp3', 'dhook_hw.json', 'sample.xml',
-         'teamspeak3.exe', 'project_module3.py', 'math_lesson3.mp4', 'old_memories.mp4',
-         'spiritfarer.exe', 'backups.json', 'python_for_beg1.mp4', 'emoji_angry.jpeg',
-         'exam_results.csv', 'project_main.py', 'classes.csv', 'plants.xml',
-         'cant-help-myself.mp3', 'microsoft_edge.exe', 'steam.exe', 'math_lesson4.mp4',
-         'city.jpeg', 'bad-disease.mp3', 'beauty.jpeg', 'hollow_knight_silksong.exe',
-         'whatsapp.exe', 'photoshop.exe', 'telegram.exe', 'yandex_browser.exe',
-         'math_lesson7.mp4', 'students.csv', 'emojis.zip', '7z.zip',
-         'bones.mp3', 'python3.zip', 'dhook_lsns.json', 'carl_backups.json',
-         'forest.jpeg', 'python_for_pro8.mp4', 'yandexdisc.exe', 'but-you.mp3',
-         'project_module1.py', 'nothing.xml', 'flowers.jpeg', 'grades.csv',
-         'nvidia_gf.exe', 'small_txt.zip', 'project_module2.py', 'tab.csv',
-         'note.xml', 'sony_vegas11.exe', 'friends.jpeg', 'data.pkl']
+letters = Counter(s=0, b=1, e=4, t=-2, g=2, k=1)
 
-ext_files = list(map(lambda x: x[x.find('.')+1:], files))
-result = Counter(ext_files)
-for k, v in sorted(result.items()):
-    print(f'{k}: {v}')
+print(*letters.elements())
 
 
 
