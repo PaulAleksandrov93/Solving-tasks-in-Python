@@ -6763,13 +6763,98 @@
 
 # =
 
+# from collections import Counter
+
+# letters = Counter(s=0, b=1, e=4, t=-2, g=2, k=1)
+
+# print(*letters.elements())
+
+# =
+
+# from collections import Counter
+
+# left_pocket = Counter(coin=11, candy=4, key=1)
+# right_pocket = Counter(coin=19, candy=1, key=2, card=2)
+
+# print(left_pocket.total() + right_pocket.total())
+
+# =
+
+# from collections import Counter
+
+# counter1 = Counter(a=2, b=3, c=6)
+# counter2 = Counter(a=5, b=7, c=1)
+
+# print(counter1 + counter2)
+# print(counter1 - counter2)
+# print(counter1 & counter2)
+# print(counter1 | counter2)
+
+# = 
+
+# from collections import Counter
+
+# letters1 = Counter('stepik')
+# letters2 = {'s': 1, 't': 1, 'e': 1, 'p': 1, 'i': 1, 'k': 1}
+
+# print(letters1 + letters2)
+
+# =
+
+# from collections import Counter
+
+# word = 'stepik'
+
+# counter1 = Counter(word)
+# counter2 = Counter(word * 3)
+
+# print(counter1 < counter2)
+# print(counter2)
+
+# ===
+
+# from collections import Counter
+
+# words = Counter([w.lower() for w in input().split()])
+# print(*dict(words.most_common(1)).keys())
+
+# ===
+
+# from collections import Counter
+
+# words = Counter([w.lower() for w in input().split()])
+# min_count = words.most_common()[-1]
+# result = [k for k, v in words.items() if v == min_count[1]]
+# print(', '.join(sorted(result)))
+
+# ===
+
+# from collections import Counter
+
+# words = Counter([w.lower() for w in input().split()])
+# max_count = words.most_common()[0]
+# result = [k for k, v in words.items() if v == max_count[1]]
+# print(max(result))
+
+# ===
+
+# from collections import Counter, OrderedDict
+
+# mylst = [len(x) for x in input().split()]
+# words = Counter(mylst)
+# lst = list(words.elements())
+# ordered_words1 = OrderedDict(sorted(words.items(), key=lambda x: x[1]))
+# for item in ordered_words1:
+#     print(f"Слов длины {item}: {ordered_words1[item]}")
+
+# ===
+
+import sys
 from collections import Counter
 
-letters = Counter(s=0, b=1, e=4, t=-2, g=2, k=1)
+dct = dict([tuple(s.split()) for s in sys.stdin])
+dct1 = {k: int(v) for k, v in dct.items()}
+cntr = Counter(dct1)
+print(cntr.most_common()[-2][0])
 
-print(*letters.elements())
-
-
-
-
-
+# data.sorted_values = lambda reverse=False: sorted(data.values(), reverse=reverse)
