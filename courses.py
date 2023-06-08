@@ -6849,12 +6849,89 @@
 
 # ===
 
-import sys
-from collections import Counter
+# import sys
+# from collections import Counter
 
-dct = dict([tuple(s.split()) for s in sys.stdin])
-dct1 = {k: int(v) for k, v in dct.items()}
-cntr = Counter(dct1)
-print(cntr.most_common()[-2][0])
+# dct = dict([tuple(s.split()) for s in sys.stdin])
+# dct1 = {k: int(v) for k, v in dct.items()}
+# cntr = Counter(dct1)
+# print(cntr.most_common()[-2][0])
 
 # data.sorted_values = lambda reverse=False: sorted(data.values(), reverse=reverse)
+
+# ===
+
+# from collections import Counter
+
+# data = Counter('aksjaskfjsklfjdslkfjajfopewtoieqpwdpqworiiqjskanvmcxbmpewrqopkqwlmdzczmxvmvlnjpjqpkqzxvmbowiqeorewi')
+
+# data.__dict__['min_values'] = lambda: [x for x in data.items() if x[1] == min(data.values())]
+# data.__dict__['max_values'] = lambda: [x for x in data.items() if x[1] == max(data.values())]
+
+# ===
+
+# import csv
+# from collections import Counter
+
+# with open('name_log.csv', 'r', encoding='UTF-8') as file:
+#     rows = csv.DictReader(file, delimiter=',')
+#     names = [row['email'] for row in rows]
+#     for email in Counter(sorted(names)):
+#         print(f"{email}: {Counter(sorted(names))[email]}")
+    
+
+# ===
+
+# from collections import Counter
+
+# def scrabble(symbols, word):
+#     letters = Counter([l.lower() for l in symbols])
+#     word_letters = Counter([wl.lower() for wl in word])
+#     counter = 0
+#     for k, v in letters.items():
+#         for k1, v1 in word_letters.items():
+#             if k1 == k:
+#                 if v1 <= v:
+#                     counter += 1
+#     if counter == len(set(word)):
+#         return True
+#     else:
+#         return False
+
+# print(scrabble('bbbbbeeeeegggggggeeeeeekkkkk', 'Beegeek'))
+# print(scrabble('begk', 'beegeek'))   
+
+# ===
+
+# from collections import Counter
+
+# def print_bar_chart(data, mark):
+#     max_len = max([len(x) for x in data])
+#     words = Counter(data).most_common()
+#     for key, value in words:
+#         print(f"{key + ' ' * (max_len-len(key))} |{mark * value}")
+
+# print_bar_chart('beegeek', '+')
+# languages = ['java', 'java', 'python', 'C++', 'assembler', 'java', 'C++', 'C', 'pascal', 'C++', 'pascal', 'java']
+
+# print_bar_chart(languages, '#')
+
+# ===
+
+import csv, json
+from functools import reduce
+from collections import Counter
+
+with open('quarter1.csv', 'r', encoding='UTF-8') as file1, open('quarter2.csv', 'r', encoding='UTF-8') as file2, open('quarter3.csv', 'r', encoding='UTF-8') as file3, open('quarter4.csv', 'r', encoding='UTF-8') as file4:
+    
+    rows1 = csv.DictReader(file1, delimiter=',')
+    rows2 = csv.DictReader(file2, delimiter=',')
+    rows3 = csv.DictReader(file3, delimiter=',')
+    rows4 = csv.DictReader(file4, delimiter=',')
+    for row in rows1:
+        for r in row:
+            print(f"{r}: {row[r]}")
+        print()
+    rows1_1 = reduce(lambda x, y: Counter(x)+Counter(y), list(rows1))
+    
+    # print(rows1_1)
