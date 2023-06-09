@@ -6918,20 +6918,102 @@
 
 # ===
 
-import csv, json
-from functools import reduce
-from collections import Counter
+# import csv, json
+# from collections import Counter
 
-with open('quarter1.csv', 'r', encoding='UTF-8') as file1, open('quarter2.csv', 'r', encoding='UTF-8') as file2, open('quarter3.csv', 'r', encoding='UTF-8') as file3, open('quarter4.csv', 'r', encoding='UTF-8') as file4:
-    
-    rows1 = csv.DictReader(file1, delimiter=',')
-    rows2 = csv.DictReader(file2, delimiter=',')
-    rows3 = csv.DictReader(file3, delimiter=',')
-    rows4 = csv.DictReader(file4, delimiter=',')
-    for row in rows1:
-        for r in row:
-            print(f"{r}: {row[r]}")
-        print()
-    rows1_1 = reduce(lambda x, y: Counter(x)+Counter(y), list(rows1))
-    
-    # print(rows1_1)
+# with open('quarter1.csv', 'r', encoding='UTF-8') as file1, open('quarter2.csv', 'r', encoding='UTF-8') as file2, open('quarter3.csv', 'r', encoding='UTF-8') as file3, open('quarter4.csv', 'r', encoding='UTF-8') as file4, open('prices.json', 'r', encoding='UTF-8') as file5:
+#     files = [file1, file2, file3, file4]
+#     all_products = [csv.DictReader(f, delimiter=',') for f in files]
+#     prices = json.load(file5)
+#     all_prods = []
+#     for products in all_products:
+#         prods = {}
+#         for product in products:
+#             prods.setdefault(product['продукт'], sum([int(x) for x in [product[list(product.keys())[1]], product[list(product.keys())[2]], product[list(product.keys())[3]]]]))
+#         all_prods.append(prods)
+#     data = []
+#     for prods in all_prods:
+#         res = {}
+#         for k, v in prices.items():
+#             if k in prods:
+#                 res.setdefault(k, prods[k]*v)
+#         data.append(res)    
+#     result = sum([Counter(x).total() for x in data])
+#     print(result)
+
+# ===
+# from collections import Counter
+
+# classes_books = Counter(input().split())
+# buys = [input().split() for _ in range(int(input()))]
+# books = Counter([x[0] for x in buys])
+# # prices = 
+# res = books - classes_books
+# print(classes_books)
+# # print(buys)
+# print(books)
+# print(res)
+
+# ===
+
+# from collections import Counter
+
+# books_available = Counter(input().split())
+# n = int(input())
+# total_earnings = 0
+
+# for _ in range(n):
+#     class_num, price = map(int, input().split())
+#     if books_available[str(class_num)] > 0:
+#         total_earnings += price
+#         books_available[str(class_num)] -= 1
+
+# print(total_earnings)
+
+# ===
+
+# from collections import ChainMap, Counter
+# import json
+
+# with open('zoo.json', 'r', encoding='UTF-8') as file:
+#     print(Counter(ChainMap(*json.load(file))).total())
+
+# ===
+
+# from collections import ChainMap, Counter        
+
+# bread = {'булочка с кунжутом': 15, 'обычная булочка': 10, 'ржаная булочка': 15}
+# meat = {'куриный бифштекс': 50, 'говяжий бифштекс': 70, 'рыбный бифштекс': 40}
+# sauce = {'сливочно-чесночный': 15, 'кетчуп': 10, 'горчица': 10, 'барбекю': 15, 'чили': 15}
+# vegetables = {'лук': 10, 'салат': 15, 'помидор': 15, 'огурцы': 10}
+# toppings = {'сыр': 25, 'яйцо': 15, 'бекон': 30}
+
+# data = ChainMap(bread, meat, sauce, vegetables, toppings)
+# order = Counter(input().split(','))
+# price = {}
+# for k, v in order.items():
+#     price.setdefault(k, data[k]*v)
+# max_length = len(max(order, key=len))
+# for k, v in sorted(order.items()):
+#     s = f"{k.ljust(max_length)} x {v}"
+#     print(s)
+# total_print = f"ИТОГ: {Counter(price).total()}р"
+# if len(total_print) > max_length:
+#     print('-'*len(total_print))
+# else:
+#     print('-'*((max_length)+3+len(str(max(list(order.values()))))))
+# print(total_print)
+
+# ===
+
+from collections import ChainMap
+
+fruits = ChainMap({'apple': 10, 'banana': 20},
+                  {'lemon': 10, 'pineapple': 15},
+                  {'kiwi': 15, 'lime': 5})
+
+fruits.maps.reverse()
+
+print(fruits)
+
+
