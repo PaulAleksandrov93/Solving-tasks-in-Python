@@ -7006,14 +7006,209 @@
 
 # ===
 
-from collections import ChainMap
+# from collections import ChainMap
 
-fruits = ChainMap({'apple': 10, 'banana': 20},
-                  {'lemon': 10, 'pineapple': 15},
-                  {'kiwi': 15, 'lime': 5})
+# def get_all_values(chainmap, key):
+#     try:
+#         ret = set(d[key] for d in chainmap.maps if key in d)
+#     except KeyError:
+#         ret = set()
+#     return ret
 
-fruits.maps.reverse()
+# # chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+# # result = get_all_values(chainmap, 'name')
 
-print(fruits)
+# # print(*sorted(result))
 
+# # chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+# # result = get_all_values(chainmap, 'age')
 
+# # print(result)
+
+# chainmap = ChainMap({'name': 'Anri'}, {'name': 'Arthur', 'age': 20}, {'name': 'Timur', 'age': 29})
+# result = get_all_values(chainmap, 'age')
+
+# print(*sorted(result))
+
+# ===
+
+# from collections import ChainMap
+
+# def deep_update(chainmap, key, value):
+#     for d in chainmap.maps:
+#         if key in d:
+#             d[key] = value
+#         if key not in chainmap:
+#             d[key] = value
+    
+# chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+# deep_update(chainmap, 'age', 20)
+
+# print(chainmap)
+
+# ===
+
+# from collections import ChainMap
+
+# def get_value(chainmap, key, from_left=True):
+#     if key not in chainmap:
+#         return None
+#     if from_left:
+#         for d in chainmap.maps:
+#             if key not in d:
+#                 continue
+#             else:
+#                 return d[key]
+#     else:
+#         for d in reversed(chainmap.maps):
+#             if key not in d:
+#                 continue
+#             else:
+#                 return d[key]
+
+# chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+
+# print(get_value(chainmap, 'name'))
+# chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+
+# print(get_value(chainmap, 'name', False))
+# chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+
+# print(get_value(chainmap, 'age'))
+
+# ===
+
+# try:
+#     raise ValueError('oops')
+# except ValueError as e:
+#     print(e)
+#     print(e.args)
+#     print(type(e.args))
+
+# try:
+#     raise ValueError('oops', 'something went wrong')
+# except ValueError as e:
+#     print(e)
+#     print(e.args)
+
+# data = {'Chrome': 'browser', 'Discord': 'messenger', 'Steam': 'digital distributor'}
+
+# try:    
+#     try:
+#         app_name = 'Firefox'
+#         app_type = data[app_name]
+#     except:
+#         raise KeyError('Not found', app_name)
+# except KeyError as e:
+#     print(e.args)
+
+# ===
+
+# import calendar
+# import locale
+
+# def get_weekday(number):
+#     locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
+#     days_of_week = dict(zip(range(1, 8), [day.title() for day in list(calendar.day_name)]))
+#     if isinstance(number, int):
+#         if number in range(1, 8):
+#             return days_of_week[number]
+#         else:
+#             raise ValueError('Аргумент не принадлежит требуемому диапазону')
+#     else:
+#         raise TypeError('Аргумент не является целым числом')
+
+# ===
+
+# def get_id(names, name):
+#     if isinstance(name, str):
+#         if name.isalpha() and name.istitle():
+#             names.append(name)
+#             return len(names)
+#         else:
+#             raise ValueError('Имя не является корректным')
+#     else:
+#         raise TypeError('Имя не является строкой')
+    
+# names = ['Timur', 'Anri', 'Dima', 'Roma', 'Gvido', 'Rosy', 'Soslan', 'Natasha', 'Arthur']
+# name = 'Arthur'
+
+# print(get_id(names, name))
+
+# ===
+
+# import json
+
+# try:
+#     with open(input(), 'r', encoding='UTF-8') as file:
+#         try:
+#             data = json.load(file)
+#             print(data)
+#         except json.JSONDecodeError:
+#             print("Ошибка при десериализации")
+# except FileNotFoundError:
+#     print("Файл не найден.")
+
+# ===
+
+# class NumberNotInRangeError(Exception):
+#     pass
+
+# try:
+#     number = int('3999')
+#     if not 4000 < number < 8000:
+#         raise NumberNotInRangeError('Число из недопустимого диапазона')
+#     print(number)
+# except NumberNotInRangeError as e:
+#     print(e)
+
+# ===
+
+# def is_good_password(string):
+#     if len(string) >= 9 and any(l.isdigit() for l in string) and any(l.isupper() for l in string) and any(l.islower() for l in string):
+#         return True
+#     else:
+#         return False
+
+# print(is_good_password('41157082'))
+# print(is_good_password('МойПарольСамыйЛучший111'))
+
+# ===
+
+class PasswordError(Exception):
+    pass
+
+class LengthError(PasswordError):
+    pass
+
+class LetterError(PasswordError):
+    pass
+
+class DigitError(PasswordError):
+    pass
+
+def is_good_password(string):
+    try:
+        if len(string) >= 9:
+            try:
+                if any(l.isupper() for l in string) and any(l.islower()):
+                    try:
+                        if any(l.isdigit() for l in string):
+                            return True
+                        else:
+                            raise DigitError
+                    except (DigitError) as e:
+                        return e
+                else:
+                    raise LetterError
+            except (LetterError) as e:
+                return e
+        else:
+            raise LengthError
+    except LengthError as e:
+        print(e)
+
+try:
+    print(is_good_password('Short7'))
+except Exception as err:
+    print(type(err))
