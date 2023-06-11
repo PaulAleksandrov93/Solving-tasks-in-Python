@@ -7175,40 +7175,201 @@
 
 # ===
 
-class PasswordError(Exception):
-    pass
+# class PasswordError(Exception):
+#     pass
 
-class LengthError(PasswordError):
-    pass
+# class LengthError(PasswordError):
+#     pass
 
-class LetterError(PasswordError):
-    pass
+# class LetterError(PasswordError):
+#     pass
 
-class DigitError(PasswordError):
-    pass
+# class DigitError(PasswordError):
+#     pass
 
-def is_good_password(string):
-    try:
-        if len(string) >= 9:
-            try:
-                if any(l.isupper() for l in string) and any(l.islower()):
-                    try:
-                        if any(l.isdigit() for l in string):
-                            return True
-                        else:
-                            raise DigitError
-                    except (DigitError) as e:
-                        return e
-                else:
-                    raise LetterError
-            except (LetterError) as e:
-                return e
-        else:
-            raise LengthError
-    except LengthError as e:
-        print(e)
+# def is_good_password(string):
+#     try:
+#         if len(string) >= 9:
+#             try:
+#                 if any(l.isupper() for l in string) and any(l.islower() for l in string):
+#                     try:
+#                         if any(l.isdigit() for l in string):
+#                             return True
+#                         else:
+#                             raise DigitError
+#                     except DigitError:
+#                         raise DigitError
+#                 else:
+#                     raise LetterError
+#             except LetterError:
+#                 raise LetterError
+#         else:
+#             raise LengthError
+#     except LengthError:
+#         raise LengthError
 
-try:
-    print(is_good_password('Short7'))
-except Exception as err:
-    print(type(err))
+# # try:
+# #     print(is_good_password('Short7'))
+# # except Exception as err:
+# #     print(type(err))
+
+# # print(is_good_password('еПQSНгиfУЙ70qE'))
+
+# try:
+#     print(is_good_password('41157081231232'))
+# except Exception as err:
+#     print(type(err))
+# ===
+
+# import sys
+# import itertools
+# class PasswordError(Exception):
+#     pass
+
+# class LengthError(PasswordError):
+#     pass
+
+# class LetterError(PasswordError):
+#     pass
+
+# class DigitError(PasswordError):
+#     pass
+
+# def is_good_password(string):
+#     try:
+#         if len(string) >= 9:
+#             try:
+#                 if any(l.isupper() for l in string) and any(l.islower() for l in string):
+#                     try:
+#                         if any(l.isdigit() for l in string):
+#                             return 'Success!'
+#                         else:
+#                             raise DigitError
+#                     except DigitError:
+#                         return 'DigitError'
+#                 else:
+#                     raise LetterError
+#             except LetterError:
+#                 return 'LetterError'
+#         else:
+#             raise LengthError
+#     except LengthError:
+#         return 'LengthError'
+
+# passwords = [p.strip() for p in sys.stdin.readlines()]
+# # result = list(map(lambda x: print(is_good_password(x)), passwords))
+# # list(itertools.takewhile(lambda x: 'Success!', map(print(is_good_password), passwords)))
+# result = list(itertools.takewhile(lambda x: x != "Success!", map(lambda password: is_good_password(password), passwords)))
+# result.append('Success!')
+# print(*result, sep='\n')
+
+# ===
+
+# def message(times):
+#     if times > 0:
+#         print('Это рекурсивная функция.')
+#         message(times - 1)
+#         print(times)
+
+# message(5)
+
+# = 
+
+# def bee(n):
+#     if n < 5:
+#         print(n)
+#     else:
+#         bee(n + 1)
+
+# bee(7)
+
+# ===
+
+# def traffic(n):
+#     if n > 0:
+#         print('Не парковаться')
+#         traffic(n-1)
+    
+# traffic(5)
+
+# ===
+
+# def print_nums(n):
+#     if n <= 100:
+#         print(n)
+#         print_nums(n+1)
+# print_nums(1)
+
+# ===
+
+# def show_lst(lst):
+#     def rec(index):
+#         if index < len(lst):
+#             print(f'Элемент {index}: {lst[index]}')
+#             rec(index + 1)
+#     rec(0)
+    
+
+# numbers = [243, -279, 395, 130, 89, 269, 861, 669, 939, 367, -46, 710, 841, -280, -244, 274, -132, 273, 418, 432, -341, 437, 360, 960, 195, 792, 106, 461, -35, 980, -80, 540, -358, 69, -26, -416, 597, 96, 533, 232, 755, 894, 331, 323, -383, -386, 231, 436, 553, 967, 166, -151, 772, 434, 325, 301, 275, 431, 556, 728, 558, 702, 463, 127, 984, 212, 876, -287, -16, -177, 577, 604, 116, 500, 653, 669, 916, 802, 817, 762, -210, -353, 144, -351, 777, 805, 692, 22, -303, 249, 190, 411, 236, -274, 174, 380, 71, 124, -85, 430]
+
+# show_lst(numbers)
+
+# ===
+
+# def nums(n = int(input())):
+#     if n != 0:
+#         nums(n = int(input()))
+#         print(n)
+#     else:
+#         print(0)
+# nums()
+
+# ===
+
+# def triangle(h):
+#     def rec(step):
+#         if step - h:
+#             print('*'*(h - step))
+#             rec(step+1)
+#     rec(0)
+
+# triangle(3)
+
+# ===
+
+# def triangle(h):
+#     def rec(step):
+#         if step - h-1:
+#             print('*'*(step))
+#             rec(step+1)
+#     rec(1)
+
+# triangle(3)
+
+# ===
+
+# def hourglass(n, m = 16):
+#     if n < 4:
+#         print((str(n)*m).center(16))
+#         hourglass(n + 1, m - 4)
+#     print((str(n)*m).center(16))
+# hourglass(1)
+
+# ===
+
+# def print_digits(number):
+#     if number:
+#         print(number % 10)
+#         print_digits(number // 10)
+
+# print_digits(12345) 
+
+# ===
+
+def print_digits(number):
+    if number:
+        print_digits(number // 10)
+    if number > 0:
+        print(number % 10)
+
+print_digits(12345) 
