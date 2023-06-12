@@ -7599,3 +7599,330 @@
 
 # dict_travel(data)
 
+# positive = [1, 2, 3, 4, 5]
+# negative = [-1, -2, -3]
+# combined = [1, 2, -3, 4]
+
+# result = map(lambda a, b, c: a + b + c, positive, negative, combined)
+
+# print(*result)
+
+# =
+
+# numbers = filter(lambda x: x > 0, [-3, -2, -1, 0, 1, 2, 3])
+
+# if 1 in numbers:
+#     print('bee')
+# if 1 in numbers:
+#     print('geek')
+
+# = 
+# result = (lambda x: x > 5)(3)
+
+# print(result)
+# =
+
+# data = ['Timur', -16.648911695768902, 'six', -202, 883.0093275936454, -765, (3, 4), -105.10718000213546, 976, -308.96857946288094, 458, ['one', 'two'], 479.92207220345927, -87, -71, 'twelve', 112, -621, -715.0179551194733, 'seven', 229, 729, -358, [1, 2, 3], -974, 882, -894.4709033242768, '', 323.7720806756133, 'beegeek', -224, 431, 170.6353248658936, -343.0016746052049, 'number', 104.17133679352878, [], -353.5964777099863, 'zero', -113, 288, None, -708.3036176571618]
+
+# numbers = filter(lambda x: isinstance(x, (int, float)), data)
+# integers = map(lambda x: int(x) if isinstance(x, float) else x, numbers)
+# for integer in integers:
+#     print(integer)
+
+# ===
+
+# numbers = [4754, -4895, -364, -4764, 4683, 1639, -43, 228, -2701, -1503, 1223, 4340, -1296, 3939, -345, 623, -3275, 1003, 4367, -1739, 550, -1217, -1334, 1526, -4359, -3028, -4663, 3356, 3887, 4297, -1982, 1013, 3299, 3556, -3324, 417, 3531, -3134, 1782, 4439, 1652, -985, 4327, 1517, 1225, -915, 2808, -3851, -1005, 3396, 2842, -3879, -3824, -3805, 1609, -4741, -3072, 3573, 4680, 588, -1430, 2378, -1095, -343, 4357, -2164, -3304, 4354, 4926, -352, -1187, -3313, 2741, 4786, -2689, 741, 4558, 1442, 62, -1099, -2201, -16, -3115, 1862, 2384, 4072, -90, 204, 1158, -3134, -2512, 756, 4148, 4370, 1756, 3609, -1148, -3909, 4123, -2906, 69, 96, 1111]
+
+# filtered_numbers = filter(lambda x: 9 <= abs(x) < 100 and x % 9 == 0, numbers)
+# sum_of_squares = sum(map(lambda x: x**2, filtered_numbers))
+
+# print(sum_of_squares)
+
+# ===
+
+# names = ['ульяна', 'арина', 'Дмитрий', 'Сергей', 'Яна', 'мила', 'Ольга', 'софья', 'семён', 'Никита', 'маргарита', 'Василиса', 'Кирилл', 'александр', 'александра', 'Иван', 'андрей', 'Родион', 'максим', 'алиса', 'Артём', 'софия', 'владимир', 'дамир', 'Валерий', 'степан', 'Алексей', 'Марк', 'олег', 'ирина', 'Милана', 'мия', 'денис', 'Фёдор', 'Елизавета', 'айлин', 'Варвара', 'валерия', 'Алёна', 'Николь', 'юлия', 'Ксения', 'пётр', 'георгий', 'Мария', 'глеб', 'илья', 'Захар', 'Дарья', 'Евгения', 'матвей', 'Серафим', 'екатерина', 'Тимофей', 'виктор', 'Егор', 'Ника', 'анна', 'даниил', 'тихон', 'вера', 'кира', 'Эмилия', 'Виктория', 'Игорь', 'полина', 'алина', 'Давид', 'анастасия', 'Вероника', 'ярослав', 'Руслан', 'татьяна', 'Демид', 'амелия', 'Элина', 'Арсен', 'евгений', 'мадина', 'дарина', 'Савелий', 'Платон', 'Аделина', 'диана', 'Айша', 'павел', 'Стефания', 'Тимур', 'Ева', 'Елисей', 'Артемий', 'григорий', 'Мирон', 'Мирослава', 'Мира', 'Марат', 'Лилия', 'роман', 'владислав', 'Леонид']
+
+# filtered_names = filter(lambda name: name[0].lower() in ['а', 'м'] and len(name) > 4, names)
+# sorted_names = sorted(filtered_names, key=lambda name: name.capitalize())
+
+# output = ' '.join(map(lambda name: name.capitalize(), sorted_names))
+# print(output)
+
+# ===
+
+# fib = lambda n: n if n <= 1 else fib(n-1) + fib(n-2)
+
+# ===
+
+# def print_operation_table(operation, rows, cols):
+#     for i in range(1, rows + 1):
+#         for j in range(1, cols + 1):
+#             result = operation(i, j)
+#             print(result, end=" ")
+#         print()
+
+# print_operation_table(lambda a, b: a * b, 5, 5)
+
+# ===
+
+# def verification(login, password, success, failure):
+#     has_latin_letters = any(c.isalpha() and c.isascii() for c in password)
+#     has_uppercase = any(c.isupper() for c in password)
+#     has_lowercase = any(c.islower() and c.isascii() for c in password)
+#     has_digit = any(c.isdigit() for c in password)
+
+#     if not has_latin_letters:
+#         failure(login, 'в пароле нет ни одной буквы')
+#     elif not has_uppercase:
+#         failure(login, 'в пароле нет ни одной заглавной буквы')
+#     elif not has_lowercase:
+#         failure(login, 'в пароле нет ни одной строчной буквы')
+#     elif not has_digit:
+#         failure(login, 'в пароле нет ни одной цифры')
+#     else:
+#         success(login)
+
+# def success(login):
+#     print(f'Здравствуйте, {login}!')
+
+
+# def failure(login, text):
+#     print(f'{login}, попробуйте снова. Текст ошибки: {text}')
+
+
+# verification('Arthur_Davletov', 'мойпароль123', success, failure)
+
+# ===
+# def numbers_sum(elems):
+#     # """
+#     # Принимает список и возвращает сумму его чисел (int, float),
+#     # игнорируя нечисловые объекты. 0 - если в списке чисел нет.
+#     # """
+#     return sum(num for num in elems if isinstance(num, (int, float)))
+
+# print(numbers_sum([1, '2', 3, 4, 'five']))
+
+# ===
+
+# old_print = print
+# def print(*args, sep=' ', end='\n'):
+#     modified_args = list(map(lambda x: str(x).upper() if isinstance(x, str) else x, args))
+#     modified_sep = str(sep).upper()
+#     modified_end = str(end).upper()
+#     old_print(*modified_args, sep=modified_sep, end=modified_end)
+
+
+# # words = [['black', 'white', 'grey', 'black-1', 'white-1', 'python']]
+# # print(words, sep=' to ', end=' LOVE')
+
+# print('beegeek', [1, 2, 3], 4)
+
+# ===
+
+# def polynom(x):
+#     result = x**2+1
+#     polynom.values.add(result)
+#     return result
+
+# polynom.values = set()
+
+# print(polynom(5))
+# print(polynom.values)
+
+# ===
+
+# def remove_marks(text, marks):
+#     remove_marks.count += 1
+#     return ''.join(char for char in text if char not in marks)
+
+# remove_marks.count = 0
+
+# text = 'Hi! Will we go together?'
+
+# print(remove_marks(text, '!?'))
+# print(remove_marks.count)
+
+# ===
+
+# def outer(x):
+#     def inner():
+#         return x + 1
+#     return inner
+
+# print(inner(10))
+
+# def outer(x):
+#     def inner():
+#         return x + 1
+#     return inner
+
+# print(outer.inner(10))
+
+# def outer(x):
+#     y = 5
+#     z = 10
+#     def inner():
+#         nonlocal y
+#         y += 1
+#         z = 20
+#         print('x =', x)
+#         print('z =', z)
+#     inner()
+#     print('x =', x)
+#     print('y =', y)
+#     print('z =', z)
+
+# outer(5)
+
+# =
+
+# def outer(x):
+#     y = 20
+#     def inner(z):
+#         t = 30
+#         return x + y + z + t
+#     return inner
+
+# func = outer(10)
+
+# for var in func.__closure__:
+#     print(var.cell_contents)
+
+# =
+
+# def outer():
+#     x = 'bee'
+#     def inner():
+#         x = 'geek'
+#         print(x)
+#     inner()
+#     print(x)
+    
+# outer()
+
+# def outer():
+#     x = 'bee'
+#     def inner():
+#         nonlocal x
+#         x = 'geek'
+#         print(x)
+#     inner()
+#     print(x)
+
+# outer()
+
+# =
+
+# def outer(x):
+#     def inner():
+#         return x
+#     x = None
+#     return inner
+
+# print(outer(10)())
+
+# =
+
+# def outer(x, y=2):
+#     def inner(z=y):
+#         return x, z
+#     x, y = None, None
+#     return inner
+
+# print(outer(10)())
+
+# =
+
+# def make_counter(i):
+#     def counter():
+#         nonlocal i
+#         i += 1
+#         return i
+#     return counter
+
+# counter1 = make_counter(100)
+# counter2 = make_counter(200)
+
+# print(counter1(), counter1())
+# print(counter2(), counter2())
+
+# =
+
+# def greeting(language):
+#     def greeting_ru():
+#         print('Привет!')
+#     def greeting_fr():
+#         print('Bonjour!')
+    
+#     if language == 'ru':
+#         return greeting_ru
+#     if language == 'fr':
+#         return greeting_fr
+    
+# func = greeting('fr')
+# func()
+
+# =
+
+# def power(degree):
+#     def inner(x):
+#         return x**degree
+#     return inner
+
+# square = power(2)
+# print(square(5))
+
+# ===
+
+# def generator_square_polynom(a,b,c):
+#     def inner(x):
+#         return a*x**2 + b*x + c
+#     return inner
+
+# f = generator_square_polynom(1, 2, 1)
+# print(f(5))
+
+# ===
+
+# def sourcetemplate(url):
+#     def generate_query_string(**kwargs):
+#         if kwargs:
+#             sorted_params = sorted(kwargs.items())
+#             query_string = '&'.join([f"{key}={value}" for key, value in sorted_params])
+#             return f"{url}?{query_string}"
+#         else:
+#             return url
+    
+#     return generate_query_string
+
+# url = 'https://beegeek.ru'
+# load = sourcetemplate(url)
+# print(load(name='timur'))
+
+# ===
+
+# from datetime import date
+
+# def date_formatter(country_code):
+#     def format_date(date_obj):
+#         if country_code == 'ru':
+#             return date_obj.strftime("%d.%m.%Y")
+#         elif country_code == 'us':
+#             return date_obj.strftime("%m-%d-%Y")
+#         elif country_code == 'ca':
+#             return date_obj.strftime("%Y-%m-%d")
+#         elif country_code == 'br':
+#             return date_obj.strftime("%d/%m/%Y")
+#         elif country_code == 'fr':
+#             return date_obj.strftime("%d.%m.%Y")
+#         elif country_code == 'pt':
+#             return date_obj.strftime("%d-%m-%Y")
+    
+#     return format_date
+
+# date_ru = date_formatter('ru')
+# today = date(2022, 1, 25)
+# print(date_ru(today))
+
+# ===
+
