@@ -7366,10 +7366,236 @@
 
 # ===
 
-def print_digits(number):
-    if number:
-        print_digits(number // 10)
-    if number > 0:
-        print(number % 10)
+# def print_digits(number):
+#     if number:
+#         print_digits(number // 10)
+#     if number > 0:
+#         print(number % 10)
 
-print_digits(12345) 
+# print_digits(12345) 
+
+# ===
+
+# def f(n):
+#     if n in (1, 2, 3):
+#         return 1
+#     else:
+#         return 2*f(n - 1) + 4*f(n - 3) + f(n - 2)
+
+# print(f(4))
+
+# ===
+
+# def count_digits(n, count=0):
+#     if n == 0:
+#         return count
+#     else:
+#         return count_digits(n // 10, count+1)
+
+# print(count_digits(int(input())))
+
+# ===
+
+# def count_digits(n, sum=0):
+#     if n == 0:
+#         return sum
+#     else:
+#         last_digit = n % 10
+#         return count_digits(n // 10, sum+last_digit)
+
+# print(count_digits(int(input())))
+
+# ===
+
+# def number_of_frogs(year):
+#     if year == 1:
+#         return 77
+#     else:
+#         return 3*(number_of_frogs(year-1)-30)
+
+# print(number_of_frogs(int(input())))
+
+# ===
+
+# def range_sum(numbers, start, end):
+#     if start > end:
+#         return 0
+#     elif start == end:
+#         return numbers[start]
+#     else:
+#         return numbers[start] + range_sum(numbers, start+1, end)
+
+# print(range_sum([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 7))
+
+# ===
+
+# def get_pow(a, n):
+#     if n == 0:
+#         return 1
+#     else:
+#         return a * get_pow(a, n-1)
+    
+# print(get_pow(5, 2))
+
+# ===
+
+# def get_fast_pow(a, n):
+#     if n == 0:
+#         return 1
+#     elif n % 2 == 0:
+#         half_pow = get_fast_pow(a, n // 2)
+#         return half_pow * half_pow
+#     else:
+#         return a * get_fast_pow(a, n - 1)
+
+# print(get_fast_pow(2, 10))
+
+# ===
+
+# def recursive_sum(a, b):
+#     if b == 0:
+#         return a
+#     else:
+#         return recursive_sum(a + 1, b - 1)
+    
+# print(recursive_sum(10, 22))
+
+# ===
+
+# def is_power(number):
+#     if number == 1:
+#         return True
+#     elif number % 2 == 0:
+#         return is_power(number // 2)
+#     else:
+#         return False
+    
+# print(is_power(512))
+
+# ===
+
+# def tribonacci(n, memo={}):
+#     if n == 1 or n == 2 or n == 3:
+#         return 1
+#     elif n in memo:
+#         return memo[n]
+#     else:
+#         result = tribonacci(n-1, memo) + tribonacci(n-2, memo) + tribonacci(n-3, memo)
+#         memo[n] = result
+#         return result
+    
+# print(tribonacci(7))
+
+# ===
+
+# def is_palindrome(string):
+#     if len(string) <= 1:
+#         return True
+#     elif string[0] != string[-1]:
+#         return False
+#     else:
+#         return is_palindrome(string[1:-1])
+    
+# print(is_palindrome('level'))
+
+# ===
+
+# def to_binary(number):
+#     if number == 0:
+#         return '0'
+#     elif number == 1:
+#         return '1'
+#     else:
+#         return to_binary(number // 2) + str(number % 2)
+# print(to_binary(15))
+
+# ===
+
+# def recursive_operations(n):
+#     if n <= 0:
+#         print(n)
+#         return
+#     else:
+#         print(n)
+#         recursive_operations(n - 5)
+#         print(n)
+
+# recursive_operations(int(input()))
+
+# ===
+
+# def recursive_sum(nested_lists):
+#     if not nested_lists:  # Если список пустой
+#         return 0
+#     else:
+#         total_sum = 0
+#         for element in nested_lists:
+#             if isinstance(element, int):  # Если элемент является целым числом
+#                 total_sum += element
+#             elif isinstance(element, list):  # Если элемент является списком
+#                 total_sum += recursive_sum(element)
+#         return total_sum
+    
+# my_list = [1, [4, 4], 2, [1, [2, 10]]]
+
+# print(recursive_sum(my_list))
+
+# ===
+
+# def linear(nested_lists):
+#     result = []
+#     for element in nested_lists:
+#         if isinstance(element, int):
+#             result.append(element)
+#         elif isinstance(element, list):
+#             result.extend(linear(element))
+#     return result
+
+# my_list = [3, [4], [5, [6, [7, 8]]]]
+
+# print(linear(my_list))
+
+# ===
+
+# def get_value(nested_dicts, key):
+#     if key in nested_dicts:
+#         return nested_dicts[key]
+#     for value in nested_dicts.values():
+#         if isinstance(value, dict):
+#             result = get_value(value, key)
+#             if result is not None:
+#                 return result
+
+# data = {'firstName': 'Тимур', 'lastName': 'Гуев', 'birthDate': {'day': 10, 'month': 'October', 'year': 1993}, 'address': {'streetAddress': 'Часовая 25, кв. 127', 'city': {'region': 'Московская область', 'type': 'город', 'cityName': 'Москва'}, 'postalCode': '125315'}}
+
+# print(get_value(data, 'cityName'))
+
+# ===
+
+# def get_all_values(nested_dicts, key):
+#     values = set()
+#     if key in nested_dicts:
+#         values.add(nested_dicts[key])
+#     for value in nested_dicts.values():
+#         if isinstance(value, dict):
+#             values.update(get_all_values(value, key))
+#     return values
+
+# my_dict = {'users': {'Arthur': {'grades': [4, 4, 3], 'top_grade': 4}, 'Timur': {'grades': [5, 5, 5], 'top_grade': 5}}}
+# result = get_all_values(my_dict, 'top_grade')
+
+# print(*sorted(result))
+
+# ===
+
+# def dict_travel(nested_dicts, prefix=''):
+#     for key, value in sorted(nested_dicts.items()):
+#         if isinstance(value, dict):
+#             dict_travel(value, prefix + key + '.')
+#         else:
+#             print(prefix + key + ':', value)
+
+# data = {'a': 1, 'b': {'c': 30, 'a': 10, 'b': 20}}
+
+# dict_travel(data)
+
