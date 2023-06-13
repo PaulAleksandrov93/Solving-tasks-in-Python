@@ -7926,3 +7926,147 @@
 
 # ===
 
+# def get_digits(number: int | float) -> list[int]:
+#     lst = []
+#     if '.' in str(number):
+#         num = [digit for digit in str(number) if digit != '.']
+#         number = int(''.join(num))
+#     while number != 0:
+#         last_digit = number % 10
+#         lst.append(last_digit)
+#         number //= 10
+#     return list(reversed(lst))
+
+# # print(get_digits(16733))
+# print(get_digits(13.909934))
+
+# ===
+
+# def top_grade(grades: dict[str, str | list[int]]) -> dict[str, str | int]:
+#     name = grades['name']
+#     highest_grade = max(grades['grades'])
+#     return {'name': name, 'top_grade': highest_grade}
+
+# print(*top_grade.__annotations__.values())
+
+# ===
+
+# def cyclic_shift(numbers: list[int | float], step: int) -> None:
+#     n = len(numbers)
+#     step %= n  # Приводим step к значению в диапазоне [0, n)
+#     numbers[:] = numbers[-step:] + numbers[:-step]
+
+# numbers = [1, 2, 3, 4, 5]
+# cyclic_shift(numbers, 1)
+
+# print(numbers)
+
+# annotations = cyclic_shift.__annotations__
+# print(annotations['return'])
+# print(annotations['step'])+
+
+# ===
+
+# def matrix_to_dict(matrix: list[list[int | float]]) -> dict[int, list[int | float]]:
+#     return {i+1: row for i, row in enumerate(matrix)}
+
+
+# matrix = [[5, 6, 7], [8, 3, 2], [4, 9, 8]]
+
+# print(matrix_to_dict(matrix))
+
+# ===
+
+# def null_decorator(func):
+#     return func
+# def say():
+#     print('Привет Мир!')
+
+# say = null_decorator(say)      # декорируем функцию
+
+# say()                          # вызываем декорированную функцию
+
+# =
+
+# def sample_decorator(func):          # определяем декоратор
+#     def wrapper():
+#         print('Начало функции')
+#         func()
+#         print('Конец функции')
+#     return wrapper
+
+# def say():
+#     print('Привет Мир!')
+
+# say = sample_decorator(say)          # декорируем функцию
+
+# say()                                # вызываем декорированную функцию
+
+# =
+
+# def uppercase_decorator(func):
+#     def wrapper():
+#         original_result = func()
+#         modified_result = original_result.upper()
+#         return modified_result
+#     return wrapper
+
+# @uppercase_decorator
+# def greet():
+#     return 'Hello world!'
+
+# print(greet())
+
+# =
+
+# def bold(func):
+#     def wrapper(*args, **kwargs):
+#         return '<b>' + func(*args, **kwargs) + '</b>'
+#     return wrapper
+
+# def greet(name):
+#     return f'Hello {name}!'
+
+# @bold
+# def greet1(name):
+#     return f'Hello {name}!'
+
+# @bold
+# def greet2():
+#     return 'Hello world!'
+
+# @bold
+# def greet3(name, surname):
+#     return f'Hello {name} {surname}!'
+
+# print(greet1('Timur'))
+# print(greet2())
+# print(greet3('Timur', 'Guev'))
+
+# =
+
+# def talk(func):
+#     def wrapper(*args, **kwargs):
+#         dash = '-' * 15
+#         print(dash)
+#         func(*args, **kwargs)           # вызываем декорируемую функцию
+#         print(dash)
+#     return wrapper
+
+# @talk
+# def greet(name):
+#     return f'Hello {name}!'
+# =
+
+def make_upper(func):
+    def wrapper():
+        return func().upper()
+    return wrapper
+
+def beegeek():
+    return 'beegeek'
+
+new_beegeek = make_upper(beegeek)
+
+print(beegeek())
+print(new_beegeek())
