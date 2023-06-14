@@ -8058,15 +8058,83 @@
 #     return f'Hello {name}!'
 # =
 
-def make_upper(func):
-    def wrapper():
-        return func().upper()
-    return wrapper
+# def make_upper(func):
+#     def wrapper():
+#         return func().upper()
+#     return wrapper
 
-def beegeek():
-    return 'beegeek'
+# def beegeek():
+#     return 'beegeek'
 
-new_beegeek = make_upper(beegeek)
+# new_beegeek = make_upper(beegeek)
 
-print(beegeek())
-print(new_beegeek())
+# print(beegeek())
+# print(new_beegeek())
+
+# ===
+
+# def add_dollar_prefix(func):
+#     def wrapper():
+#         result = str(func())
+#         return '$' + result
+#     return wrapper
+
+# @add_dollar_prefix
+# def get_price(item):
+#     prices = {'comic book': 5, 'puzzle': 15}
+#     return prices[item]
+
+# print(get_price('comic book'))
+
+# def add_dollar_prefix(func):
+#     def wrapper(*args, **kwargs):
+#         result = str(func(*args, **kwargs))
+#         return '$' + result
+#     return wrapper
+
+# @add_dollar_prefix
+# def get_price(item):
+#     prices = {'comic book': 5, 'puzzle': 20}
+#     return prices[item]
+
+# print(get_price(item='puzzle'))
+
+# = 
+
+# def double(func):
+#     def wrapper(*args, **kwargs):
+#         doubled_result = func(*args, **kwargs) * 2
+#     return wrapper
+
+# @double
+# def get_color_code(color):
+#     color_codes = {'black': '#000000', 'white': '#FFFFFF'}
+#     return color_codes[color]
+
+# print(get_color_code('white'))
+
+# ===
+
+# def sandwich(func):
+#     def wrapper(*args, **kwargs):
+#         print('---- Верхний ломтик хлеба ----')
+#         f = func(*args, **kwargs)
+#         print('---- Нижний ломтик хлеба ----')
+#         return f
+#     return wrapper
+
+
+# @sandwich
+# def add_ingredients(ingredients):
+#     print(' | '.join(ingredients))
+
+# add_ingredients(['томат', 'салат', 'сыр', 'бекон'])
+
+# @sandwich
+# def beegeek():
+#     return 'beegeek'
+    
+# print(beegeek())
+
+# ===
+
