@@ -8137,4 +8137,218 @@
 # print(beegeek())
 
 # ===
+        
+# def uppercase_decorator(func):
+#     def wrapper(*args, **kwargs):
+#         # Преобразование всех аргументов в верхний регистр
+#         args = [str(arg).upper() for arg in args]
+#         kwargs = {key: str(value).upper() for key, value in kwargs.items()}
+
+#         # Вызов оригинальной функции print() с измененными аргументами
+#         print = func(*args, **kwargs)
+#         return print
+#     return wrapper
+# print = uppercase_decorator(print)
+# print('hi', 'there', end='!')
+
+# ===
+
+# def do_twice(func):
+#     def wrapper(*args, **kwargs):
+#         func(*args, **kwargs)
+#         return func(*args, **kwargs)
+    
+#     return wrapper
+
+# @do_twice
+# def beegeek():
+#     print('beegeek')
+    
+# beegeek()
+
+# ===
+
+# def reverse_args(func):
+#     def wrapper(*args, **kwargs):
+#         a = reversed(args)
+#         f = func(*a, **kwargs)
+#         return f
+#     return wrapper
+
+# @reverse_args
+# def concat(a, b, c):
+#     return a + b + c
+    
+# print(concat('apple', 'cherry', 'melon'))
+
+# ===
+
+# def exception_decorator(func):
+#     def wrapper(*args, **kwargs):
+#         try:
+#             foo = func(*args, **kwargs)
+#             return (foo, 'Функция выполнилась без ошибок')
+#         except:
+#             return (None, 'При вызове функции произошла ошибка')
+#     return wrapper
+
+# @exception_decorator
+# def f(x):
+#     return x**2 + 2*x + 1
+
+# print(f(7))
+
+# sum = exception_decorator(sum)
+
+# print(sum(['199', '1', 187]))
+
+# ===
+
+# def takes_positive(func):
+#     def wrapper(*args, **kwargs):
+#         if all(list(map(lambda x: isinstance(x, int), args))) and all(list(map(lambda x: isinstance(x, int), kwargs.values()))):
+#             if all(list(map(lambda x: x > 0, args))) and all(list(map(lambda x: x > 0, kwargs.values()))):
+#                 f = func(*args, **kwargs)
+#                 return f
+#             else:
+#                 return ValueError
+#         else:
+#             return TypeError 
+#     return wrapper
+
+
+# @takes_positive
+# def positive_sum(*args):
+#     return sum(args)
+    
+# print(positive_sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+# @takes_positive
+# def positive_sum(*args):
+#     return sum(args)
+    
+# try:
+#     print(positive_sum(-3, -2, -1, 0, 1, 2, 3))
+# except Exception as err:
+#     print(type(err))
+
+# ===
+
+# import functools
+
+# def bold(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         return '<b>' + func(*args, **kwargs) + '</b>'
+#     return wrapper
+
+# @bold
+# def greet(name):
+#     '''Функция приветствие пользователя.'''
+#     return f'Hello {name}!'
+
+# print(greet.__name__)
+# print(greet.__doc__)
+
+# =
+
+# import functools
+
+# def make_capitalize(func):
+#     @functools.wraps
+#     def wrapper():
+#         return func().capitalize()
+#     return wrapper
+
+# @make_capitalize
+# def beegeek():
+#     '''documentation'''
+#     return 'beegeek'
+
+# print(beegeek.__name__)
+# print(beegeek.__doc__)
+
+# = Шаблон декоратора общего назначения:
+
+# import functools
+
+# def decorator(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         # Что-то выполняется до вызова декорируемой функции
+#         value = func(*args, **kwargs)
+#         # декорируется возвращаемое значение функции
+#         # или что-то выполняется после вызова декорируемой функции
+#         return value
+#     return wrapper
+
+# =
+
+# import functools
+# def square(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         value = func(*args, **kwargs)
+#         return value**2
+#     return wrapper
+
+# @square
+# def add(a, b):
+#     return a + b
+
+# print(add(3, 7))
+
+# ===
+
+# import functools
+# def returns_string(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         f = func(*args, **kwargs)
+#         if isinstance(f, str):
+#             return f
+#         else:
+#             raise TypeError
+#     return wrapper
+
+# @returns_string
+# def nothing():
+#     return
+
+# print(nothing.__name__)
+# print(nothing.__doc__)
+
+# try:
+#     nothing()
+# except TypeError as e:
+#     print(type(e))
+
+# ===
+import functools
+
+def trace(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f'TRACE: вызов {func.__name__}() с аргументами: {args}, {kwargs}')
+        f = func(*args, **kwargs)
+        print(f'TRACE: возвращаемое значение {func.__name__}(): {repr(f)}')
+        return f
+    return wrapper
+
+# @trace
+# def beegeek():
+#     '''beegeek docs'''
+#     return 'beegeek'
+
+# print(beegeek())    
+# print(beegeek.__name__)
+# print(beegeek.__doc__)
+@trace
+def add(a, b, c):
+    '''docs'''
+    return a + b + c
+
+print(add(1, 2, 3))    
+print(add.__name__)
+print(add.__doc__)
+
 
