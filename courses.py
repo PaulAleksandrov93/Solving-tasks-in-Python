@@ -8323,32 +8323,282 @@
 #     print(type(e))
 
 # ===
-import functools
+# import functools
 
-def trace(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        print(f'TRACE: вызов {func.__name__}() с аргументами: {args}, {kwargs}')
-        f = func(*args, **kwargs)
-        print(f'TRACE: возвращаемое значение {func.__name__}(): {repr(f)}')
-        return f
-    return wrapper
+# def trace(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         print(f'TRACE: вызов {func.__name__}() с аргументами: {args}, {kwargs}')
+#         f = func(*args, **kwargs)
+#         print(f'TRACE: возвращаемое значение {func.__name__}(): {repr(f)}')
+#         return f
+#     return wrapper
 
+# # @trace
+# # def beegeek():
+# #     '''beegeek docs'''
+# #     return 'beegeek'
+
+# # print(beegeek())    
+# # print(beegeek.__name__)
+# # print(beegeek.__doc__)
 # @trace
+# def add(a, b, c):
+#     '''docs'''
+#     return a + b + c
+
+# print(add(1, 2, 3))    
+# print(add.__name__)
+# print(add.__doc__)
+
+# def add_smiley_face(face):
+#     def smiley_face_decorator(func):
+#         def wrapper():
+#             return func() + ' ' + face
+#         return wrapper
+#     return smiley_face_decorator
+
+# @add_smiley_face('^~^')
 # def beegeek():
-#     '''beegeek docs'''
 #     return 'beegeek'
 
-# print(beegeek())    
-# print(beegeek.__name__)
-# print(beegeek.__doc__)
-@trace
-def add(a, b, c):
-    '''docs'''
-    return a + b + c
+# print(beegeek())
+# =
+# def make_upper(func):
+#     def wrapper():
+#         return func().upper()
+#     return wrapper
 
-print(add(1, 2, 3))    
-print(add.__name__)
-print(add.__doc__)
+# def del_first_char(func):
+#     def wrapper():
+#         return func()[1:]
+#     return wrapper
 
+# def reverse(func):
+#     def wrapper():
+#         return func()[::-1]
+#     return wrapper
 
+# @reverse
+# @del_first_char
+# @make_upper
+# def beegeek():
+#     return 'beegeek'
+
+# print(beegeek())
+
+# =
+
+# import functools
+
+# def prefix(string, to_the_end=False):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             f = func(*args, **kwargs)
+#             if to_the_end:
+#                 return f + string
+#             else:
+#                 return string + f
+#         return wrapper
+#     return decorator
+
+# @prefix('€')
+# def get_bonus():
+#     return '2000'
+    
+# print(get_bonus())
+
+# @prefix('$$$', to_the_end=True)
+# def get_bonus():
+#     return '2000'
+       
+# print(get_bonus())
+
+# ===
+# import functools
+
+# def make_html(tag):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             value = func(*args, **kwargs)
+#             return f'<{tag}>{value}</{tag}>'
+#         return wrapper
+#     return decorator
+
+# @make_html('del')
+# def get_text(text):
+#     return text
+    
+# print(get_text('Python'))
+
+# ===
+
+# import functools
+
+# def repeat(times):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             for i in range(times):
+#                 value = func(*args, **kwargs)
+#             return value
+#         return wrapper
+#     return decorator            
+
+# @repeat(3)
+# def say_beegeek():
+#     '''documentation'''
+#     print('beegeek')
+    
+# say_beegeek()
+
+# ===
+
+# import functools
+
+# def strip_range(start, end, char='.'):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             ret = ''
+#             r = range(start, end)
+#             value = func(*args, **kwargs)
+#             for l in range(len(value)):
+#                 if l in r:
+#                     ret += char
+#                 else:
+#                     ret += value[l]
+#             return ret
+#         return wrapper
+#     return decorator
+
+# @strip_range(3, 5)
+# def beegeek():
+#     return 'beegeek'
+    
+# print(beegeek())
+
+# ===
+
+# import functools
+
+# def returns(datatype):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             ret = func(*args, **kwargs)
+#             if isinstance(ret, datatype):
+#                 return ret
+#             else:
+#                 return TypeError
+#         return wrapper
+#     return decorator
+
+# @returns(int)
+# def add(a, b):
+#     return a + b
+
+# print(add(10, 5))
+# @returns(int)
+# def add(a, b):
+#     return a + b
+
+# try:
+#     print(add('199', '1'))
+# except TypeError as e:
+#     print(type(e))
+
+# ===
+
+# import functools
+
+# def takes(*args1):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             ret = func(*args, **kwargs)
+#             if all(list(map(lambda x: type(x) in args1, args))):
+#                 if all(list(map(lambda x: type(x) in args1, kwargs.values()))):
+#                     return ret
+#                 else:
+#                     return TypeError
+#             else:
+#                 return TypeError
+#         return wrapper
+#     return decorator
+
+# # TEST_11:
+# @takes(str)
+# def beegeek(word, repeat):
+#     return word * repeat
+    
+# try:
+#     print(beegeek('beegeek', repeat=2))
+# except TypeError as e:
+#     print(type(e))
+
+# @takes(list, int, tuple, str)
+# def add(a, b):
+#     '''add docs'''
+#     return a + b
+
+# print(add.__name__)
+# print(add.__doc__)
+
+# try:
+#     print(add(a='a', b='c'))
+# except TypeError as e:
+#     print(type(e))
+
+# ===
+
+# import functools
+
+# def add_attrs(**kwargs1):
+#     def decorator(func):
+#         for k, v in kwargs1.items():
+#             setattr(func, k, v)
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             return func(*args, **kwargs)
+#         return wrapper
+#     return decorator
+
+# @add_attrs(attr1='bee', attr2='geek')
+# def beegeek():
+#     return 'beegeek'
+
+# print(beegeek.attr1)
+# print(beegeek.attr2)
+
+# ===
+
+import functools
+
+def ignore_exception(*args1):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                f = func(*args, **kwargs)
+                return f
+            except Exception as e:
+                if type(e) in args1:
+                    print(f'Исключение {type(e).__name__} обработано')
+                else:
+                    return type(e)
+        return wrapper
+    return decorator
+                
+
+@ignore_exception()
+def func():
+    '''func docs'''
+    raise ValueError
+  
+try:    
+    func()
+except Exception as e:
+    print(type(e))
