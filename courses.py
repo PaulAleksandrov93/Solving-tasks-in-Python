@@ -8575,30 +8575,445 @@
 
 # ===
 
-import functools
+# import functools
 
-def ignore_exception(*args1):
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            try:
-                f = func(*args, **kwargs)
-                return f
-            except Exception as e:
-                if type(e) in args1:
-                    print(f'Исключение {type(e).__name__} обработано')
-                else:
-                    return type(e)
-        return wrapper
-    return decorator
+# def ignore_exception(*args1):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             try:
+#                 f = func(*args, **kwargs)
+#                 return f
+#             except Exception as e:
+#                 if type(e) in args1:
+#                     print(f'Исключение {type(e).__name__} обработано')
+#                 else:
+#                     raise type(e)
+#         return wrapper
+#     return decorator
                 
+# # TEST_9:
+# @ignore_exception(ValueError, TypeError, ZeroDivisionError, NameError)
+# def beegeek():
+#     return 'beegeek'
+    
+# print(beegeek())
 
-@ignore_exception()
-def func():
-    '''func docs'''
-    raise ValueError
-  
-try:    
-    func()
-except Exception as e:
-    print(type(e))
+# ===
+
+# import functools
+
+# class MaxRetriesException(Exception):
+#     pass
+
+# def retry(num):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             for i in range(num):
+#                 try:
+#                     return func(*args, **kwargs)
+#                 except:
+#                     pass
+#             raise MaxRetriesException
+#         return wrapper
+#     return decorator
+
+# @retry(8)
+# def beegeek():
+#     beegeek.calls = beegeek.__dict__.get('calls', 0) + 1
+#     if beegeek.calls < 5:
+#         raise ValueError
+#     print('beegeek')
+    
+# beegeek()
+
+# ===
+
+# from functools import partial
+
+# beegeek = partial(print, 'bee', 'geek', end='!')
+
+# print(beegeek.args)
+# print(beegeek.keywords)
+
+# ===
+
+# from functools import partial
+
+# to_Timur = partial(send_email, 'Тимур', 'timyrik20@beegeek.ru', 'text')
+# send_an_invitation = partial(send_email, name, email_address, text='Школа BEEGEEK приглашает Вас на новый курс по программированию на языке Python. тутут....')
+
+# ===
+
+# from functools import lru_cache
+
+# @lru_cache()
+# def average(numbers):
+#     return sum(numbers) / len(numbers)
+
+# numbers = [1, 2, 3, 4, 5]
+
+# print(average(numbers))
+# print(average(numbers))
+
+# ===
+
+# from functools import lru_cache
+
+# @lru_cache(typed=True)
+# def return_this(a, b):
+#     return a, b
+
+# print(return_this(True, True))
+# print(return_this(1.0, 1.0))
+# print(return_this(1, 1))
+
+# ===
+
+# words = []
+# while True:
+#     try:
+#         words.append(input().strip())
+#     except:
+#         break
+
+# for word in words:
+#     print(''.join(sorted(word))) 
+
+# ===
+
+# from functools import lru_cache
+
+# @lru_cache
+# def ways(n):
+#     if n == 0:
+#         return 0
+#     if n == 1:
+#         return 1
+#     if n > 4:
+#         return ways(n-1) + ways(n-3) + ways(n-4)
+#     if n > 3:
+#         return ways(n-1) + ways(n-3)
+#     if n > 1:
+#         return ways(n-1)
+    
+    
+
+# print(ways(5))
+
+# =
+
+# numbers = (-2, -1, 0, 1, 2)
+
+# non_zero = filter(None, numbers)
+# positive = map(abs, non_zero)
+
+# print(*positive)
+
+# =
+
+# numbers = filter(None, [0, 1, 2, 3])
+
+# next(numbers)
+# next(numbers)
+# next(numbers)
+
+# try:
+#     print(next(numbers))
+# except StopIteration:
+#     print('Error')
+
+# =
+
+# from sys import getsizeof
+
+# numbers1 = range(10)
+# numbers2 = range(10000000)
+
+# size1 = getsizeof(numbers1)
+# size2 = getsizeof(numbers2)
+
+# print(size1 == size2)
+
+# ===
+
+# numbers = [100, 70, 34, 45, 30, 83, 12, 83, -28, 49, -8, -2, 6, 62, 64, -22, -19, 61, 13, 5, 80, -17, 7, 3, 21, 73, 88, -11, 16, -22]
+# nums_iterator = iter(numbers)
+# next(nums_iterator)
+# next(nums_iterator)
+# next(nums_iterator)
+
+# print(next(nums_iterator))
+
+# ===
+
+# numbers = [100, 70, 34, 45, 30, 83, 12, 83, -28, 49, -8, -2, 6, 62, 64, -22, -19, 61, 13, 5, 80, -17, 7, 3, 21, 73, 88, -11, 16, -22]
+# iterator = iter(numbers)
+# last = None
+# try:
+#     while True:
+#         last = next(iterator)
+# except StopIteration:
+#     pass
+
+# print(last)
+
+# =
+
+# non_zero = filter(None, [0, 1, 2, 3, 4])
+
+# for _ in non_zero:
+#     pass
+
+# print(next(non_zero))
+
+# =
+
+# non_zero = filter(None, [-2, -1, 0, 1, 2])
+# positive = map(abs, non_zero)
+
+# print(list(non_zero))
+# print(list(positive))
+
+# =
+
+# non_zero = filter(None, [-2, -1, 0, 1, 2])
+# positive = map(abs, non_zero)
+
+# print(list(positive))
+# print(list(non_zero))
+
+# =
+
+# positive = (1, 2, 3)
+# negative = map(lambda x: -x, positive)
+
+# for a, b in zip(positive, negative):
+#     print(a + b)
+
+# =
+
+# def filterfalse(predicate, iterable):
+#     iterator = filter(predicate, iterable)    
+#     lst = list(iterator)
+#     ret = [i for i in iterable if i not in lst]
+#     return ret
+
+# objects = [0, 1, True, False, 17, []]
+
+# print(*filterfalse(None, objects))
+
+# def transpose(matrix):
+#     return [list(x) for x in zip(*matrix)]
+
+# matrix = [[1, 2, 3],
+#           [4, 5, 6],
+#           [7, 8, 9]]
+
+# for row in transpose(matrix):
+#     print(row)
+
+# ===
+
+# def get_min_max(data):
+#     if not data:
+#         return None
+#     min_index = max_index = 0
+#     for i, elem in enumerate(data):
+#         if elem < data[min_index]:
+#             min_index = i
+#         elif elem > data[max_index]:
+#             max_index = i
+#     return (min_index, max_index)
+
+# data = [2, 3, 8, 1, 7]
+
+# print(get_min_max(data))
+
+# ===
+
+# def starmap(func, iterable):
+#     return map(lambda args: func(*args), iterable)
+# pairs = [(1, 3), (2, 5), (6, 4)]
+
+# print(*starmap(lambda a, b: a + b, pairs))
+
+# ===
+
+# def get_min_max(iterable):
+#     try:
+#         min_value = max_value = next(iter(iterable))
+#     except StopIteration:
+#         return None
+#     for value in iterable:
+#         if value < min_value:
+#             min_value = value
+#         if value > max_value:
+#             max_value = value
+#     return min_value, max_value
+
+# iterable = iter(range(10))
+
+# print(get_min_max(iterable))
+
+# iterable = [6, 4, 2, 33, 19, 1]
+
+# print(get_min_max(iterable))
+# iterable = iter([])
+
+# print(get_min_max(iterable))
+# data = iter(range(100_000_000))
+
+# print(get_min_max(data))
+
+# =
+
+# iterator = iter(lambda: 2, 10)
+
+# print(next(iterator) + next(iterator))
+
+# ===
+
+# def love():
+#     while True:
+#         return 'i love beegeek!'
+
+# infinite_love = iter(love, None)
+
+
+# print(next(infinite_love))
+
+# ===
+
+# def is_iterator(obj):
+#     try:
+#         next(obj)
+#         return True
+#     except TypeError:
+#         return False
+    
+
+# print(is_iterator([1, 2, 3, 4, 5]))
+
+# ===
+
+# import random
+
+# def random_numbers(left, right):
+#     while True:
+#         yield random.randint(left, right)
+
+# iterator = random_numbers(1, 1)
+
+# print(next(iterator))
+
+# ===
+
+# numbers = [1, 2, 3, 4, 5]
+
+# iterator = iter(numbers)
+
+# del numbers[0]
+# del numbers[1]
+
+# print(next(iterator))
+
+# =
+
+# numbers = [1, 2, 3, 4, 5]
+
+# iterator = iter(numbers)
+
+# next(iterator)
+# next(iterator)
+
+# del numbers[0]
+# del numbers[1]
+
+# print(next(iterator))
+
+# ===
+
+# class Repeater:
+#     def __init__(self, obj):
+#         self.obj = obj
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         return self.obj
+    
+# ===
+
+# class BoundedRepeater:
+#     def __init__(self, obj, times):
+#         self.obj = obj
+#         self.times = times
+#         self.current = 0
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if self.current < self.times:
+#             self.current += 1
+#             return self.obj
+#         else:
+#             raise StopIteration
+
+# ===
+
+# class Square: 
+#     def __init__(self, n): 
+#         self.n = n 
+#         self.current = 1
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if self.current > self.n:
+#             raise StopIteration
+#         result = self.current ** 2
+#         self.current += 1
+#         return result
+
+# ===
+
+# class Fibonacci: 
+#     def __init__(self): 
+#         self.current = 1 
+#         self.previous = 0
+
+#     def __iter__(self):
+#         return self
+        
+#     def __next__(self):
+#         result = self.current
+#         self.current += self.previous
+#         self.previous = result
+#         return result
+
+# fibonacci = Fibonacci()
+
+# print(next(fibonacci))
+
+# ===
+
+# class PowerOf:
+#     def __init__(self, number):
+#         self.number = number
+#         self.current = 1
+
+#     def __iter__(self):
+#         return self
+    
+#     def __next__(self):
+#         result = self.current
+#         self.current *= self.number
+#         return result
+
+# ===
+
