@@ -9017,3 +9017,44 @@
 
 # ===
 
+# class DictItemsIterator:
+#     def __init__(self, data):
+#         self.data = data
+#         self.keys = list(data.keys())
+#         self.index = 0
+    
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if self.index >= len(self.keys):
+#             raise StopIteration
+#         key = self.keys[self.index]
+#         value = self.data[key]
+#         self.index += 1
+#         return (key, value)
+    
+# pairs = DictItemsIterator({1: 'A', 2: 'B', 3: 'C'})
+
+# ===
+
+class CardDeck:
+    def __init__(self):
+        self.nominals = "2 3 4 5 6 7 8 9 10 валет дама король туз".split()
+        self.suits = "пик треф бубен червей".split()
+        self.cards = [f"{nominal} {suit}" for nominal in self.nominals for suit in self.suits]
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.cards:
+            return self.cards.pop(0)
+        else:
+            raise StopIteration
+        
+
+cards = CardDeck()
+
+print(next(cards))
+print(next(cards))

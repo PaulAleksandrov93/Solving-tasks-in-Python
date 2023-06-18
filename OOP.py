@@ -990,39 +990,147 @@
 
 # ===
 
-def hash_function(password):
-        hash_value = 0
-        for char, index in zip(password, range(len(password))):
-            hash_value += ord(char) * index
-        return hash_value % 10**9
+# def hash_function(password):
+#         hash_value = 0
+#         for char, index in zip(password, range(len(password))):
+#             hash_value += ord(char) * index
+#         return hash_value % 10**9
 
 
-class Account():
+# class Account():
     
-    def __init__(self, login, password):
-        self._login = login
-        self._password = password
+#     def __init__(self, login, password):
+#         self._login = login
+#         self._password = password
     
-    @property
-    def login(self):
-        return self._login
-    @login.setter
-    def login(self, login):
-        raise AttributeError('Изменение логина невозможно')
+#     @property
+#     def login(self):
+#         return self._login
+#     @login.setter
+#     def login(self, login):
+#         raise AttributeError('Изменение логина невозможно')
     
-    @property
-    def password(self):
-        return hash_function(self._password)
+#     @property
+#     def password(self):
+#         return hash_function(self._password)
     
-    @password.setter
-    def password(self, password):
-        self._password = password
+#     @password.setter
+#     def password(self, password):
+#         self._password = password
 
 
-account = Account('timyr-guev', 'lovebeegeek')
-try:
-    account.login = 'timyrik30'
-except AttributeError as e:
-    print(e)
+# account = Account('timyr-guev', 'lovebeegeek')
+# try:
+#     account.login = 'timyrik30'
+# except AttributeError as e:
+#     print(e)
+
+# ===
+
+# import functools, json
+
+
+# def jsonify(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         f = func(*args, **kwargs)
+#         return json.dumps(f)
+#     return wrapper    
+
+# @jsonify
+# def make_user(id, live, options):
+#     return {'id': id, 'live': live, 'options': options}
     
-    
+
+# print(make_user(4, False, None))
+
+# ===
+
+# import sys
+# v = sys.stdin.readlines()
+# data = list(map(lambda x:x.strip().split(', '), v))
+# coordinates = []
+# for e in data: 
+#   lst = []
+#   for i in range(len(e)):
+#     if i % 2 == 0:
+#       lst.append(e[i][1:])
+#     else:
+#       lst.append(e[i][:-1])
+#   coordinates.append(lst)
+# for e in coordinates:
+#     if -90 <= float(e[0]) <= 90 and -180 <= float(e[1]) <= 180:
+#       print(True)
+#     else:
+#       print(False)
+
+# ===
+
+# def quantify(iterable, predicate):
+#     data = filter(predicate, iterable)
+#     return len(list(data))
+
+
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# print(quantify(numbers, lambda x: x > 1))
+
+# ===
+
+# import calendar
+# from datetime import datetime
+
+# year = int(input())
+# month = int(input())
+# mnth = calendar.monthcalendar(year, month)
+# counter = 0
+# for week in mnth:
+#     if week[3] != 0:
+#         counter += 1
+#     if counter >= 4:
+#         day = week[3]
+#         break
+# print(datetime(year, month, day).strftime("%d.%m.%Y"))
+
+# ===
+
+# def is_integer(string):
+#     try:
+#         int(string)
+#         return True
+#     except:
+#         return False
+
+# ===
+
+# def is_decimal(string):
+#     try:
+#         try:
+#             int(string)
+#             return True
+#         except:
+#             float(string)
+#             return True
+#     except:
+#         return False
+
+
+# print(is_decimal('.-95'))
+
+# ===
+
+import re
+
+def is_fraction(string):
+    pattern = "^-?\d+/\d+$"
+    match = re.match(pattern, string)
+    if match:
+        num, denom = match.group().split('/')
+        if int(denom) == 0:
+            return False
+        return True
+    else:
+        return False
+
+
+print(is_fraction('71'))
