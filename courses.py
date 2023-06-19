@@ -9038,23 +9038,227 @@
 
 # ===
 
-class CardDeck:
-    def __init__(self):
-        self.nominals = "2 3 4 5 6 7 8 9 10 валет дама король туз".split()
-        self.suits = "пик треф бубен червей".split()
-        self.cards = [f"{nominal} {suit}" for nominal in self.nominals for suit in self.suits]
+# class CardDeck:
+#     def __init__(self):
+#         self.nominals = "2 3 4 5 6 7 8 9 10 валет дама король туз".split()
+#         self.suits = "пик треф бубен червей".split()
+#         self.cards = [f"{nominal} {suit}" for suit in self.suits for nominal in self.nominals]
 
-    def __iter__(self):
-        return self
+#     def __iter__(self):
+#         return self
 
-    def __next__(self):
-        if self.cards:
-            return self.cards.pop(0)
-        else:
-            raise StopIteration
+#     def __next__(self):
+#         if self.cards:
+#             return self.cards.pop(0)
+#         else:
+#             raise StopIteration
         
 
-cards = CardDeck()
+# cards = CardDeck()
 
-print(next(cards))
-print(next(cards))
+# print(next(cards))
+# print(next(cards))
+
+# ===
+
+# class Cycle():
+#     def __init__(self, iterable):
+#         self.iterable = iterable
+#         self.index = 0
+    
+#     def __iter__(self):
+#         return self
+
+    
+#     def __next__(self):
+#         if len(self.iterable) == 0:
+#             raise StopIteration
+#         result = self.iterable[self.index % len(self.iterable)]
+#         self.index += 1
+#         return result
+
+# cycle = Cycle('be')
+
+# print(next(cycle))
+# print(next(cycle))
+# print(next(cycle))
+# print(next(cycle))
+
+# ===
+
+# import random
+
+# class RandomNumbers:
+#     def __init__(self, left, right, n):
+#         self.left = left
+#         self.right = right
+#         self.n = n
+#         self.count = 0
+    
+#     def __iter__(self):
+#         return self
+    
+#     def __next__(self):
+#         if self.count >= self.n:
+#             raise StopIteration
+#         self.count += 1
+#         return random.randint(self.left, self.right)
+    
+# iterator = RandomNumbers(1, 1, 3)
+
+# print(next(iterator))
+# print(next(iterator))
+# print(next(iterator))
+
+# ===
+
+# class Alphabet: 
+#     RU_ALPHABET = 'абвгдежзийклмнопрстуфхцчшщъыьэюя' 
+#     EN_ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
+
+#     def __init__(self, language):
+#         self.index = 0
+#         if language == 'ru':
+#             self.alphabet = self.RU_ALPHABET
+#         elif language == 'en':
+#             self.alphabet = self.EN_ALPHABET
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         current_letter = self.alphabet[self.index % len(self.alphabet)]
+#         self.index += 1
+#         return current_letter
+    
+# ru_alpha = Alphabet('ru')
+
+# print(next(ru_alpha))
+# print(next(ru_alpha))
+# print(next(ru_alpha))
+
+# ===
+
+# class Xrange:
+#     def __init__(self, start, end, step=1):
+#         self.start = start
+#         self.end = end
+#         self.step = step
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if isinstance(self.start, float) or isinstance(self.step, float):
+#             if isinstance(self.step, float):
+#                 t = type(self.step)
+#                 self.start = t(self.start)
+#             else:
+#                 t = type(self.start)
+#                 self.step = t(self.step)
+#         if self.step > 0 and self.start >= self.end:
+#             raise StopIteration
+#         elif self.step < 0 and self.start <= self.end:
+#             raise StopIteration
+#         current_num = self.start
+#         self.start += self.step
+#         return current_num
+    
+# xrange = Xrange(5.9, 44, 3)
+
+# print(tuple(xrange))
+
+# ===
+
+# def bee():
+#     yield 'b'
+#     yield 'e'
+#     yield 'e'
+
+# generator = bee()
+
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+
+# =
+
+# def bee():
+#     yield 'b'
+#     yield 'e'
+#     yield 'e'
+
+# print(next(bee()))
+# print(next(bee()))
+# print(next(bee()))
+
+# =
+
+# def beegeek():
+#     for char in 'bee':
+#         yield char
+#     for char in 'geek':
+#         yield char
+
+# generator = beegeek()
+
+# print(*generator)
+
+# =
+
+# def bee():
+#     yield 'b'
+#     print('--')
+#     yield 'e'
+#     print('--')
+#     yield 'e'
+
+# for elem in bee():
+#     print(elem)
+
+# =
+
+# def simple_sequence():
+#     start = 1
+#     while True:
+#         yield start
+#         start += 1
+#         for i in range(start-1):
+#             yield start
+
+# generator = simple_sequence()
+# numbers = [next(generator) for _ in range(10)]
+
+# print(*numbers)
+
+# =
+
+def alternating_sequence(count = None):
+    start = 0 
+    # yield start
+    if count == None:
+        while True:
+            start += 1
+            yield start
+            start += 1
+            yield -start
+    if count == 1:
+       for i in range(count):
+        start += 1
+        yield start
+        
+    for i in range(count//2):
+        start += 1
+        yield start
+        start += 1
+        yield -start
+
+
+
+generator = alternating_sequence(1)
+
+try:
+    print(next(generator))
+    print(next(generator))
+except StopIteration:
+    print('Error')
