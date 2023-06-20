@@ -9233,32 +9233,212 @@
 
 # =
 
-def alternating_sequence(count = None):
-    start = 0 
-    # yield start
-    if count == None:
-        while True:
-            start += 1
-            yield start
-            start += 1
-            yield -start
-    if count == 1:
-       for i in range(count):
-        start += 1
-        yield start
+# def alternating_sequence(count = None):
+#     start = 0 
+#     # yield start
+#     if count == None:
+#         while True:
+#             start += 1
+#             yield start
+#             start += 1
+#             yield -start
+#     if count == 1:
+#        for i in range(count):
+#         start += 1
+#         yield start
         
-    for i in range(count//2):
-        start += 1
-        yield start
-        start += 1
-        yield -start
+#     for i in range(count//2):
+#         start += 1
+#         yield start
+#         start += 1
+#         yield -start
 
 
 
-generator = alternating_sequence(1)
+# generator = alternating_sequence(1)
 
-try:
-    print(next(generator))
-    print(next(generator))
-except StopIteration:
-    print('Error')
+# try:
+#     print(next(generator))
+#     print(next(generator))
+# except StopIteration:
+#     print('Error')
+
+# =
+
+
+# from math import sqrt
+
+# def is_prime(n):
+#     if n <= 1:
+#         return False
+#     elif n <= 3:
+#         return True
+#     elif n % 2 == 0 or n % 3 == 0:
+#         return False
+#     i = 5
+#     while i * i <= n:
+#         if n % i == 0 or n % (i + 2) == 0:
+#             return False
+#         i += 6
+#     return True
+    
+# def primes(left, right):
+#     for n in range(left, right + 1):
+#         if is_prime(n):
+#             yield n
+    
+# generator = primes(1, 15)
+
+# print(*generator)
+
+# ===
+
+# def reverse(sequence):
+#     rev = reversed(sequence)
+#     for r in rev:
+#         yield r
+
+# generator = reverse('beegeek')
+
+# print(type(generator))
+# print(*generator)
+
+# ===
+
+# from datetime import date, timedelta
+
+# def dates(start, count=None):
+#     delta = timedelta(days=1) 
+#     if count == None:
+#         yield start
+#         while True:
+#             if start == date(9999, 12, 31):
+#                 break
+#             start += delta
+#             yield start
+#     else:
+#         yield start
+#         for i in range(count-1):
+#             start += delta
+#             yield start
+
+
+# generator = dates(date(9999, 1, 7))
+
+# for _ in range(348):
+#     next(generator)
+
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+
+# try:
+#    print(next(generator))
+# except StopIteration:
+#     print('Error')
+
+# ===
+
+                
+# def card_deck(suit):
+#     nominals = "2 3 4 5 6 7 8 9 10 валет дама король туз".split()
+#     suits = "пик треф бубен червей".split()
+#     cards = [f"{nominal} {suit}" for suit in suits for nominal in nominals]
+#     while True:
+#         for card in cards:
+#             if suit not in card:
+#                 yield card 
+
+# generator = card_deck('треф')
+# cards = [next(generator) for _ in range(40)]
+
+# print(*cards)
+
+# ===
+
+# def bee():
+#     yield 'b'
+#     yield 'e'
+#     yield 'e'
+
+# def geek():
+#     yield from 'geek'
+
+# print(*bee())
+# print(*geek())
+
+# =
+
+# def bee():
+#     for char in 'bee':
+#         yield char
+
+# def geek():
+#     yield from 'geek'
+
+# print(*bee())
+# print(*geek())
+
+# =
+
+# def bee():
+#     yield from 'bee'
+
+# def geek():
+#     yield from 'geek'
+
+# def beegeek():
+#     yield from bee()
+#     yield from geek()
+
+# print(*beegeek())
+
+# ===
+
+# def matrix_by_elem(matrix):
+#     for row in matrix:
+#         yield from row
+
+# matrix = [[1, 2, 3],
+#           [4, 5, 6],
+#           [7, 8, 9]]
+
+# print(*matrix_by_elem(matrix))
+
+# ===
+
+# def palindromes():
+#     start = 0
+#     while True:
+#         start += 1
+#         if str(start) == str(start)[::-1]:
+#             yield start
+
+
+# generator = palindromes()
+
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+
+# ===
+
+# def flatten(nested_list):
+#     for element in nested_list:
+#         if isinstance(element, int):
+#             yield element
+#         elif isinstance(element, list):
+#             yield from flatten(element)
+    
+
+# generator = flatten([[1, 2], [[3]], [[4], 5]])
+
+# print(*generator)
