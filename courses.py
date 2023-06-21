@@ -9442,3 +9442,64 @@
 # generator = flatten([[1, 2], [[3]], [[4], 5]])
 
 # print(*generator)
+
+# ===
+
+# def cubes_of_odds(iterable):
+#     return (number**3 for number in iterable if number % 2)
+
+# print(*cubes_of_odds([1, 2, 3, 4, 5]))
+
+# ===
+
+# def is_prime(number):
+#     if number < 2:
+#         return False
+#     return all(number % i != 0 for i in range(2, int(number ** 0.5) + 1))
+
+# print(is_prime(7))
+# print(is_prime(8))
+
+# ===
+
+# def count_iterable(iterable):
+#     counter = 0
+#     generator = (i for i in iterable)
+#     for i in generator:
+#         counter +=1
+#     return counter
+# print(count_iterable([1, 2, 3, 4, 5]))
+
+# ===
+
+# def all_together(*args):
+#     for i in args:
+#         yield from i
+
+# objects = [range(3), 'bee', [1, 3, 5], (2, 4, 6)]
+# print(*all_together(*objects))
+
+# ===
+
+# def interleave(*args):
+#     for seq in zip(*args):
+#         yield from seq
+
+# ===
+
+def digits(number):
+    for digit in str(number):
+        yield int(digit)
+    
+def cubed(numbers):
+    for number in numbers:
+        yield number ** 3
+
+def odds(numbers):
+    for number in numbers:
+        if number % 2:
+            yield number
+            
+numbers = cubed(odds(digits(1234321)))
+
+print(*numbers)
