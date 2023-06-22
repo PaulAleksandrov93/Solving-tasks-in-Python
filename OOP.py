@@ -1119,18 +1119,60 @@
 
 # ===
 
-import re
-
-def is_fraction(string):
-    pattern = "^-?\d+/\d+$"
-    match = re.match(pattern, string)
-    if match:
-        num, denom = match.group().split('/')
-        if int(denom) == 0:
-            return False
-        return True
-    else:
-        return False
+# def intersperse(iterable, delimeter):
+#     if isinstance(iterable, str):
+#         seq = [l for l in iterable]
+#     else:
+#         seq = list(iterable)
+#     for i in seq:
+#         yield i
+#         if seq.index(i) != len(seq)-1:
+#             yield delimeter
 
 
-print(is_fraction('71'))
+# inter = intersperse('beegeek', '!')
+# print(next(inter))
+# print(next(inter))
+# print(*inter)
+
+# ===
+
+# def annual_return(start, percent, years):
+#     for _ in range(years):
+#         start += start/100*percent
+#         yield start
+
+# for value in annual_return(120000, 10, 3):
+#     print(round(value))
+
+# ===
+
+# def pluck(data: dict, path: str, default=None):
+#     if '.' in path:
+#         p = path.split('.')
+#     else: 
+#         if path in data:
+#             return data[path]
+#         else: 
+#             return default
+#     while len(p) > 0:
+#         try:
+#             # value = data.get(p[0])
+#             value = data[p[0]]
+#             if isinstance(value, dict):
+#                 data = value
+#             else:
+#                 return value
+#             del p[0]
+#         except KeyError:
+#             return default
+#     return data
+        
+
+# d = {'firstname': 'Тимур', 'lastname': 'Гуев', 'birthdate': {'day': 10, 'month': 'October', 'year': 1993},
+#      'address': {'streetaddress': 'Часовая 25, кв. 127',
+#                  'city': {'region': 'Московская область', 'type': 'город', 'cityname': 'Москва'},
+#                  'postalcode': '125315'}}
+
+# ===
+

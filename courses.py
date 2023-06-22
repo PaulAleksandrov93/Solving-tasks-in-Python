@@ -9487,19 +9487,39 @@
 
 # ===
 
-def digits(number):
-    for digit in str(number):
-        yield int(digit)
+# def digits(number):
+#     for digit in str(number):
+#         yield int(digit)
     
-def cubed(numbers):
-    for number in numbers:
-        yield number ** 3
+# def cubed(numbers):
+#     for number in numbers:
+#         yield number ** 3
 
-def odds(numbers):
-    for number in numbers:
-        if number % 2:
-            yield number
+# def odds(numbers):
+#     for number in numbers:
+#         if number % 2:
+#             yield number
             
-numbers = cubed(odds(digits(1234321)))
+# numbers = cubed(odds(digits(1234321)))
 
-print(*numbers)
+# print(*numbers)
+
+# ===
+
+# from itertools import repeat
+
+# repeater = repeat('bee')
+
+# for _ in range(100):
+#     next(repeater)
+
+# print(next(repeater))
+# print(next(repeater))
+
+# =
+
+from itertools import repeat
+
+repeater = repeat('geek', 4)
+
+print(list(repeater))
