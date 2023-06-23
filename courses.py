@@ -9518,8 +9518,147 @@
 
 # =
 
-from itertools import repeat
+# from itertools import repeat
 
-repeater = repeat('geek', 4)
+# repeater = repeat('geek', 4)
 
-print(list(repeater))
+# print(list(repeater))
+
+# =
+
+# from collections import namedtuple
+
+# Person = namedtuple('Person', ['name', 'nationality', 'sex', 'birth', 'death'])
+
+# persons = [Person('E. M. Ashe', 'American', 'male', 1867, 1941),
+#            Person('Goran Aslin', 'Swedish', 'male', 1980, 0),
+#            Person('Erik Gunnar Asplund', 'Swedish', 'male', 1885, 1940),
+#            Person('Genevieve Asse', 'French', 'female', 1949, 0),
+#            Person('Irene Adler', 'Swedish', 'female', 2005, 0),
+#            Person('Sergio Asti', 'Italian', 'male', 1926, 0),
+#            Person('Olof Backman', 'Swedish', 'male', 1999, 0),
+#            Person('Alyson Hannigan', 'Swedish', 'female', 1940, 1987),
+#            Person('Dana Atchley', 'American', 'female', 1941, 2000),
+#            Person('Monika Andersson', 'Swedish', 'female', 1957, 0),
+#            Person('Shura_Stone', 'Russian', 'male', 2000, 0),
+#            Person('Jon Bale', 'Swedish', 'male', 2000, 0)]
+
+
+# youngest_alive_swede = swedens(mans(alives(persons)))
+
+# print(*youngest_alive_swede)
+
+# youngest_male_swedish = max((p for p in persons if p.nationality == 'Swedish' and p.sex == 'male' and p.death == 0), key=lambda p: p.birth)
+# print(youngest_male_swedish.name)
+
+# ===
+
+# def parse_ranges(ranges):
+#     for ran in ranges.split(','):
+#         bounds = list(map(int, ran.split('-')))
+#         for num in range(bounds[0], bounds[-1] + 1):
+#             yield num
+
+# print(*parse_ranges('1-2,4-4,8-10'))
+
+# ===
+
+# def filter_names(names, ignore_char, max_names):
+#     count = 0
+#     for name in names:
+#         if count == max_names:
+#             break
+#         if name[0].lower() == ignore_char.lower() or any(char.isdigit() for char in name):
+#             continue
+#         yield name 
+#         count += 1
+
+# data = ['Dima', 'Timur', 'Arthur', 'Anri20', 'Arina', 'German', 'Ruslan']
+
+# print(*filter_names(data, 'D', 3))
+
+# ===
+
+# import csv
+
+# with open('data.csv', 'r', newline='', encoding='utf-8') as file:
+#     file_lines = (line for line in file)
+#     line_values = (line.rstrip().split(',') for line in file_lines)
+#     file_headers = next(line_values)
+#     sum = 0
+#     for line in line_values:
+#         if line[2] == 'a':
+#             sum += int(line[1])
+#     print(sum)
+
+# ===
+
+# from datetime import date, timedelta
+
+# def years_days(year):
+#     current_date = date(year=year, month=1, day=1)
+#     end_date = date(year=year, month=12, day=31)
+#     while current_date <= end_date:
+#         yield current_date
+#         current_date += timedelta(days=1)
+
+# ===
+
+
+# def recviz(fn):
+#     def wrapped(*args, **kwargs):
+#         arg_str = ""
+#         for i, arg in enumerate(args):
+#             if i > 0:
+#                 arg_str += ", "
+#             arg_str += str(arg)
+
+#         for kw, val in kwargs.items():
+#             if arg_str:
+#                 arg_str += ", "
+#             arg_str += kw + "=" + str(val)
+
+#         print(f"-> {fn.__name__}({arg_str})")
+#         res = fn(*args, **kwargs)
+#         print("<-", res)
+
+#         return res
+
+#     return wrapped
+
+# @recviz
+# def add(a, b, c, d, e):
+#     return (a + b + c) * (d + e)
+
+# add('a', b='b', c='c', d=3, e=True)
+
+
+def recviz(fn):
+    def wrapped(*args, **kwargs):
+        arg_str = ""
+        for i, arg in enumerate(args):
+            if i > 0:
+                arg_str += ", "
+            arg_str += str(arg)
+
+        for kw, val in kwargs.items():
+            if arg_str:
+                arg_str += ", "
+            arg_str += kw + "=" + str(val)
+
+        print(f"-> {fn.__name__}({arg_str})")
+        res = fn(*args, **kwargs)
+        print("<-", res)
+
+        return res
+
+    return wrapped
+
+@recviz
+
+def add(a, b, c, d, e):
+    return (a + b + c) * (d + e)
+
+add('a', b='b', c='c', d=3, e=True)
+
+

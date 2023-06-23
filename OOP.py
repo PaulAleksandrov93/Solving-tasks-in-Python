@@ -1176,3 +1176,60 @@
 
 # ===
 
+# def recviz(fn):
+#     def wrapped(*args, **kwargs):
+#         arg_str = ""
+#         for i, arg in enumerate(args):
+#             if i > 0:
+#                 arg_str += ", "
+#             arg_str += str(arg)
+
+#         for kw, val in kwargs.items():
+#             if arg_str:
+#                 arg_str += ", "
+#             arg_str += kw + "=" + str(val)
+
+#         print(f"-> {fn.__name__}({arg_str})")
+#         res = fn(*args, **kwargs)
+#         print("<-", res)
+
+#         return res
+
+#     return wrapped
+
+# @recviz
+# def add(a, b, c, d, e):
+#     return (a + b + c) * (d + e)
+
+# add('a', b='b', c='c', d=3, e=True)
+
+
+def recviz(fn):
+    def wrapped(*args, **kwargs):
+        arg_str = ""
+        for i, arg in enumerate(args):
+            if i > 0:
+                arg_str += ", "
+            arg_str += str(arg)
+
+        for kw, val in kwargs.items():
+            if arg_str:
+                arg_str += ", "
+            arg_str += kw + "=" + str(val)
+
+        print(f"-> {fn.__name__}({arg_str})")
+        res = fn(*args, **kwargs)
+        print("<-", res)
+
+        return res
+
+    return wrapped
+
+@recviz
+
+def add(a, b, c, d, e):
+    return (a + b + c) * (d + e)
+
+add('a', b='b', c='c', d=3, e=True)
+
+
