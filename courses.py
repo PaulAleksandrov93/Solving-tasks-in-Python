@@ -9604,61 +9604,189 @@
 
 # ===
 
+# def nonempty_lines(file_name):
+#     with open(file_name, 'r', encoding='utf-8') as f:
+#         for line in f:
+#             if not line.isspace():
+#                 if len(line.strip()) > 25:
+#                     yield "...".strip()
+#                 else:
+#                     yield line.strip()
 
-# def recviz(fn):
-#     def wrapped(*args, **kwargs):
-#         arg_str = ""
-#         for i, arg in enumerate(args):
-#             if i > 0:
-#                 arg_str += ", "
-#             arg_str += str(arg)
+# print(*nonempty_lines('file2.txt'))
 
-#         for kw, val in kwargs.items():
-#             if arg_str:
-#                 arg_str += ", "
-#             arg_str += kw + "=" + str(val)
+# ===
 
-#         print(f"-> {fn.__name__}({arg_str})")
-#         res = fn(*args, **kwargs)
-#         print("<-", res)
+# def txt_to_dict():
+#     with open('planets.txt', encoding='UTF-8') as file:
+#         planet = {}
+#         for line in file:
+#             if line.strip():
+#                 key, value = line.strip().split(' = ')
+#                 planet[key] = value
+#             else:
+#                 yield planet
+#                 planet = {}
+#         yield planet
 
-#         return res
+# planets = txt_to_dict()
 
-#     return wrapped
+# print(next(planets))
 
-# @recviz
-# def add(a, b, c, d, e):
-#     return (a + b + c) * (d + e)
+# ===
 
-# add('a', b='b', c='c', d=3, e=True)
+# def unique(iterable):    
+#     seen = set()
+#     for element in iterable:
+#         if element not in seen:
+#             seen.add(element)
+#             yield element
 
+# numbers = [1, 2, 2, 3, 4, 5, 5, 5]
 
-def recviz(fn):
-    def wrapped(*args, **kwargs):
-        arg_str = ""
-        for i, arg in enumerate(args):
-            if i > 0:
-                arg_str += ", "
-            arg_str += str(arg)
+# print(*unique(numbers))
 
-        for kw, val in kwargs.items():
-            if arg_str:
-                arg_str += ", "
-            arg_str += kw + "=" + str(val)
+# ===
 
-        print(f"-> {fn.__name__}({arg_str})")
-        res = fn(*args, **kwargs)
-        print("<-", res)
-
-        return res
-
-    return wrapped
-
-@recviz
-
-def add(a, b, c, d, e):
-    return (a + b + c) * (d + e)
-
-add('a', b='b', c='c', d=3, e=True)
+# def stop_on(iterable, obj):
+#     for element in iterable:
+#         if element == obj:
+#             break
+#         yield element
+#     else:
+#         yield from iterable
 
 
+# numbers = [1, 2, 3, 4, 5]
+
+# print(*stop_on(numbers, 4))
+
+# ===
+
+# def with_previous(iterable):
+#     previous = None
+#     for current in iterable:
+#         yield (current, previous)
+#         previous = current
+
+# numbers = [1, 2, 3, 4, 5]
+
+# print(*with_previous(numbers))
+
+# ===
+
+# def pairwise(iterable):
+#     iterator = iter(iterable)
+#     try:
+#         prv = next(iterator)
+#     except StopIteration:
+#         return
+
+#     while True:
+#         try:
+#             cur = next(iterator)
+#         except StopIteration:
+#             yield prv, None
+#             return
+#         else:
+#             yield prv, cur
+#             prv = cur
+
+# numbers = [1, 2, 3, 4, 5]
+
+# print(*pairwise(numbers))
+
+# ===
+
+# def around(iterable):
+#     iterator = iter(iterable)
+#     try:
+#         prv = None 
+#         cur = next(iterator) 
+#         lst = len(list(iterable))
+#         if  lst == 1:
+#             nxt = None
+#         else:
+#             nxt = next(iterator) 
+#     except StopIteration:
+#         return
+
+#     while True:
+#         try:
+#             yield prv, cur, nxt
+#             prv = cur
+#             cur = nxt
+#             nxt = next(iterator)
+#         except StopIteration:
+#             yield prv, cur, None
+#             # yield cur, None, None
+#             return
+
+# ===
+
+# def around(iterable):
+#     iterator = iter(iterable)
+#     prev_item = None
+#     curr_item = next(iterator)
+    
+#     for next_item in iterator:
+#         yield (prev_item, curr_item, next_item)
+#         prev_item = curr_item
+#         curr_item = next_item
+    
+#     yield (prev_item, curr_item, None)
+            
+
+
+# print(list(around([])))
+
+
+# # numbers = [1, 2, 3, 4, 5]
+
+# # print(*around(numbers))
+
+# ===
+
+# from itertools import accumulate
+# import operator
+
+# def factorials(n):
+#     return accumulate(range(1, n+1), func=operator.mul)
+
+# ===
+
+# import itertools
+
+# def alnum_sequence():
+#     numbers = itertools.cycle(range(1, 27))
+#     letters = itertools.cycle('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    
+#     while True:
+#         yield next(numbers)
+#         yield next(letters)
+
+# alnum = alnum_sequence()
+
+# print(*(next(alnum) for _ in range(55)))
+
+# ===
+
+from itertools import cycle, islice
+
+def roundrobin(*args):
+    iterators = [iter(iterable) for iterable in args]
+    exhausted = set()
+    
+    while iterators:
+        # Удаляем итераторы, которые уже исчерпаны
+        iterators = [iterator for iterator in iterators if iterator not in exhausted]
+        
+        for iterator in iterators:
+            try:
+                yield next(iterator)
+            except StopIteration:
+                # Если итератор исчерпан, добавляем его в множество исчерпанных итераторов
+                exhausted.add(iterator)
+
+
+print(*roundrobin('abc', 'd', 'ef'))
