@@ -9771,22 +9771,293 @@
 
 # ===
 
-from itertools import cycle, islice
+# from itertools import cycle, islice
 
-def roundrobin(*args):
-    iterators = [iter(iterable) for iterable in args]
-    exhausted = set()
+# def roundrobin(*args):
+#     iterators = [iter(iterable) for iterable in args]
+#     exhausted = set()
     
-    while iterators:
-        # Удаляем итераторы, которые уже исчерпаны
-        iterators = [iterator for iterator in iterators if iterator not in exhausted]
+#     while iterators:
+#         # Удаляем итераторы, которые уже исчерпаны
+#         iterators = [iterator for iterator in iterators if iterator not in exhausted]
         
-        for iterator in iterators:
-            try:
-                yield next(iterator)
-            except StopIteration:
-                # Если итератор исчерпан, добавляем его в множество исчерпанных итераторов
-                exhausted.add(iterator)
+#         for iterator in iterators:
+#             try:
+#                 yield next(iterator)
+#             except StopIteration:
+#                 # Если итератор исчерпан, добавляем его в множество исчерпанных итераторов
+#                 exhausted.add(iterator)
 
 
-print(*roundrobin('abc', 'd', 'ef'))
+# print(*roundrobin('abc', 'd', 'ef'))
+
+# ===
+
+# from itertools import dropwhile
+
+# numbers = [1, 2, 3, 4, 5, 5, 5, 4, 3, 2, 1]
+
+# print(*dropwhile(lambda x: x < 5, numbers))
+
+# =
+
+# from itertools import filterfalse
+
+# names = ['Timur', 'Arthur', 'Dima', 'Anri']
+
+# print(*filterfalse(lambda name: name.startswith('A'), names))
+
+# =
+
+# from itertools import filterfalse
+
+# objects = [True, False, 'True', 'False', [], ()]
+
+# print(*filterfalse(None, objects))
+
+# =
+
+# from itertools import cycle, compress
+
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# every_third = cycle([False, False, True])
+
+# print(*compress(numbers, every_third))
+
+# =
+
+# from itertools import islice
+
+# print(*islice('beegeek', 4))
+
+# =
+
+# from itertools import islice
+
+# print(*islice('stepik', 0, 6, 2))
+
+# ===
+
+# import itertools
+
+# def drop_while_negative(iterable):
+#     return itertools.islice(itertools.dropwhile(lambda x: x < 0, iterable), None)
+
+
+# numbers = [-3, -2, -1, 0, 1, 2, 3]
+
+# print(*drop_while_negative(numbers))
+
+# ===
+
+# import itertools
+
+# def drop_this(iterable, obj):
+#     return itertools.dropwhile(lambda x: x == obj, iterable)
+
+# numbers = [0, 0, 0, 1, 2, 3]
+
+# print(*drop_this(numbers, 0))
+
+# ===
+
+# import itertools
+
+# def first_true(iterable, predicate=None):
+#     if predicate is None:
+#         predicate = bool
+#     return next(itertools.filterfalse(lambda x: not predicate(x), iterable), None)
+
+# ===
+
+# import itertools
+
+# def take(iterable, n):
+#     return itertools.islice(iterable, n)
+
+#  ===
+
+# import itertools
+
+# def take_nth(iterable, n):
+#     try:
+#         return next(itertools.islice(iterable, n - 1, None))
+#     except StopIteration:
+#         return None
+
+
+# numbers = [11, 22, 33, 44, 55]
+
+# print(take_nth(numbers, 3))
+
+# ===
+# from itertools import tee
+
+# numbers = [1, 2, 3, 4, 5]
+
+# iter1, iter2 = tee(numbers)
+
+# numbers[1] = 20
+
+# print(next(iter1), next(iter2))
+# print(next(iter1), next(iter2))
+
+# ===
+
+# import itertools
+
+# def is_rising(iterable):
+#     pairs = itertools.pairwise(iterable)
+#     return all(x < y for x, y in pairs)
+
+# print(is_rising([1, 2, 3, 4, 5]))
+
+# ===
+
+# from itertools import zip_longest, islice
+
+# def grouper(iterable, n):
+#     args = [iter(iterable)] * n
+#     return zip_longest(*args)
+
+# numbers = [1, 2, 3, 4, 5, 6]
+
+# print(*grouper(numbers, 2))
+
+# =
+
+# from itertools import groupby
+
+# key_func = lambda x: x % 2
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# groups = groupby(sorted(numbers, key=key_func), key=key_func)
+
+# for _, group in groups:
+#     print(*group)
+
+# =
+
+# from itertools import groupby
+
+# groups = groupby('aaabbbcccaabb')
+
+# key, group = next(groups)
+
+# print(key, len(group)) 
+
+# =
+
+# from itertools import groupby
+
+# groups = groupby('aaabbbcccaabb')
+
+# key1, group1 = next(groups)
+# key2, group2 = next(groups)
+
+# print(key1, list(group1))
+
+# =
+
+# from collections import namedtuple
+# from itertools import groupby
+
+# Person = namedtuple('Person', ['name', 'age', 'height'])
+
+# persons = [Person('Tim', 63, 193), Person('Eva', 47, 158),
+#            Person('Mark', 71, 172), Person('Alex', 45, 193),
+#            Person('Jeff', 63, 193), Person('Ryan', 41, 184),
+#            Person('Ariana', 28, 158), Person('Liam', 69, 193)]
+
+# # Сортировка людей по росту
+# persons.sort(key=lambda p: p.height)
+
+# # Группировка людей по росту
+# groups = groupby(persons, key=lambda p: p.height)
+
+# # Вывод групп
+# for height, group in groups:
+#     names = ', '.join(sorted(p.name for p in group))
+#     print(f"{height}: {names}")
+
+# ===
+
+# from collections import namedtuple
+# from collections import Counter
+
+# Student = namedtuple('Student', ['surname', 'name', 'grade'])
+
+# students = [Student('Гагиев', 'Александр', 10), Student('Дедегкаев', 'Илья', 11), Student('Кодзаев', 'Георгий', 10),
+#             Student('Набокова', 'Алиса', 11), Student('Кораев', 'Артур', 10), Student('Шилин', 'Александр', 11),
+#             Student('Уртаева', 'Илина', 11), Student('Салбиев', 'Максим', 10), Student('Капустин', 'Илья', 11),
+#             Student('Гудцев', 'Таймураз', 11), Student('Перчиков', 'Максим', 10), Student('Чен', 'Илья', 11),
+#             Student('Елькина', 'Мария', 11),Student('Макоев', 'Руслан', 11), Student('Албегов', 'Хетаг', 11),
+#             Student('Щербак', 'Илья', 10), Student('Идрисов', 'Баграт', 11), Student('Гапбаев', 'Герман', 10),
+#             Student('Цивинская', 'Анна', 10), Student('Туткевич', 'Юрий', 11), Student('Мусиков', 'Андраник', 11),
+#             Student('Гадзиев', 'Георгий', 11), Student('Белов', 'Юрий', 11), Student('Акоева', 'Диана', 11),
+#             Student('Денисов', 'Илья', 11), Student('Букулова', 'Диана', 10), Student('Акоева', 'Лера', 11)]
+
+# # Используем Counter для подсчета частоты имен
+# name_counts = Counter(student.name for student in students)
+
+# # Находим наиболее часто встречаемое имя
+# most_common_name = name_counts.most_common(1)[0][0]
+
+# print(most_common_name)
+
+# ===
+
+# words = input().split()
+
+# # Создаем словарь для группировки слов по их длине
+# word_groups = {}
+
+# # Группируем слова по их длине
+# for word in words:
+#     length = len(word)
+#     if length in word_groups:
+#         word_groups[length].append(word)
+#     else:
+#         word_groups[length] = [word]
+
+# # Выводим группы слов
+# for length, group in sorted(word_groups.items()):
+#     words_str = ", ".join(sorted(group))
+#     print(f"{length} -> {words_str}")
+
+# ===
+
+# from itertools import groupby
+
+# tasks = [('Отдых', 'поспать днем', 3),
+#          ('Ответы на вопросы', 'ответить на вопросы в дискорде', 1),
+#          ('ЕГЭ Математика', 'доделать курс по параметрам', 1),
+#          ('Ответы на вопросы', 'ответить на вопросы в курсах', 2),
+#          ('Отдых', 'погулять вечером', 4),
+#          ('Курс по ооп', 'обсудить темы', 1),
+#          ('Урок по groupby', 'добавить задачи на программирование', 3),
+#          ('Урок по groupby', 'написать конспект', 1),
+#          ('Отдых', 'погулять днем', 2),
+#          ('Урок по groupby', 'добавить тестовые задачи', 2),
+#          ('Уборка', 'убраться в ванной', 2),
+#          ('Уборка', 'убраться в комнате', 1),
+#          ('Уборка', 'убраться на кухне', 3),
+#          ('Отдых', 'погулять утром', 1),
+#          ('Курс по ооп', 'обсудить задачи', 2)]
+
+# # Сортируем список дел по названию в алфавитном порядке
+# tasks_sorted = sorted(tasks, key=lambda x: x[0])
+
+# # Группируем дела по названию
+# grouped_tasks = groupby(tasks_sorted, key=lambda x: x[0])
+
+# # Выводим дела и действия в правильной очередности
+# for task, task_group in grouped_tasks:
+#     print(f"{task}:")
+#     actions = sorted(task_group, key=lambda x: x[2])
+#     for i, action in enumerate(actions, start=1):
+#         print(f"    {i}. {action[1]}")
+#     print()
+
+# ===
+
