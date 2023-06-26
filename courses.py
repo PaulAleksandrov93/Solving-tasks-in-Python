@@ -10061,3 +10061,112 @@
 
 # ===
 
+# from itertools import permutations
+
+# word = input()
+# for perm in sorted(set(permutations(word))):
+#     print(''.join(perm))
+
+# ===
+
+# from itertools import combinations, combinations_with_replacement, permutations
+# wallet = [100, 100, 50, 50, 50, 50, 20, 20, 20, 10, 10, 10, 10, 10, 5, 5, 1, 1, 1, 1, 1]
+# count = 0
+# for i in range(len(wallet)):
+#     for comb in set(combinations(wallet, i)):
+#         if sum(comb) == 100:
+#             pay = set(combinations(comb, i))
+#             count += len(pay)
+
+# print(count)
+
+# ===
+
+# from itertools import combinations, combinations_with_replacement, permutations
+# wallet = [100, 50, 20, 10, 5]
+# count = 0
+# for i in range(21):
+#     for comb in set(combinations_with_replacement(wallet, i)):
+#         if sum(comb) == 100:
+#             pay = set(combinations(comb, i))
+#             count += len(pay)
+
+# print(count)
+
+# ===
+
+# from collections import namedtuple
+# import itertools
+
+# Item = namedtuple('Item', ['name', 'mass', 'price'])
+
+# items = [Item('Обручальное кольцо', 7, 49_000),
+#          Item('Мобильный телефон', 200, 110_000),
+#          Item('Ноутбук', 2000, 150_000),
+#          Item('Ручка Паркер', 20, 37_000),
+#          Item('Статуэтка Оскар', 4000, 28_000),
+#          Item('Наушники', 150, 11_000),
+#          Item('Гитара', 1500, 32_000),
+#          Item('Золотая монета', 8, 140_000),
+#          Item('Фотоаппарат', 720, 79_000),
+#          Item('Лимитированные кроссовки', 300, 80_000)]
+# cap = int(input()) 
+# best_price = 0 
+# best_combination = None 
+# for i in range(1, len(items) + 1): 
+#     for combination in itertools.combinations(items, i): 
+#         cur_mass = sum(item.mass for item in combination) 
+#         if cur_mass <= cap: 
+#             cur_price = sum(item.price for item in combination) 
+#             if cur_price > best_price: 
+#                 best_price = cur_price 
+#                 best_combination = combination
+
+# if best_combination is None: 
+#     print('Рюкзак собрать не удастся') 
+# else: 
+#     for item in sorted(best_combination): 
+#         print(item.name)
+
+# ===
+
+# from itertools import product
+
+# numbers = [1, 2, 3]
+# letters = ['a', 'b']
+
+# print(*product(numbers, letters))
+
+# ===
+
+# from string import ascii_lowercase
+# from itertools import product
+
+# letters = ascii_lowercase[:8]
+# digits = [1, 2, 3, 4, 5, 6, 7, 8]
+
+# for combination in product(letters, digits):
+#     print(''.join(map(str, combination)), end=' ')
+
+# ===
+
+# from itertools import product
+
+# def password_gen():
+#     for combination in product(range(10), repeat=3):
+#         yield ''.join(map(str, combination))
+
+# ===
+
+# from itertools import product
+
+# n = int(input())
+# m = int(input())
+
+# digits = [str(i) if i < 10 else chr(i + 55) for i in range(n)]
+
+# numbers = product(digits, repeat=m)
+# result = ' '.join(''.join(number) for number in numbers)
+# print(result)
+
+
