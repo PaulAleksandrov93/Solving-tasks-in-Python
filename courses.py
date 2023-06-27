@@ -10169,4 +10169,26 @@
 # result = ' '.join(''.join(number) for number in numbers)
 # print(result)
 
+# ===
+
+# import re
+# import sys
+# s = sys.stdin.readlines()
+# ret = []
+# for phone in s:
+#     phone_num = phone.strip()
+#     if phone_num == '':
+#         break
+#     pattern = r'^(\d{1,3})[- ](\d{1,3})[- ](\d{4,10})$'
+#     match = re.match(pattern, phone_num)
+    
+#     if match:
+#         country_code, city_code, number = match.groups()
+#         # print(f"Код страны: {country_code}, Код города: {city_code}, Номер: {number}")
+#         r = f"Код страны: {country_code}, Код города: {city_code}, Номер: {number}"
+#         ret.append(r)
+# print(*ret, sep='\n')
+
+# ===
+
 
