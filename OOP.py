@@ -1204,32 +1204,195 @@
 # add('a', b='b', c='c', d=3, e=True)
 
 
-def recviz(fn):
-    def wrapped(*args, **kwargs):
-        arg_str = ""
-        for i, arg in enumerate(args):
-            if i > 0:
-                arg_str += ", "
-            arg_str += str(arg)
+# ===
 
-        for kw, val in kwargs.items():
-            if arg_str:
-                arg_str += ", "
-            arg_str += kw + "=" + str(val)
+# Решить!!
+# def recviz(fn):
+#     def wrapped(*args, **kwargs):
+#         arg_str = ""
+#         for i, arg in enumerate(args):
+#             if i > 0:
+#                 arg_str += ", "
+#             arg_str += str(arg)
 
-        print(f"-> {fn.__name__}({arg_str})")
-        res = fn(*args, **kwargs)
-        print("<-", res)
+#         for kw, val in kwargs.items():
+#             if arg_str:
+#                 arg_str += ", "
+#             arg_str += kw + "=" + str(val)
 
-        return res
+#         print(f"-> {fn.__name__}({arg_str})")
+#         res = fn(*args, **kwargs)
+#         print("<-", res)
 
-    return wrapped
+#         return res
 
-@recviz
+#     return wrapped
 
-def add(a, b, c, d, e):
-    return (a + b + c) * (d + e)
+# @recviz
 
-add('a', b='b', c='c', d=3, e=True)
+# def add(a, b, c, d, e):
+#     return (a + b + c) * (d + e)
+
+# add('a', b='b', c='c', d=3, e=True)
+
+# ===
+
+# from math import sqrt
+
+
+# class QuadraticPolynomial:
+#     def __init__(self, a, b, c):
+#         self._a = a
+#         self._b = b
+#         self._c = c
+#         self._d = 0
+    
+#     @property
+#     def a(self):
+#         return self._a
+    
+#     @a.setter
+#     def a(self, a):
+#         self._a = a
+    
+#     @property
+#     def b(self):
+#         return self._b
+    
+#     @b.setter
+#     def b(self, b):
+#         self._b = b
+    
+#     @property
+#     def c(self):
+#         return self._c
+    
+#     @c.setter
+#     def c(self, c):
+#         self._c = c
+       
+#     @property
+#     def x1(self):
+#         self._d = self._b**2 - 4 * self._a * self._c
+#         if self._d < 0:
+#             return None
+#         else:
+#             x1 = (-self._b - sqrt(self._d))/(2 * self._a)
+#             return x1
+
+#     @property
+#     def x2(self):
+#         self._d = self._b**2 - 4 * self._a * self._c
+#         if self._d < 0:
+#             return None
+#         else:
+#             x2 = (-self._b + sqrt(self._d))/(2 * self._a)
+#             return x2
+        
+#     @property
+#     def view(self):
+#         m1 = '+'
+#         m2 = '+'
+#         if self._b < 0:
+#             m1 = '-'
+#         if self._c < 0:
+#             m2 = '-'
+
+#         return f'{self._a}x^2 {m1} {abs(self._b)}x {m2} {abs(self._c)}'
+    
+#     @property
+#     def coefficients(self):
+#         return (self._a, self._b, self._c)
+    
+#     @coefficients.setter
+#     def coefficients(self, data):
+#         self._a = data[0]
+#         self._b = data[1]
+#         self._c = data[2]
+
+        
+# polynom = QuadraticPolynomial(1, 2, -3)
+
+# polynom.coefficients = (5, 3, 1)
+# print(polynom.x1)
+# print(polynom.x2)
+# print(polynom.view)
+
+# ===
+
+# class Color:
+
+#     def __init__(self, hexcode):
+#         self._hexcode = hexcode
+    
+#     @property
+#     def r(self):
+#         return int(self._hexcode[:2], 16)
+    
+#     @property
+#     def g(self):
+#         return int(self._hexcode[2:4], 16)
+    
+#     @property
+#     def b(self):
+#         return int(self._hexcode[4:], 16)
+
+#     @property
+#     def hexcode(self):
+#         return self._hexcode
+    
+#     @hexcode.setter
+#     def hexcode(self, hexcode):
+#         self._hexcode = hexcode
+        
+
+# color = Color('0000FF')
+
+# color.hexcode = 'A782E3'
+# print(color.hexcode)
+# print(color.r)
+# print(color.g)
+# print(color.b)
+
+# ===
+
+# class ElectricCar:
+#     def __init__(self, color):
+#         if not ElectricCar.is_valid(color):
+#             raise ValueError
+#         self._color = color
+
+#     @staticmethod
+#     def is_valid(data):
+#         return isinstance(data, str) and data.isalpha()
+
+
+# car = ElectricCar('black')
+
+# print(ElectricCar.is_valid(car, 'yellow'))
+
+# ===
+
+# class Circle:
+    
+#     def __init__(self, radius):
+#         self.radius = radius
+    
+#     def radius(self):
+#         return self.radius
+    
+#     def radius(self, radius):
+#         self.radius = radius
+
+#     @classmethod
+#     def from_diameter(cls, diameter):
+#         return cls(diameter/2)
+
+
+# circle = Circle.from_diameter(10)
+
+# print(circle.radius)
+
+# ===
 
 
