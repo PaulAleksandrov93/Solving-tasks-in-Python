@@ -1395,4 +1395,184 @@
 
 # ===
 
+# class Rectangle:
+#     def __init__(self, length, width):
+#         self.length = length
+#         self.width = width
+    
+#     def length(self):
+#         return self.length
+    
+#     def width(self):
+#         return self.width
+    
+#     @classmethod
+#     def square(cls, side):
+#         return cls(side, side)
 
+
+# rectangle = Rectangle.square(5)
+
+# print(rectangle.length)
+# print(rectangle.width)
+
+# ===
+
+# class QuadraticPolynomial:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+        
+#     def a(self):
+#         return self.a
+
+#     def b(self):
+#         return self.b
+    
+#     def c(self):
+#         return self.c
+    
+#     @classmethod
+#     def from_iterable(cls, iterobj):
+#         return cls(iterobj[0], iterobj[1], iterobj[2])
+    
+#     @classmethod
+#     def from_str(cls, strobj):
+#         if '.' in strobj:
+#             lst = list(map(lambda x: float(x), strobj.split()))
+#         else:
+#             lst = list(map(lambda x: float(x), strobj.split()))
+#         return cls(lst[0], lst[1], lst[2])
+
+
+# polynom = QuadraticPolynomial.from_str('-1.5 4 14.8')
+
+# print(polynom.a)
+# print(polynom.b)
+# print(polynom.c)
+# print(polynom.a + polynom.b + polynom.c)
+
+# ===
+
+# class Pet:
+#     pet_list = []
+    
+#     def __init__(self, name):
+#         self.name = name
+#         Pet.pet_list.append(self)
+        
+#     @classmethod
+#     def first_pet(cls):
+#         if cls.pet_list:
+#             return cls.pet_list[0]
+#         else:
+#             return None
+    
+#     @classmethod
+#     def last_pet(cls):
+#         if cls.pet_list:
+#             return cls.pet_list[-1]
+#         else:
+#             return None
+    
+#     @classmethod
+#     def num_of_pets(cls):
+#         return len(cls.pet_list)
+
+# ===
+
+# class StrExtension:
+#     def __init__(self):
+#         pass
+
+#     @staticmethod
+#     def remove_vowels(string):
+#         vowels = 'aeiouyAEIOUY'
+#         result = ''
+#         for char in string:
+#             if char not in vowels:
+#                 result += char
+#         return result
+
+#     @staticmethod
+#     def leave_alpha(string):
+#         result = ''
+#         for char in string:
+#             if char.isalpha():
+#                 result += char
+#         return result
+
+#     @staticmethod
+#     def replace_all(string, chars, char):
+#         for old_char in chars:
+#             string = string.replace(old_char, char)
+#         return string
+
+# ===
+
+# class CaseHelper:
+#     def init(self):
+#         pass
+    
+#     @staticmethod
+#     def is_snake(string):
+#         words = string.split('_')
+#         for word in words:
+#             if not word.islower():
+#                 return False
+#         return True
+    
+#     @staticmethod
+#     def is_upper_camel(string):
+#         if string[0].isupper():
+#             return True
+#         else:
+#             return False
+    
+#     @staticmethod
+#     def to_snake(string):
+#         result = ''
+#         for char in string:
+#             if char.isupper():
+#                 result += '_' + char.lower()
+#             else:
+#                 result += char
+#         return result
+    
+#     @staticmethod
+#     def to_upper_camel(string):
+#         result = ''
+#         words = string.split('_')
+#         for word in words:
+#             result += word.capitalize()
+#         return result
+        
+# print(CaseHelper.is_snake('beegeek'))
+# print(CaseHelper.is_snake('bee_geek'))
+# print(CaseHelper.is_snake('Beegeek'))
+# print(CaseHelper.is_snake('BeeGeek'))
+
+
+# ===
+
+from functools import singledispatchmethod
+
+
+class ElectricCar:
+    @singledispatchmethod
+    def __init__(self, color, owner):
+        self.color = color
+        self.owner = owner
+    
+    @__init__.register(list)
+    def _multiple_colors_owners(self, color, owner):
+        self.color = ', '.join(color)
+        self.owner = ', '.join(owner)
+
+
+car1 = ElectricCar('black', 'Elon')
+car2 = ElectricCar('yellow', ['Gvido', 'Hideo'])
+
+print(car1.color, car1.owner)
+print(car2.color, car2.owner)
