@@ -1556,23 +1556,240 @@
 
 # ===
 
-from functools import singledispatchmethod
+# from functools import singledispatchmethod
 
 
-class ElectricCar:
-    @singledispatchmethod
-    def __init__(self, color, owner):
-        self.color = color
-        self.owner = owner
+# class ElectricCar:
+#     @singledispatchmethod
+#     def __init__(self, color, owner):
+#         self.color = color
+#         self.owner = owner
     
-    @__init__.register(list)
-    def _multiple_colors_owners(self, color, owner):
-        self.color = ', '.join(color)
-        self.owner = ', '.join(owner)
+#     @__init__.register(list)
+#     def _multiple_colors_owners(self, color, owner):
+#         self.color = ', '.join(color)
+#         self.owner = ', '.join(owner)
 
 
-car1 = ElectricCar('black', 'Elon')
-car2 = ElectricCar('yellow', ['Gvido', 'Hideo'])
+# car1 = ElectricCar('black', 'Elon')
+# car2 = ElectricCar('yellow', ['Gvido', 'Hideo'])
 
-print(car1.color, car1.owner)
-print(car2.color, car2.owner)
+# print(car1.color, car1.owner)
+# print(car2.color, car2.owner)
+
+# ===
+
+# from functools import singledispatchmethod
+
+
+# class ElectricCar:
+#     @singledispatchmethod
+#     def __init__(self, color):
+#         raise ValueError
+
+#     @__init__.register(str)
+#     def _from_str(self, color):
+#         self.color = color
+    
+#     @__init__.register(list)
+#     def _from_list_tuple(self, color):
+#         self.color = ', '.join(color)
+
+
+# car1 = ElectricCar('yellow')
+# car2 = ElectricCar(['black', 'white'])
+
+# print(car1.color)
+# print(car2.color)
+
+# ===
+
+# from functools import singledispatch
+
+# class Processor:
+#     @singledispatch
+#     def process(data):
+#         raise TypeError('Аргумент переданного типа не поддерживается')
+    
+#     @process.register(str)
+#     def process_str(data):
+#         return data.upper()
+    
+#     @process.register(list)
+#     @staticmethod
+#     def process_list(data):
+#         return sorted(data)
+    
+#     @process.register(tuple)
+#     @staticmethod
+#     def process_tuple(data):
+#         return tuple(sorted(data))
+    
+#     @process.register(int)
+#     @process.register(float)
+#     @staticmethod
+#     def process_number(data):
+#         return data * 2
+
+# print(Processor.process(10))
+# print(Processor.process(5.2))
+# print(Processor.process('hello'))
+# print(Processor.process((4, 3, 2, 1)))
+# print(Processor.process([3, 2, 1]))
+
+# ===
+
+# from functools import singledispatch
+# class Negator:
+#     @singledispatch
+#     @staticmethod
+#     def neg(obj):
+#         raise TypeError('Аргумент переданного типа не поддерживается')
+
+#     @neg.register(int)
+#     @neg.register(float)
+#     @staticmethod
+#     def _(obj):
+#         return -obj
+
+#     @neg.register(bool)
+#     @staticmethod
+#     def _(obj):
+#         return not obj
+    
+
+# print(Negator.neg(11.0))
+# print(Negator.neg(-12))
+# print(Negator.neg(True))
+# print(Negator.neg(False))
+
+# ===
+
+# from functools import singledispatch
+
+# class Formatter:
+#     @singledispatch
+#     @staticmethod
+#     def format(obj):
+#         raise TypeError('Аргумент переданного типа не поддерживается')
+
+#     @format.register(int)
+#     @staticmethod
+#     def _(obj):
+#         print(f'Целое число: {obj}')
+
+#     @format.register(float)
+#     @staticmethod
+#     def _(obj):
+#         print(f'Вещественное число: {obj}')
+
+#     @format.register(list)
+#     @staticmethod
+#     def _(obj):
+#         print(f'Элементы списка: {", ".join(str(x) for x in obj)}')
+
+#     @format.register(tuple)
+#     @staticmethod
+#     def _(obj):
+#         print(f'Элементы кортежа: {", ".join(repr(x) for x in obj)}')
+
+#     @format.register(dict)
+#     @staticmethod
+#     def _(obj):
+#         pairs = [] 
+#         for key, value in obj.items(): 
+#             pair = (key, value) 
+#             pairs.append(pair) 
+#         output = ", ".join([f"({repr(pair[0])}, {repr(pair[1])})" for pair in pairs]) 
+#         print(f'Пары словаря: {output}')
+
+
+# Formatter.format({'Cuphead': 1, 'Mugman': 3})
+# Formatter.format({1: 'one', 2: 'two'})
+# Formatter.format({1: True, 0: False})
+
+# ===
+
+# from datetime import date 
+# from functools import singledispatch
+
+# class BirthInfo: 
+#     def init(self, birth_date): 
+#         self.birth_date = self.check_birth_date(birth_date)
+
+#     @singledispatch
+#     def check_birth_date(self, birth_date):
+#         raise TypeError('Аргумент переданного типа не поддерживается')
+
+#     @check_birth_date.register
+#     def _(self, birth_date: date):
+#         self.birth_date = birth_date
+
+#     @check_birth_date.register
+#     def _(self, birth_date: str):
+#         try:
+#             self.birth_date = date.fromisoformat(birth_date)
+#         except ValueError:
+#             raise TypeError('Аргумент переданного типа не поддерживается')
+
+#     @check_birth_date.register
+#     def _(self, birth_date: (list, tuple)):
+#         if len(birth_date) != 3:
+#             raise TypeError('Аргумент переданного типа не поддерживается')
+#         try:
+#             self.birth_date = date(*birth_date)
+#         except ValueError:
+#             raise TypeError('Аргумент переданного типа не поддерживается')
+
+#     @property
+#     def age(self):
+#         today = date.today()
+#         if today.month < self.birth_date.month or (today.month == self.birth_date.month and today.day < self.birth_date.day):
+#             return today.year - self.birth_date.year - 1
+#         else:
+#             return today.year - self.birth_date.year
+
+# ===
+from datetime import date
+from functools import singledispatch
+
+
+class BirthInfo:
+    @staticmethod
+    def check_birth_date(birth_date):
+        if isinstance(birth_date, date):
+            return birth_date
+        elif isinstance(birth_date, str):
+            try:
+                return date.fromisoformat(birth_date)
+            except ValueError:
+                raise TypeError('Аргумент переданного типа не поддерживается')
+        elif isinstance(birth_date, (list, tuple)):
+            if len(birth_date) != 3:
+                raise TypeError('Аргумент переданного типа не поддерживается')
+            try:
+                return date(*birth_date)
+            except ValueError:
+                raise TypeError('Аргумент переданного типа не поддерживается')
+        else:
+            raise TypeError('Аргумент переданного типа не поддерживается')
+
+    def __init__(self, birth_date):
+        self.birth_date = self.check_birth_date(birth_date)
+
+    @property
+    def age(self):
+        today = date.today()
+        if today.month < self.birth_date.month or (today.month == self.birth_date.month and today.day < self.birth_date.day):
+            return today.year - self.birth_date.year - 1
+        else:
+            return today.year - self.birth_date.year
+
+
+birthinfo1 = BirthInfo('2020-09-18')
+birthinfo2 = BirthInfo(date(2010, 10, 10))
+birthinfo3 = BirthInfo([2016, 1, 1])
+
+print(birthinfo1.birth_date)
+print(birthinfo2.birth_date)
+print(birthinfo3.birth_date)
