@@ -1,3 +1,5 @@
+
+
 #ChatbotGPT
 # def create_darts_board(side):
 #     board = [[0] * side for _ in range(side)]
@@ -1750,46 +1752,187 @@
 #             return today.year - self.birth_date.year
 
 # ===
-from datetime import date
-from functools import singledispatch
+
+# from datetime import date
+# from functools import singledispatch
 
 
-class BirthInfo:
-    @staticmethod
-    def check_birth_date(birth_date):
-        if isinstance(birth_date, date):
-            return birth_date
-        elif isinstance(birth_date, str):
-            try:
-                return date.fromisoformat(birth_date)
-            except ValueError:
-                raise TypeError('Аргумент переданного типа не поддерживается')
-        elif isinstance(birth_date, (list, tuple)):
-            if len(birth_date) != 3:
-                raise TypeError('Аргумент переданного типа не поддерживается')
-            try:
-                return date(*birth_date)
-            except ValueError:
-                raise TypeError('Аргумент переданного типа не поддерживается')
-        else:
-            raise TypeError('Аргумент переданного типа не поддерживается')
+# class BirthInfo:
+#     @staticmethod
+#     def check_birth_date(birth_date):
+#         if isinstance(birth_date, date):
+#             return birth_date
+#         elif isinstance(birth_date, str):
+#             try:
+#                 return date.fromisoformat(birth_date)
+#             except ValueError:
+#                 raise TypeError('Аргумент переданного типа не поддерживается')
+#         elif isinstance(birth_date, (list, tuple)):
+#             if len(birth_date) != 3:
+#                 raise TypeError('Аргумент переданного типа не поддерживается')
+#             try:
+#                 return date(*birth_date)
+#             except ValueError:
+#                 raise TypeError('Аргумент переданного типа не поддерживается')
+#         else:
+#             raise TypeError('Аргумент переданного типа не поддерживается')
 
-    def __init__(self, birth_date):
-        self.birth_date = self.check_birth_date(birth_date)
+#     def __init__(self, birth_date):
+#         self.birth_date = self.check_birth_date(birth_date)
 
-    @property
-    def age(self):
-        today = date.today()
-        if today.month < self.birth_date.month or (today.month == self.birth_date.month and today.day < self.birth_date.day):
-            return today.year - self.birth_date.year - 1
-        else:
-            return today.year - self.birth_date.year
+#     @property
+#     def age(self):
+#         today = date.today()
+#         if today.month < self.birth_date.month or (today.month == self.birth_date.month and today.day < self.birth_date.day):
+#             return today.year - self.birth_date.year - 1
+#         else:
+#             return today.year - self.birth_date.year
 
 
-birthinfo1 = BirthInfo('2020-09-18')
-birthinfo2 = BirthInfo(date(2010, 10, 10))
-birthinfo3 = BirthInfo([2016, 1, 1])
+# birthinfo1 = BirthInfo('2020-09-18')
+# birthinfo2 = BirthInfo(date(2010, 10, 10))
+# birthinfo3 = BirthInfo([2016, 1, 1])
 
-print(birthinfo1.birth_date)
-print(birthinfo2.birth_date)
-print(birthinfo3.birth_date)
+# print(birthinfo1.birth_date)
+# print(birthinfo2.birth_date)
+# print(birthinfo3.birth_date)
+
+# class Config:
+#     _instance = None
+    
+#     def __new__(cls):
+#         if cls._instance is None:
+#             cls._instance = super().__new__(cls)
+#             cls._instance.program_name = "GenerationPy"
+#             cls._instance.environment = "release"
+#             cls._instance.loglevel = "verbose"
+#             cls._instance.version = "1.0.0"
+#         return cls._instance
+
+# config = Config()
+# print(config.program_name)
+# print(config.environment)
+# print(config.loglevel)
+# print(config.version)
+
+# ===
+
+# class Book:
+#     def __init__(self, title, author, year):
+#         self.title = title
+#         self.author = author
+#         self.year = year
+
+#     def __str__(self):
+#         return f"{self.title} ({self.author}, {self.year})"
+
+#     def __repr__(self):
+#         return f"Book('{self.title}', '{self.author}', {self.year})"
+
+
+# book = Book('Изучаем Python', 'Марк Лутц', 2021) 
+# print(book) 
+# print(repr(book))
+
+# ===
+
+# class Rectangle: 
+#     def __init__(self, length, width): 
+#         self.length = length 
+#         self.width = width
+
+#     def __str__(self):
+#         return f"Rectangle({self.length}, {self.width})"
+
+#     def __repr__(self):
+#         return f"Rectangle({self.length}, {self.width})"
+
+
+# rectangle = Rectangle(1, 2) 
+# print(str(rectangle)) 
+# print(repr(rectangle))
+
+# ===
+
+# class Vector: 
+#     def __init__(self, x, y): 
+#         self.x = x 
+#         self.y = y
+
+#     def __str__(self):
+#         return f"Вектор на плоскости с координатами ({self.x}, {self.y})"
+
+#     def __repr__(self):
+#         return f"Vector({self.x}, {self.y})"
+
+# vector = Vector(1, 2) 
+# print(str(vector)) 
+# print(repr(vector))
+
+# ===
+
+# from functools import singledispatchmethod
+
+# class IPAddress:
+#     def __init__(self, ipaddress):
+#         self.ipaddress = ipaddress
+        
+#     def __str__(self):
+#         return str(self.ipaddress)
+    
+#     def __repr__(self):
+#         return f"IPAddress('{self.ipaddress}')"
+    
+#     @singledispatchmethod
+#     def from_input(self, ipinput):
+#         return self
+    
+#     @from_input.register(str)
+#     def _(self, ipinput):
+#         return IPAddress(ipinput)
+    
+#     @from_input.register(list)
+#     def _(self, ipinput):
+#         return IPAddress('.'.join(str(octet) for octet in ipinput))
+    
+#     @from_input.register(tuple)
+#     def _(self, ipinput):
+#         return IPAddress('.'.join(str(octet) for octet in ipinput))
+
+# ip = IPAddress('8.8.1.1')
+
+# print(ip.from_input(str(ip)))
+# print(repr(ip))
+
+# ip = IPAddress([1, 1, 10, 10])
+
+# print(ip.from_input(ip))
+# print(repr(ip))
+
+# ip = IPAddress((1, 1, 11, 11))
+
+# print(ip.from_input(ip))
+# print(repr(ip))
+
+
+# class IPAddress: 
+#     def __init__(self, ipaddress): 
+#         self.ipaddress = ipaddress
+
+#     def __str__(self):
+#         if isinstance(self.ipaddress, list) or isinstance(self.ipaddress, tuple):
+#             return '.'.join(str(i) for i in self.ipaddress)
+#         else:
+#             return str(self.ipaddress)
+    
+#     def __repr__(self):
+#         return "IPAddress('%s')" % self.__str__()
+
+
+# ip = IPAddress([1, 1, 10, 10])
+
+# print(str(ip))
+# print(repr(ip))
+
+# ===
+
