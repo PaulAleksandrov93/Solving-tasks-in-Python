@@ -1936,3 +1936,266 @@
 
 # ===
 
+# class PhoneNumber:
+#     def __init__(self, phone_number):
+#         self.phone_number = phone_number
+
+#     def __str__(self):
+#         phone = ''
+#         formattednumber = ''
+#         for digit in self.phone_number:
+#             if digit.isdigit():
+#                 phone += digit
+#         for i in range(len(phone)):
+#             if i == 0:
+#                 formattednumber += '('
+#             if i == 3:
+#                 formattednumber += ') '
+#             if i == 6:
+#                 formattednumber += '-'
+#             formattednumber += phone[i]
+#         return formattednumber
+
+#     def __repr__(self):
+#         phone = ''
+#         for digit in self.phone_number:
+#             if digit.isdigit():
+#                 phone += digit
+#         return f"PhoneNumber('{phone}')"
+
+
+# phone = PhoneNumber('918 396 3389')
+
+# print(str(phone))
+# print(repr(phone))
+
+# ===
+
+# class AnyClass: 
+#     def __init__(self, **kwargs): 
+#         for key, value in kwargs.items(): 
+#             setattr(self, key, value)
+
+#     def __str__(self):
+#         attributes = ', '.join([f"{key}={repr(value)}" for key, value in self.__dict__.items()])
+#         return f"AnyClass: {attributes}"
+
+#     def __repr__(self):
+#         attributes = ', '.join([f"{key}={repr(value)}" for key, value in self.__dict__.items()])
+#         return f"AnyClass({attributes})"
+
+
+# any = AnyClass()
+
+# print(str(any)) 
+# print(repr(any))
+
+# cowboy = AnyClass(name='John', surname='Marston')
+
+# print(str(cowboy)) 
+# print(repr(cowboy))
+
+# ===
+
+# class Vector: 
+#     def __init__(self, x, y): 
+#         self.x = x 
+#         self.y = y
+
+#     def __str__(self):
+#         return f"({self.x}, {self.y})"
+    
+#     def __repr__(self) -> str:
+#         return f"Vector({self.x}, {self.y})"
+
+#     def __eq__(self, other):
+#         if isinstance(other, Vector):
+#             return self.x == other.x and self.y == other.y
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             return self.x == other[0] and self.y == other[1]
+#         else:
+#             return NotImplemented
+
+#     def __ne__(self, other):
+#         if isinstance(other, Vector):
+#             return not (self == other)
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             return not (self == Vector(*other))
+#         else:
+#             return NotImplemented
+
+
+# vector = Vector(0, 1)
+
+# print(vector.__eq__(1))
+# print(vector.__ne__(1.1))
+# print(vector.__gt__(range(5)))
+# print(vector.__lt__([1, 2, 3]))
+# print(vector.__ge__({4, 5, 6}))
+# print(vector.__le__({1: 'one'}))
+
+# ===
+
+# import functools
+
+
+# @functools.total_ordering 
+# class Word: 
+#     def __init__(self, word): 
+#         self.word = word
+
+#     def __repr__(self):
+#         return f"Word('{self.word}')"
+
+#     def __str__(self):
+#         return f"{self.word.capitalize()}"
+
+#     def __eq__(self, other):
+#         if isinstance(other, Word):
+#             return len(self.word) == len(other.word)
+#         return NotImplemented
+
+#     def __lt__(self, other):
+#         if isinstance(other, Word):
+#             return len(self.word) < len(other.word)
+#         return NotImplemented
+    
+# print(Word('bee') == Word('hey'))
+# print(Word('bee') < Word('geek'))
+# print(Word('bee') > Word('geek'))
+# print(Word('bee') <= Word('geek'))
+# print(Word('bee') >= Word('gee'))
+
+# ===
+
+# class Month:
+#     def __init__(self, year, month):
+#         self.year = year
+#         self.month = month
+        
+#     def __repr__(self):
+#         return f"Month({self.year}, {self.month})"
+    
+#     def __str__(self):
+#         return f"{self.year}-{self.month}"
+    
+#     def __eq__(self, other):
+#         if isinstance(other, Month):
+#             return self.year == other.year and self.month == other.month
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             return self.year == other[0] and self.month == other[1]
+#         return NotImplemented
+    
+#     def __ne__(self, other):
+#         if isinstance(other, Month):
+#             return self.year != other.year or self.month != other.month
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             return self.year != other[0] or self.month != other[1]
+#         return NotImplemented
+    
+#     def __lt__(self, other):
+#         if isinstance(other, Month):
+#             if self.year < other.year:
+#                 return True
+#             elif self.year == other.year:
+#                 return self.month < other.month
+#             return False
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             if self.year < other[0]:
+#                 return True
+#             elif self.year == other[0]:
+#                 return self.month < other[1]
+#             return False
+#         return NotImplemented
+    
+#     def __gt__(self, other):
+#         if isinstance(other, Month):
+#             if self.year > other.year:
+#                 return True
+#             elif self.year == other.year:
+#                 return self.month > other.month
+#             return False
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             if self.year > other[0]:
+#                 return True
+#             elif self.year == other[0]:
+#                 return self.month > other[1]
+#             return False
+#         return NotImplemented
+    
+#     def __le__(self, other):
+#         if isinstance(other, Month):
+#             return self < other or self == other
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             return self < other or self == other
+#         return NotImplemented
+    
+#     def __ge__(self, other):
+#         if isinstance(other, Month):
+#             return self > other or self == other
+#         elif isinstance(other, tuple) and len(other) == 2:
+#             return self > other or self == other
+#         return NotImplemented
+    
+# print(Month(1999, 12) == Month(1999, 12))
+# print(Month(1999, 12) < Month(2000, 1))
+# print(Month(1999, 12) > Month(2000, 1))
+# print(Month(1999, 12) <= Month(1999, 12))
+# print(Month(1999, 12) >= Month(2000, 1))
+
+# ===
+
+class Version:
+    def __init__(self, version):
+        self.version = version
+
+    def __repr__(self):
+        return f"Version('{self.version}')"
+
+    def __str__(self):
+        return self.version
+
+    def __eq__(self, other):
+        if isinstance(other, Version):
+            v1 = list(map(int, self.version.split('.')))
+            v2 = list(map(int, other.version.split('.')))
+            length = max(len(v1), len(v2))
+            v1 += [0] * (length - len(v1))
+            v2 += [0] * (length - len(v2))
+            return v1 == v2
+        return NotImplemented
+
+    def __ne__(self, other):
+        return not self == other
+
+    def __lt__(self, other):
+        if isinstance(other, Version):
+            v1 = list(map(int, self.version.split('.')))
+            v2 = list(map(int, other.version.split('.')))
+            length = max(len(v1), len(v2))
+            v1 += [0] * (length - len(v1))
+            v2 += [0] * (length - len(v2))
+            return v1 < v2
+        return NotImplemented
+
+    def __gt__(self, other):
+        if isinstance(other, Version):
+            v1 = list(map(int, self.version.split('.')))
+            v2 = list(map(int, other.version.split('.')))
+            length = max(len(v1), len(v2))
+            v1 += [0] * (length - len(v1))
+            v2 += [0] * (length - len(v2))
+            return v1 > v2
+        return NotImplemented
+
+    def __le__(self, other):
+        return self < other or self == other
+
+    def __ge__(self, other):
+        return self > other or self == other
+
+
+versions = [Version('2'), Version('2.1'), Version('1.9.1')]
+print(sorted(versions))
+print(min(versions))
+print(max(versions))
