@@ -2145,57 +2145,228 @@
 
 # ===
 
-class Version:
-    def __init__(self, version):
-        self.version = version
+# class Version:
+#     def __init__(self, version):
+#         version_parts = version.split('.')
+#         self.major = int(version_parts[0]) if len(version_parts) >= 1 else 0
+#         self.minor = int(version_parts[1]) if len(version_parts) >= 2 else 0
+#         self.patch = int(version_parts[2]) if len(version_parts) >= 3 else 0
 
-    def __repr__(self):
-        return f"Version('{self.version}')"
+#     def __str__(self):
+#         return f'{self.major}.{self.minor}.{self.patch}'
 
-    def __str__(self):
-        return self.version
+#     def __repr__(self):
+#         return f'Version(\'{str(self)}\')'
 
-    def __eq__(self, other):
-        if isinstance(other, Version):
-            v1 = list(map(int, self.version.split('.')))
-            v2 = list(map(int, other.version.split('.')))
-            length = max(len(v1), len(v2))
-            v1 += [0] * (length - len(v1))
-            v2 += [0] * (length - len(v2))
-            return v1 == v2
-        return NotImplemented
+#     def __eq__(self, other):
+#         if isinstance(other, Version):
+#             return self.major == other.major and self.minor == other.minor and self.patch == other.patch
+#         return NotImplemented
 
-    def __ne__(self, other):
-        return not self == other
+#     def __ne__(self, other):
+#         if isinstance(other, Version):
+#             return not self.__eq__(other)
+#         return NotImplemented
 
-    def __lt__(self, other):
-        if isinstance(other, Version):
-            v1 = list(map(int, self.version.split('.')))
-            v2 = list(map(int, other.version.split('.')))
-            length = max(len(v1), len(v2))
-            v1 += [0] * (length - len(v1))
-            v2 += [0] * (length - len(v2))
-            return v1 < v2
-        return NotImplemented
+#     def __gt__(self, other):
+#         if isinstance(other, Version):
+#             if self.major > other.major:
+#                 return True
+#             elif self.major == other.major:
+#                 if self.minor > other.minor:
+#                     return True
+#                 elif self.minor == other.minor:
+#                     return self.patch > other.patch
+#             return False
+#         return NotImplemented
 
-    def __gt__(self, other):
-        if isinstance(other, Version):
-            v1 = list(map(int, self.version.split('.')))
-            v2 = list(map(int, other.version.split('.')))
-            length = max(len(v1), len(v2))
-            v1 += [0] * (length - len(v1))
-            v2 += [0] * (length - len(v2))
-            return v1 > v2
-        return NotImplemented
+#     def __lt__(self, other):
+#         if isinstance(other, Version):
+#             return other.__gt__(self)
+#         return NotImplemented
 
-    def __le__(self, other):
-        return self < other or self == other
+#     def __ge__(self, other):
+#         if isinstance(other, Version):
+#             return self.__eq__(other) or self.__gt__(other)
+#         return NotImplemented
 
-    def __ge__(self, other):
-        return self > other or self == other
+#     def __le__(self, other):
+#         if isinstance(other, Version):
+#             return self.__eq__(other) or self.__lt__(other)
+#         return NotImplemented
+
+#     def __hash__(self):
+#         return hash((self.major, self.minor, self.patch))
+
+#     def __bool__(self):
+#         return bool(self.major or self.minor or self.patch)
+
+#     def __int__(self):
+#         return self.major
 
 
-versions = [Version('2'), Version('2.1'), Version('1.9.1')]
-print(sorted(versions))
-print(min(versions))
-print(max(versions))
+# version = Version('25')
+
+# print(version.__eq__(1))
+# print(version.__ne__(1.1))
+# print(version.__gt__(range(5)))
+# print(version.__lt__([1, 2, 3]))
+# print(version.__ge__({4, 5, 6}))
+# print(version.__le__({1: 'one'}))
+
+# ===
+
+# class ReversibleString: 
+#     def __init__(self, string): 
+#         self.string = string
+
+#     def __str__(self):
+#         return self.string
+
+#     def __neg__(self):
+#         return ReversibleString(self.string[::-1])
+
+# string = ReversibleString('python')
+
+# print(string) 
+# print(-string)
+
+# ===
+
+# class Money: 
+#     def __init__(self, amount): 
+#         self.amount = amount
+
+#     def __str__(self):
+#         return f'{self.amount} руб.'
+
+#     def __pos__(self):
+#         return Money(abs(self.amount))
+
+#     def __neg__(self):
+#         return Money(-abs(self.amount))
+
+# money = Money(100) 
+# print(money) 
+# print(+money) 
+# print(-money)
+
+# money = Money(-100) 
+# print(money) 
+# print(+money) 
+# print(-money)
+
+# ===
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+    
+#     def __str__(self):
+#         return f'({self.x}, {self.y})'
+    
+#     def __repr__(self):
+#         return f'Vector({self.x}, {self.y})'
+    
+#     def __pos__(self):
+#         return Vector(self.x, self.y)
+    
+#     def __neg__(self):
+#         return Vector(-self.x, -self.y)
+    
+#     def __abs__(self):
+#         return (self.x ** 2 + self.y ** 2) ** 0.5
+
+# vector = Vector(3, -4)
+
+# print(+vector)
+# print(-vector)
+# print(abs(vector))
+
+# ===
+
+# class ColoredPoint:
+#     def __init__(self, x, y, color=(0, 0, 0)):
+#         self.x = x
+#         self.y = y
+#         self.color = color
+
+#     def __str__(self):
+#         return f'({self.x}, {self.y})'
+
+#     def __repr__(self):
+#         return f'ColoredPoint({self.x}, {self.y}, {self.color})'
+
+#     def __pos__(self):
+#         return ColoredPoint(self.x, self.y, self.color)
+
+#     def __neg__(self):
+#         return ColoredPoint(-self.x, -self.y, self.color)
+
+#     def __invert__(self):
+#         inverted_color = tuple(255 - c for c in self.color)
+#         return ColoredPoint(self.y, self.x, inverted_color)
+
+
+# point = ColoredPoint(2, -3) 
+# print(+point) 
+# print(-point) 
+# print(~point)
+
+# ===
+
+# import copy
+# class Matrix: 
+#     def __init__(self, rows, cols, value=0): 
+#         self.rows = rows 
+#         self.cols = cols 
+#         self.value = value 
+#         self.matrix = [[value] * cols for _ in range(rows)]
+
+#     def get_value(self, row, col):
+#         return self.matrix[row][col]
+
+#     def set_value(self, row, col, value):
+#         self.matrix[row][col] = value
+
+#     def __str__(self):
+#         return '\n'.join([' '.join(map(str, row)) for row in self.matrix])
+
+#     def __repr__(self):
+#         return f'Matrix({self.rows}, {self.cols})'
+
+#     def __pos__(self):
+#         return Matrix(self.rows, self.cols, value=1)
+
+#     def __neg__(self):
+#         r1 = Matrix(self.rows, self.cols, self.value)
+#         k1 = copy.deepcopy(self.matrix)
+#         r1.matrix = [[-val for val in row] for row in k1]
+#         return r1
+
+#     def __invert__(self):
+#         r1 = Matrix(self.cols, self.rows, self.value)
+#         k1 = copy.deepcopy(self.matrix)
+#         r1.matrix = [[k1[j][i] for j in range(self.rows)] for i in range(self.cols)]
+#         return r1
+
+#     def __round__(self, ndigits=None):
+#         if ndigits is None:
+#             r1 = Matrix(self.rows, self.cols, value=0)
+#             k1 = copy.deepcopy(self.matrix)
+#             r1.matrix = [[round(val) for val in row] for row in k1]
+#             return r1
+#         else:
+#             r1 = Matrix(self.rows, self.cols, value=0)
+#             k1 = copy.deepcopy(self.matrix)
+#             r1.matrix = [[round(val, ndigits) for val in row] for row in k1]
+#             return r1
+
+# matrix = Matrix(2, 3, 1)
+
+# print(+matrix)
+# print()
+# print(-matrix)
+
+# ===
