@@ -2370,3 +2370,221 @@
 # print(-matrix)
 
 # ===
+
+# class FoodInfo: 
+#     def __init__(self, proteins, fats, carbohydrates): 
+#         self.proteins = proteins 
+#         self.fats = fats 
+#         self.carbohydrates = carbohydrates
+
+#     def __add__(self, other):
+#         if isinstance(other, FoodInfo):
+#             total_proteins = self.proteins + other.proteins
+#             total_fats = self.fats + other.fats
+#             total_carbohydrates = self.carbohydrates + other.carbohydrates
+#             return FoodInfo(total_proteins, total_fats, total_carbohydrates)
+#         else:
+#             return NotImplemented
+
+#     def __mul__(self, n):
+#         if isinstance(n, int) or isinstance(n, float):
+#             total_proteins = self.proteins * n
+#             total_fats = self.fats * n
+#             total_carbohydrates = self.carbohydrates * n
+#             return FoodInfo(total_proteins, total_fats, total_carbohydrates)
+#         else:
+#             return NotImplemented
+
+#     def __truediv__(self, n):
+#         if isinstance(n, int) or isinstance(n, float):
+#             total_proteins = self.proteins / n
+#             total_fats = self.fats / n
+#             total_carbohydrates = self.carbohydrates / n
+#             return FoodInfo(total_proteins, total_fats, total_carbohydrates)
+#         else:
+#             return NotImplemented
+        
+#     def __floordiv__(self, n):
+#         if isinstance(n, int) or isinstance(n, float):
+#             total_proteins = self.proteins // n
+#             total_fats = self.fats // n
+#             total_carbohydrates = self.carbohydrates // n
+#             return FoodInfo(total_proteins, total_fats, total_carbohydrates)
+#         else:
+#             return NotImplemented
+    
+#     def __str__(self):
+#         return f"FoodInfo({self.proteins}, {self.fats}, {self.carbohydrates})"
+
+
+# pfc = [(751.26, 778.77, 947.51), (597.41, 508.5, 532.96), (800.55, 617.5, 525.14), (741.99, 785.53, 664.71),
+#        (525.69, 892.41, 541.41), (888.8, 802.56, 868.78), (609.65, 855.43, 949.44), (705.25, 592.28, 738.72),
+#        (514.88, 617.22, 557.5), (948.62, 938.7, 817.17), (783.98, 628.32, 686.38), (894.9, 815.81, 715.19),
+#        (586.79, 826.68, 637.5), (670.53, 683.69, 841.56), (583.9, 607.34, 853.35), (954.67, 950.76, 822.19),
+#        (718.94, 658.12, 537.2), (556.53, 686.17, 622.61), (699.8, 872.49, 908.3), (622.3, 920.97, 801.17)]
+
+# FoodInfo.__round__ = lambda instance: FoodInfo(
+#     round(instance.proteins, 2),
+#     round(instance.fats, 2),
+#     round(instance.carbohydrates, 2)
+# )
+
+# food1 = FoodInfo(1000, 2000, 3000)
+# for p, f, c in pfc:
+#     food2 = FoodInfo(p, f, c)
+#     add = food1 + food2
+#     mul = food1 * p
+#     truediv = food1 // c
+#     print(round(add), round(mul), round(truediv))
+
+# ===
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __str__(self):
+#         return f"Vector({self.x}, {self.y})"
+
+#     def __add__(self, other):
+#         if isinstance(other, Vector):
+#             return Vector(self.x + other.x, self.y + other.y)
+#         else:
+#             return NotImplemented
+
+#     def __sub__(self, other):
+#         if isinstance(other, Vector):
+#             return Vector(self.x - other.x, self.y - other.y)
+#         else:
+#             return NotImplemented
+
+#     def __mul__(self, other):
+#         if isinstance(other, (int, float)):
+#             return Vector(self.x * other, self.y * other)
+#         else:
+#             return NotImplemented
+
+#     def __rmul__(self, other):
+#         return self.__mul__(other)
+
+#     def __truediv__(self, other):
+#         if isinstance(other, (int, float)):
+#             return Vector(self.x / other, self.y / other)
+#         else:
+#             return NotImplemented
+
+
+# a = Vector(1, 2)
+# b = Vector(3, 4)
+
+# print(a + b)
+# print(a - b)
+# print(b + a)
+# print(b - a)
+
+# a = Vector(3, 4)
+
+# print(a * 2)
+# print(2 * a)
+# print(a / 2)
+
+# ===
+
+# class SuperString:
+#     def __init__(self, string):
+#         self.string = string
+  
+#     def __str__(self):
+#         return f"{self.string}"
+    
+#     def __add__(self, other):
+#         if isinstance(other, SuperString):
+#             return SuperString(self.string + other.string)
+#         else:
+#             return NotImplemented
+    
+#     def __mul__(self, other):
+#         if isinstance(other, int):
+#             return SuperString(self.string * other)
+#         else:
+#             return NotImplemented
+    
+#     def __rmul__(self, other):
+#         return self.__mul__(other)
+    
+#     def __truediv__(self, other):
+#         if isinstance(other, int):
+#             return SuperString(self.string[:len(self.string) // other])
+#         else:
+#             return NotImplemented
+    
+#     def __lshift__(self, other):
+#         if other == 0:
+#             return self
+#         if isinstance(other, int):
+#             return SuperString(self.string[:-other])
+#         else:
+#             return NotImplemented
+    
+#     def __rshift__(self, other):
+#         if isinstance(other, int):
+#             return SuperString(self.string[other:])
+#         else:
+#             return NotImplemented
+
+
+# s = SuperString('beegeek')
+# for i in range(9):
+#     print(f'{s} << {i} =', s << i)
+
+# ===
+
+# class PiggyBank:
+#     def __init__(self, coins):
+#         self.coins = coins
+
+#     def __repr__(self):
+#         return f'PiggyBank({self.coins})'
+
+#     def __mul__(self, other):
+#         return PiggyBank(self.coins * other)
+
+#     def __imul__(self, other):
+#         self.coins *= other
+
+
+# bank = PiggyBank(10)
+
+# bank *= 5
+
+# print(bank)
+
+# ===
+
+class Time:
+    def __init__(self, hours, minutes):
+        self.hours = hours
+        self.minutes = minutes
+
+    def __str__(self):
+        return "{:02d}:{:02d}".format(self.hours % 24, self.minutes % 60)
+
+    def __add__(self, other):
+        total_minutes = self.hours * 60 + self.minutes + other.hours * 60 + other.minutes
+        new_hours = (total_minutes // 60) % 24
+        new_minutes = total_minutes % 60
+        return Time(new_hours, new_minutes)
+
+    def __iadd__(self, other):
+        total_minutes = self.hours * 60 + self.minutes + other.hours * 60 + other.minutes
+        self.hours = (total_minutes // 60) % 24
+        self.minutes = total_minutes % 60
+        return self
+
+# Sample test case
+time1 = Time(25, 20)
+time2 = Time(10, 130)
+
+print(time1)
+print(time2)
