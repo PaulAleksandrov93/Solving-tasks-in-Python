@@ -2562,29 +2562,210 @@
 
 # ===
 
-class Time:
-    def __init__(self, hours, minutes):
-        self.hours = hours
-        self.minutes = minutes
+# class Time:
+#     def __init__(self, hours, minutes):
+#         self.hours = hours
+#         self.minutes = minutes
 
-    def __str__(self):
-        return "{:02d}:{:02d}".format(self.hours % 24, self.minutes % 60)
+#     def __str__(self):
+#         return "{:02d}:{:02d}".format(self.hours % 24, self.minutes % 60)
 
-    def __add__(self, other):
-        total_minutes = self.hours * 60 + self.minutes + other.hours * 60 + other.minutes
-        new_hours = (total_minutes // 60) % 24
-        new_minutes = total_minutes % 60
-        return Time(new_hours, new_minutes)
+#     def __add__(self, other):
+#         total_minutes = self.hours * 60 + self.minutes + other.hours * 60 + other.minutes
+#         new_hours = (total_minutes // 60) % 24
+#         new_minutes = total_minutes % 60
+#         return Time(new_hours, new_minutes)
 
-    def __iadd__(self, other):
-        total_minutes = self.hours * 60 + self.minutes + other.hours * 60 + other.minutes
-        self.hours = (total_minutes // 60) % 24
-        self.minutes = total_minutes % 60
-        return self
+#     def __iadd__(self, other):
+#         total_minutes = self.hours * 60 + self.minutes + other.hours * 60 + other.minutes
+#         self.hours = (total_minutes // 60) % 24
+#         self.minutes = total_minutes % 60
+#         return self
 
-# Sample test case
-time1 = Time(25, 20)
-time2 = Time(10, 130)
+# # Sample test case
+# time1 = Time(25, 20)
+# time2 = Time(10, 130)
 
-print(time1)
-print(time2)
+# print(time1)
+# print(time2)
+
+# ===
+
+# class Calculator:
+#     def __init__(self):
+#         pass
+    
+#     def __call__(self, a, b, operation):
+#         if operation == '+':
+#             return a + b
+#         elif operation == '-':
+#             return a - b
+#         elif operation == '*':
+#             return a * b
+#         elif operation == '/':
+#             if b == 0:
+#                 raise ValueError('Деление на ноль невозможно')
+#             return a / b
+#         else:
+#             raise ValueError('Некорректная операция')
+
+# # Пример использования
+# calculator = Calculator()
+# print(calculator(10, 5, '+'))  # 15
+# print(calculator(10, 5, '-'))  # 5
+# print(calculator(10, 5, '*'))  # 50
+# print(calculator(10, 5, '/'))  # 2.0
+
+# try:
+#     print(calculator(10, 0, '/'))  # Вызовет исключение ValueError
+# except ValueError as e:
+#     print(e)  # Деление на ноль невозможно
+
+# ===
+
+# class RaiseTo:
+#     def __init__(self, degree):
+#         self.degree = degree
+
+#     def __call__(self, x):
+#         return x ** self.degree
+
+# # Пример использования
+# raise_to_two = RaiseTo(2)
+# print(raise_to_two(2))  # 4
+# print(raise_to_two(3))  # 9
+# print(raise_to_two(4))  # 16
+
+# raise_to_three = RaiseTo(3)
+# raise_to_four = RaiseTo(4)
+# print(raise_to_three(3))  # 27
+# print(raise_to_four(2))  # 16
+
+# ===
+
+# import random
+
+# class Dice:
+#     def __init__(self, sides):
+#         self.sides = sides
+
+#     def __call__(self):
+#         return random.randint(1, self.sides)
+    
+# kingdice = Dice(6)
+# print(kingdice() in [1, 2, 3, 4, 5, 6])  # True
+# print(kingdice() in [1, 2, 3, 4, 5, 6])  # True
+# print(kingdice() in [7, 8, 9, 10])  # False
+
+# ===
+
+# class QuadraticPolynomial:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+
+#     def __call__(self, x):
+#         return self.a * x**2 + self.b * x + self.c
+
+# # Пример использования
+# func = QuadraticPolynomial(1, 2, 1)
+# print(func(1))  # 4
+# print(func(2))  # 9
+
+# func = QuadraticPolynomial(1, 3, 4)
+# print(func(1))  # 8
+# print(func(2))  # 14
+
+# ===
+
+# class Strip:
+#     def __init__(self, chars):
+#         self.chars = chars
+
+#     def __call__(self, string):
+#         return string.strip(self.chars)
+
+# # Пример использования
+# strip = Strip('!? ')
+
+# print(strip('     ?beegeek!'))  # beegeek
+# print(strip('!bee?geek!'))  # bee?geek
+
+# strip = Strip('.,+-')
+
+# print(strip('     --++beegeek++--'))  # --++beegeek
+# print(strip('-bee...geek-'))  # bee...geek
+# print(strip('-+,.b-e-e-g-e-e-k-+,.'))  # b-e-e-g-e-e-k
+
+# ===
+
+# class Filter:
+#     def __init__(self, predicate):
+#         self.predicate = predicate
+
+
+#     def __call__(self, iterable):
+#         if self.predicate is None:
+#             return list(filter(bool, iterable))
+#         else:
+#             return list(filter(self.predicate, iterable))
+        
+# leave_even = Filter(lambda x: x % 2 == 0)
+# numbers = [1, 2, 3, 4, 5, 6]
+
+# print(leave_even(numbers)) # [2, 4, 6]
+
+# ===
+
+# from datetime import date
+
+# class DateFormatter:
+#     def __init__(self, country_code):
+#         self.country_code = country_code
+
+#     def __call__(self, d):
+#         if self.country_code == 'ru':
+#             return d.strftime("%d.%m.%Y")
+#         elif self.country_code == 'us':
+#             return d.strftime("%m-%d-%Y")
+#         elif self.country_code == 'ca':
+#             return d.strftime("%Y-%m-%d")
+#         elif self.country_code == 'br':
+#             return d.strftime("%d/%m/%Y")
+#         elif self.country_code == 'fr':
+#             return d.strftime("%d.%m.%Y")
+#         elif self.country_code == 'pt':
+#             return d.strftime("%d-%m-%Y")
+
+# ===
+
+# def CountCalls(func):
+#     def wrapper(*args, **kwargs):
+#         wrapper.calls += 1
+#         return func(*args, **kwargs)
+    
+#     wrapper.calls = 0
+#     return wrapper
+
+# ===
+
+# def CachedFunction(func):
+#     cache = {}
+
+#     def wrapper(*args):
+#         if args not in cache:
+#             cache[args] = func(*args)
+#         return cache[args]
+
+#     wrapper.cache = cache
+#     return wrapper
+
+# ===
+
+# class SortKey:
+#     def __init__(self, *args):
+#         self.attributes = args
+
+#     def __call__(self, obj):
+#         return tuple(getattr(obj, attr) for attr in self.attributes)
