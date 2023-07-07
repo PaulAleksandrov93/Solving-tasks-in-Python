@@ -2769,3 +2769,181 @@
 
 #     def __call__(self, obj):
 #         return tuple(getattr(obj, attr) for attr in self.attributes)
+
+# ===
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __str__(self):
+#         return f"({self.x}, {self.y})"
+
+#     def __bool__(self):
+#         return self.x != 0 or self.y != 0
+
+#     def __int__(self):
+#         return int((self.x ** 2 + self.y ** 2) ** 0.5)
+
+#     def __float__(self):
+#         return float((self.x ** 2 + self.y ** 2) ** 0.5)
+
+#     def __complex__(self):
+#         return complex(self.x, self.y)
+
+# ===
+
+# class Temperature:
+#     def __init__(self, temperature):
+#         self.temperature = temperature
+
+#     def to_fahrenheit(self):
+#         return (self.temperature * 9/5) + 32
+
+#     @classmethod
+#     def from_fahrenheit(cls, fahrenheit):
+#         return cls((fahrenheit - 32) * 5/9)
+
+#     def __str__(self):
+#         count = len(str(self.temperature)[str(self.temperature).index('.')+1:])
+#         return f"{self.temperature:.{count}f}°C"
+
+#     def __bool__(self):
+#         return self.temperature > 0
+
+#     def __int__(self):
+#         return int(self.temperature)
+
+#     def __float__(self):
+#         return float(self.temperature)
+    
+
+# t = Temperature(5.5)
+
+# print(t)
+# print(int(t))
+# print(float(t))
+# print(t.to_fahrenheit())
+
+# ===
+
+# class RomanNumeral:
+#     ROMAN_VALUES = {
+#         'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000
+#     }
+
+#     def __init__(self, number):
+#         self.number = number
+
+#     def __str__(self):
+#         return self.number
+
+#     def __int__(self):
+#         result = 0
+#         previous_value = 0
+
+#         for char in reversed(self.number):
+#             current_value = self.ROMAN_VALUES[char]
+#             if current_value >= previous_value:
+#                 result += current_value
+#             else:
+#                 result -= current_value
+#             previous_value = current_value
+
+#         return result
+
+#     def __eq__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             return self.number == other.number
+#         return NotImplemented
+
+#     def __ne__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             return self.number != other.number
+#         return NotImplemented
+
+#     def __gt__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             return int(self) > int(other)
+#         return NotImplemented
+
+#     def __lt__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             return int(self) < int(other)
+#         return NotImplemented
+
+#     def __ge__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             return int(self) >= int(other)
+#         return NotImplemented
+
+#     def __le__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             return int(self) <= int(other)
+#         return NotImplemented
+
+#     def __add__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             result = int(self) + int(other)
+#             return RomanNumeral(convert_to_roman(result))
+#         return NotImplemented
+
+#     def __sub__(self, other):
+#         if isinstance(other, RomanNumeral):
+#             result = int(self) - int(other)
+#             return RomanNumeral(convert_to_roman(result))
+#         return NotImplemented
+
+# def convert_to_roman(number):
+#     ROMAN_NUMERALS = {
+#         1000: 'M', 900: 'CM', 500: 'D', 400: 'CD', 100: 'C',
+#         90: 'XC', 50: 'L', 40: 'XL', 10: 'X', 9: 'IX', 5: 'V', 4: 'IV', 1: 'I'
+#     }
+
+#     result = ''
+#     for value, symbol in ROMAN_NUMERALS.items():
+#         while number >= value:
+#             result += symbol
+#             number -= value
+#     return result
+
+# ===
+
+# class MyClass:
+#     def __init__(self, attr):
+#         self.attr = attr
+        
+#     def __getattribute__(self, name):
+#         return object.__getattribute__(self, name) + 1
+    
+#     def __getattr__(self, name):
+#         return 0
+
+
+# obj = MyClass(1)
+
+# print(obj.attribute)
+
+# ===
+
+# class Item:
+#     def __init__(self, name, price, quantity):
+#         self.name = name
+#         self.price = price
+#         self.quantity = quantity
+
+#     @property
+#     def name(self):
+#         return self.__name
+
+#     @name.setter
+#     def name(self, value):
+#         self.__name = value.title()
+
+#     @property
+#     def total(self):
+#         return self.price * self.quantity
+
+# ===
+
