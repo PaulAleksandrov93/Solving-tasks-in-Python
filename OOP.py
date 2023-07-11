@@ -2947,3 +2947,306 @@
 
 # ===
 
+# class Logger:
+#     def __setattr__(self, name, value):
+#         if hasattr(self, name):
+#             old_value = getattr(self, name)
+#             print(f"Изменение значения атрибута {name} на {value}")
+#             if old_value != value:
+#                 super().__setattr__(name, value)
+#         else:
+#             print(f"Изменение значения атрибута {name} на {value}")
+#             super().__setattr__(name, value)
+
+#     def __delattr__(self, name):
+#         print(f"Удаление атрибута {name}")
+#         super().__delattr__(name)
+
+# ===
+
+# from typing import Any
+
+# class Ord:
+#     def __getattribute__(self, __name: str) -> Any:
+#         return ord(__name)
+    
+# obj = Ord()
+
+# print(obj.a)
+# print(obj.b)    
+
+# ===
+
+# class DefaultObject:
+#     def __init__(self, default=None, **kwargs):
+#         self.default = default
+#         self.__dict__.update(kwargs)
+
+#     def __getattr__(self, name):
+#         return self.default
+
+# ===
+
+# class NonNegativeObject:
+#     def __init__(self, **kwargs):
+#         for name, value in kwargs.items():
+#             if isinstance(value, (int, float)):
+#                 setattr(self, name, abs(value))
+#             else:
+#                 setattr(self, name, value)
+
+# ===
+
+# class ProtectedObject:
+#     def __init__(self, **kwargs):
+#         object.__setattr__(self, "__dict__", kwargs)
+
+#     def __getattribute__(self, name):
+#         if name.startswith("_"):
+#             raise AttributeError("Доступ к защищенному атрибуту невозможен")
+#         return object.__getattribute__(self, name)
+
+#     def __setattr__(self, name, value):
+#         if name.startswith("_"):
+#             raise AttributeError("Доступ к защищенному атрибуту невозможен")
+#         object.__setattr__(self, name, value)
+
+#     def __delattr__(self, name):
+#         if name.startswith("_"):
+#             raise AttributeError("Доступ к защищенному атрибуту невозможен")
+#         object.__delattr__(self, name)
+
+
+# user = ProtectedObject(login='PG_kamiya', _password='alreadybanned')
+
+# try:
+#     user.__dict__['attr'] = 1
+# except AttributeError as e:
+#     print(e)
+
+# ===
+
+# def hash_function(obj):
+#     obj_str = str(obj)
+#     length = len(obj_str)
+#     sum1 = 0
+#     sum2 = 0
+
+#     for i in range(length // 2):
+#         sum1 += ord(obj_str[i]) * ord(obj_str[length - i - 1])
+
+#     for i, char in enumerate(obj_str):
+#         if length % 2 == 1 and i == length // 2:
+#             sum2 += ord(char)
+#         else:
+#             sum2 += ord(char) * (i + 1 if i % 2 == 0 else -i)
+
+#     result = (sum1 * sum2) % 123456791
+#     return result
+
+# print(hash_function(12345))
+
+# ===
+
+# class Cat:
+#     def __init__(self, name):
+#         self.name = name
+        
+#     def __eq__(self, other):
+#         if isinstance(other, Cat):
+#             return self.name == other.name
+#         return NotImplemented
+    
+#     def __hash__(self):
+#         return hash(self.name)
+
+
+# cat1 = Cat('Кемаль')
+# cat2 = Cat('Кемаль')
+
+# print(cat1 == cat2)
+# print(hash(cat1) == hash(cat2))
+
+# ===
+
+# class ColoredPoint:
+#     def __init__(self, x, y, color):
+#         self._x = x
+#         self._y = y
+#         self._color = color
+
+#     @property
+#     def x(self):
+#         return self._x
+
+#     @property
+#     def y(self):
+#         return self._y
+
+#     @property
+#     def color(self):
+#         return self._color
+
+#     def __eq__(self, other):
+#         if isinstance(other, ColoredPoint):
+#             return self._x == other._x and self._y == other._y and self._color == other._color
+#         return NotImplemented
+
+#     def __ne__(self, other):
+#         if isinstance(other, ColoredPoint):
+#             return not self.__eq__(other)
+#         return NotImplemented
+
+#     def __hash__(self):
+#         return hash((self._x, self._y, self._color))
+
+#     def __repr__(self):
+#         return f"ColoredPoint({self._x}, {self._y}, '{self._color}')"
+
+# ===
+
+# iters = [enumerate('beegeek'), [1, 2, 3, 4, 5], 'beegeek', range(10), map(str.upper, 'beegeek'), (1, 2, 3, 4, 5), filter(None, '11010111'), {'bee': 1, 'geek': 2}, {1, 2, 3, 4, 5}, zip('bee', 'geek')]
+
+# res = [i for i, n in enumerate(iters, start=1) if '__next__' in dir(n)]
+# print(*res, sep='\n')
+
+# ===
+
+# class Point: 
+#     def __init__(self, x, y, z): 
+#         self.x = x 
+#         self.y = y 
+#         self.z = z
+
+#     def __str__(self):
+#         return f"Point({self.x}, {self.y}, {self.z})"
+
+#     def __repr__(self):
+#         return f"Point({self.x}, {self.y}, {self.z})"
+
+#     def __iter__(self):
+#         yield self.x
+#         yield self.y
+#         yield self.z
+
+
+# # TEST_1:
+# point = Point(1, 2, 3)
+
+# print(list(point))
+
+# # TEST_2:
+# point = Point(1, 2, 3)
+# x, y, z = point
+
+# print(x, y, z)
+
+# # TEST_3:
+# points = [Point(4, 7, 0), Point(1, 5, 10), Point(12, 23, 44)]
+# print(points)
+
+# ===
+
+# class DevelopmentTeam:
+#     def __init__(self):
+#         self.juniors = []
+#         self.seniors = []
+
+#     def add_junior(self, *developers):
+#         self.juniors.extend(developers)
+
+#     def add_senior(self, *developers):
+#         self.seniors.extend(developers)
+
+#     def __iter__(self):
+#         for junior in self.juniors:
+#             yield junior, 'junior'
+#         for senior in self.seniors:
+#             yield senior, 'senior'
+
+
+# beegeek = DevelopmentTeam()
+
+# beegeek.add_junior('Timur')
+# beegeek.add_junior('Arthur', 'Valery')
+# beegeek.add_senior('Gvido')
+# print(*beegeek, sep='\n')
+
+# ===
+
+# class AttrsIterator:
+#     def __init__(self, obj):
+#         self.obj = obj
+#         self.attrs = list(obj.__dict__.items())
+#         self.index = 0
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if self.index >= len(self.attrs):
+#             raise StopIteration
+#         attr = self.attrs[self.index]
+#         self.index += 1
+#         return attr
+
+# class User:
+#     def __init__(self, name, surname, age):
+#         self.name = name
+#         self.surname = surname
+#         self.age = age
+        
+# user = User('Debbie', 'Harry', 77)
+# attrsiterator = AttrsIterator(user)
+
+# print(*attrsiterator)
+
+# ===  
+
+# class SkipIterator:
+#     def __init__(self, iterable, n):
+#         self.iterable = list(iterable)
+#         self.n = n
+#         self.index = 0
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         try:
+#             result = self.iterable[self.index]
+#             self.index += self.n + 1
+#             return result
+#         except IndexError:
+#             raise StopIteration
+        
+
+# skipiterator = SkipIterator(iter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 5)
+
+# print(*skipiterator)
+
+# ===
+
+# import random
+
+# class RandomLooper:
+#     def __init__(self, *iterables):
+#         self.iterables = iterables
+#         self.flatten_iterable = []
+#         self.generate_flatten_iterable()
+
+#     def generate_flatten_iterable(self):
+#         for iterable in self.iterables:
+#             self.flatten_iterable.extend(iterable)
+#         random.shuffle(self.flatten_iterable)
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if not self.flatten_iterable:
+#             raise StopIteration
+#         return self.flatten_iterable.pop()
+
+# ===
+
