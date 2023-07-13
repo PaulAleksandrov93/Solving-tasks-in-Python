@@ -3250,3 +3250,446 @@
 
 # ===
 
+# from copy import copy
+
+
+# class Peekable:
+#     def __init__(self, iterable):
+#         self.iterable = iter(iterable)
+
+#     def peek(self, default=Ellipsis):
+#         iterable = copy(self.iterable)
+#         item = next(iterable, Ellipsis)
+#         if item is Ellipsis and default is Ellipsis:
+#             raise StopIteration
+#         if item is Ellipsis:
+#             return default
+#         return item
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         item = next(self.iterable, Ellipsis)
+#         if item is Ellipsis:
+#             raise StopIteration
+#         return item
+            
+
+# # TEST_1:
+# iterator = Peekable('beegeek')
+
+# print(next(iterator))
+# print(next(iterator))
+# print(*iterator)
+
+# # TEST_2:
+# iterator = Peekable('Python')
+
+# print(next(iterator))
+# print(iterator.peek())
+# print(iterator.peek())
+# print(next(iterator))
+# print(iterator.peek())
+# print(iterator.peek())
+
+# # TEST_3:
+# iterator = Peekable('Python')
+
+# print(*iterator)
+# print(iterator.peek(None))
+
+# # TEST_4:
+# iterator = Peekable(iter([]))
+
+# try:
+#     iterator.peek()
+# except StopIteration:
+#     print('Пустой итератор')
+
+# try:
+#     next(iterator)
+# except StopIteration:
+#     print('Пустой итератор')
+
+# ===
+
+# class LoopTracker:
+#     def __init__(self, iterable):
+#         self.iterable = iterable
+#         self.iterator = iter(iterable)
+#         self._accesses = 0
+#         self._empty_accesses = 0
+#         self._last = None
+
+#     @property
+#     def accesses(self):
+#         return self._accesses
+
+#     @property
+#     def empty_accesses(self):
+#         return self._empty_accesses
+
+#     @property
+#     def first(self):
+#         try:
+#             return next(iter(self.iterable))
+#         except StopIteration:
+#             raise AttributeError("Исходный итерируемый объект пуст")
+
+#     @property
+#     def last(self):
+#         if self._last is None:
+#             raise AttributeError("Последнего элемента нет")
+#         return self._last
+
+#     def is_empty(self):
+#         return self._accesses == 0 and self._empty_accesses > 0
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         try:
+#             value = next(self.iterator)
+#             self._accesses += 1
+#             self._last = value
+#             return value
+#         except StopIteration:
+#             self._empty_accesses += 1
+#             raise
+
+# loop_tracker = LoopTracker([1, 2, 3])
+
+# print(loop_tracker.accesses)
+# next(loop_tracker)
+# next(loop_tracker)
+# print(loop_tracker.accesses)
+
+# ===
+
+# class ForgivingIndexer:
+#     def __init__(self, sequence):
+#         self.sequence = sequence
+
+#     def __getitem__(self, index):
+#         return self.sequence[int(index)]
+    
+#     def __len__(self):
+#         return len(self.sequence)
+
+
+# words = ForgivingIndexer(['beegeek', 'pygen', 'stepik', 'python'])
+
+# print(len(words[1.9]))
+
+# ===
+
+# import copy
+
+
+# class SequenceZip:
+#     def __init__(self, *sequences):
+#         self.sequences = copy.deepcopy(sequences)
+
+#     def __len__(self):
+#         if not self.sequences:
+#             return 0
+#         return min(len(seq) for seq in self.sequences)
+
+#     def __getitem__(self, index):
+#         if index < 0:
+#             raise IndexError("Index must be non-negative")
+
+#         if not self.sequences:
+#             raise IndexError("Index out of range")
+
+#         items = []
+#         for seq in self.sequences:
+#             if isinstance(seq, dict):
+#                 items.append(tuple(seq.values())[index])
+#             elif seq:
+#                 items.append(seq[index])
+#             else:
+#                 items.append(None)
+#         return tuple(items)
+
+
+# data = {'bee': 'bee', 'geek': 'geek'}
+
+# sequencezip = SequenceZip(data)
+# data['python'] = 'python'
+# print(data)
+# print(len(sequencezip))
+# print(list(sequencezip))
+
+# ===
+
+# class OrderedSet:
+#     def __init__(self, iterable=None):
+#         self.items = []
+#         self.set_items = set()
+#         if iterable is not None:
+#             for item in iterable:
+#                 self.add(item)
+
+#     def add(self, item):
+#         if item not in self.set_items:
+#             self.items.append(item)
+#             self.set_items.add(item)
+
+#     def discard(self, item):
+#         if item in self.set_items:
+#             self.items.remove(item)
+#             self.set_items.remove(item)
+
+#     def __len__(self):
+#         return len(self.items)
+
+#     def __iter__(self):
+#         return iter(self.items)
+
+#     def __contains__(self, item):
+#         return item in self.set_items
+
+#     def __eq__(self, other):
+#         if isinstance(other, OrderedSet):
+#             return self.items == other.items
+#         elif isinstance(other, set):
+#             return self.set_items == other
+#         return NotImplemented
+
+#     def __ne__(self, other):
+#         if isinstance(other, OrderedSet):
+#             return self.items != other.items
+#         elif isinstance(other, set):
+#             return self.set_items != other
+#         return NotImplemented
+    
+
+# orderedset = OrderedSet(['bee', 'python', 'stepik', 'bee', 'geek', 'python', 'bee'])
+
+# print(*orderedset)
+# print(len(orderedset))
+
+# ===
+
+# class AttrDict:
+#     def __init__(self, data=None):
+#         self._data = dict(data) if data is not None else {}
+
+#     def __getitem__(self, key):
+#         return self._data[key]
+
+#     def __getattr__(self, attr):
+#         return self._data[attr]
+
+#     def __setitem__(self, key, value):
+#         self._data[key] = value
+
+#     def __len__(self):
+#         return len(self._data)
+
+#     def __iter__(self):
+#         return iter(self._data.keys())
+    
+
+# attrdict = AttrDict()
+
+# attrdict['school_name'] = 'BEEGEEK'
+# print(attrdict['school_name'])
+# print(attrdict.school_name)
+
+# ===
+
+# class PermaDict:
+#     def __init__(self, data=None):
+#         self._data = dict(data) if data is not None else {}
+
+#     def __getitem__(self, key):
+#         return self._data[key]
+
+#     def __setitem__(self, key, value):
+#         if key in self._data:
+#             raise KeyError('Изменение значения по ключу невозможно')
+#         self._data[key] = value
+
+#     def __delitem__(self, key):
+#         del self._data[key]
+
+#     def __len__(self):
+#         return len(self._data)
+
+#     def __iter__(self):
+#         return iter(self._data)
+
+#     def keys(self):
+#         return self._data.keys()
+
+#     def values(self):
+#         return self._data.values()
+
+#     def items(self):
+#         return self._data.items()
+    
+
+# permadict = PermaDict({'name': 'Timur', 'city': 'Moscow', 'age': 30})
+
+# print(*permadict)
+# print(*permadict.keys())
+# print(*permadict.values())
+# print(*permadict.items())
+
+# ===
+
+# class HistoryDict:
+#     def __init__(self, data=None):
+#         self._data = {}
+#         if data:
+#             for key, value in data.items():
+#                 self._data[key] = [value]
+
+#     def __getitem__(self, key):
+#         return self._data[key][-1]
+
+#     def __setitem__(self, key, value):
+#         if key in self._data:
+#             self._data[key].append(value)
+#         else:
+#             self._data[key] = [value]
+
+#     def __delitem__(self, key):
+#         del self._data[key]
+
+#     def __len__(self):
+#         return len(self._data)
+
+#     def __iter__(self):
+#         return iter(self._data)
+
+#     def keys(self):
+#         return self._data.keys()
+
+#     def values(self):
+#         return (values[-1] for values in self._data.values())
+
+#     def items(self):
+#         return ((key, values[-1]) for key, values in self._data.items())
+
+#     def history(self, key):
+#         return self._data.get(key, [])
+
+#     def all_history(self):
+#         return {key: values.copy() for key, values in self._data.items()}
+
+# ===
+
+# class MutableString:
+#     def __init__(self, string=''):
+#         self._string = list(string)
+
+#     def lower(self):
+#         self._string = [char.lower() for char in self._string]
+
+#     def upper(self):
+#         self._string = [char.upper() for char in self._string]
+
+#     def __str__(self):
+#         return ''.join(self._string)
+
+#     def __repr__(self):
+#         return f"MutableString('{self}')"
+
+#     def __len__(self):
+#         return len(self._string)
+
+#     def __iter__(self):
+#         return iter(self._string)
+
+#     def __getitem__(self, index):
+#         if isinstance(index, slice):
+#             return MutableString(''.join(self._string[index]))
+#         return self._string[index]
+
+#     def __setitem__(self, index, value):
+#         if isinstance(index, slice):
+#             start, stop, step = index.indices(len(self._string))
+#             self._string[start:stop:step] = list(value)
+#         else:
+#             self._string[index] = value
+
+#     def __delitem__(self, index):
+#         if isinstance(index, slice):
+#             start, stop, step = index.indices(len(self._string))
+#             del self._string[start:stop:step]
+#         else:
+#             del self._string[index]
+
+#     def __add__(self, other):
+#         if isinstance(other, MutableString):
+#             return MutableString(''.join(self._string + other._string))
+#         elif isinstance(other, str):
+#             return MutableString(''.join(self._string + list(other)))
+#         else:
+#             return NotImplemented
+        
+
+# mutablestring = MutableString('beegeek')
+
+# mutablestring[-1] = 'ee'
+# print(mutablestring)
+
+# mutablestring[-2:] = 'geek'
+# print(mutablestring)
+
+# ===
+
+# class Grouper:
+#     def __init__(self, iterable, key):
+#         self.groups = {}
+#         self.key = key
+#         for item in iterable:
+#             self.add(item)
+
+#     def add(self, item):
+#         key = self.key(item)
+#         if key not in self.groups:
+#             self.groups[key] = []
+#         self.groups[key].append(item)
+
+#     def group_for(self, item):
+#         key = self.key(item)
+#         return key
+
+#     def __len__(self):
+#         return len(self.groups)
+
+#     def __iter__(self):
+#         return iter(self.groups.items())
+
+#     def __contains__(self, item):
+#         return item in self.groups
+    
+#     def __getitem__(self, key):
+#         return self.groups.get(key, [])
+    
+
+# grouper = Grouper(['bee', 'geek', 'one', 'two', 'five', 'hi'], key=len)
+
+# print(3 in grouper)
+# print('bee' in grouper)
+
+# ===
+
+
+# def log_for(logfile, date_str):
+#     with open(logfile, 'r', encoding='utf-8') as file:
+#         lines = file.readlines()
+
+#     filtered_lines = [line.split(' ')[1] + ' ' + line.split(' ', 2)[-1].strip() for line in lines if line.startswith(date_str)]
+
+#     output_file = f"log_for_{date_str}.txt"
+#     with open(output_file, 'w', encoding='utf-8') as file:
+#         file.write('\n'.join(filtered_lines))
+
+
