@@ -3692,4 +3692,923 @@
 #     with open(output_file, 'w', encoding='utf-8') as file:
 #         file.write('\n'.join(filtered_lines))
 
+# ===
 
+# class SuppressAll:
+#     def __enter__(self):
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         return True
+
+# ===
+
+# class Greeter:
+#     def __init__(self, name):
+#         self.name = name
+
+#     def __enter__(self):
+#         print(f"Приветствую, {self.name}!")
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         print(f"До встречи, {self.name}!")
+
+# ===
+
+# class Closer:
+#     def __init__(self, obj):
+#         self.obj = obj
+
+#     def __enter__(self):
+#         return self.obj
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         if hasattr(self.obj, 'close') and callable(getattr(self.obj, 'close')):
+#             self.obj.close()
+#         else:
+#             print("Незакрываемый объект")
+
+# ===
+
+# class ReadableTextFile:
+#     def __init__(self, filename):
+#         self.filename = filename
+#         self.file = None
+
+#     def __enter__(self):
+#         self.file = open(self.filename, 'r', encoding='utf-8')
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         if self.file:
+#             self.file.close()
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         line = self.file.readline()
+#         if line:
+#             return line.rstrip('\n')
+#         else:
+#             raise StopIteration
+
+# ===
+
+# class Reloopable:
+#     def __init__(self, file):
+#         self.file = file
+#         self.lines = []
+
+#     def __enter__(self):
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         self.file.close()
+#         self.lines = []
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if not self.lines:
+#             line = self.file.readline()
+#             if not line:
+#                 self.file.seek(0)
+#                 raise StopIteration
+#             self.lines.append(line.strip())
+#         return self.lines.pop(0)
+
+# ===
+
+# import sys
+
+
+# class UpperCaseWriter:
+#     def __init__(self, stdout):
+#         self.stdout = stdout
+
+#     def write(self, text):
+#         self.stdout.write(text.upper())
+
+#     def flush(self):
+#         self.stdout.flush()
+
+
+# class UpperPrint:
+#     def __init__(self):
+#         self.old_stdout = None
+
+#     def __enter__(self):
+#         self.old_stdout = sys.stdout
+#         sys.stdout = UpperCaseWriter(sys.stdout)
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         sys.stdout = self.old_stdout
+
+# ===
+
+# class Suppress:
+#     def __init__(self, *exception_types):
+#         self.exception_types = exception_types
+#         self.exception = None
+
+#     def __enter__(self):
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         if exc_type and issubclass(exc_type, self.exception_types):
+#             self.exception = exc_value
+#             return True
+
+# ===
+
+# import time
+
+
+# class AdvancedTimer:
+#     def __init__(self):
+#         self.last_run = None
+#         self.runs = []
+#         self.min = None
+#         self.max = None
+
+#     def __enter__(self):
+#         self.start_time = time.time()
+#         return self
+
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         elapsed_time = time.time() - self.start_time
+#         self.last_run = elapsed_time
+#         self.runs.append(elapsed_time)
+
+#         if self.min is None or elapsed_time < self.min:
+#             self.min = elapsed_time
+
+#         if self.max is None or elapsed_time > self.max:
+#             self.max = elapsed_time
+
+#         return False
+
+# ===
+
+# class HtmlTag:
+#     INDENT = 2
+#     depth = 0
+
+#     def __init__(self, tag, inline=False):
+#         self.tag = tag
+#         self.depth = type(self).depth
+#         self.inline = inline
+#         self.end_char = '' if inline else '\n'
+
+#     def __enter__(self):
+#         print(' ' * type(self).INDENT * self.depth + f'<{self.tag}>', end=self.end_char)
+#         type(self).depth += 1
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         if self.inline:
+#             print(f'</{self.tag}>')
+#         else:
+#             print(' ' * type(self).INDENT * self.depth + f'</{self.tag}>')
+#         type(self).depth -= 1
+
+#     def print(self, txt):
+#         if self.inline:
+#             print(txt, end=self.end_char)
+#         else:
+#             print(' ' * type(self).INDENT * (self.depth + 1) + txt, end=self.end_char)
+
+# ===
+
+# class TreeBuilder:
+#     def __init__(self):
+#         self.knots = [[]]
+        
+#     def __enter__(self):
+#         self.knots.append([])
+        
+#     def __exit__(self, *args, **kwargs):
+#         if self.knots[-1]:
+#             self.knots[-2].append(self.knots[-1])
+#         self.knots.pop()
+    
+#     def add(self, value):
+#         self.knots[-1].append(value)
+        
+#     def structure(self):
+#         return self.knots[-1]
+
+# ===
+
+# def hash_function(obj):
+#     obj_str = str(obj)
+#     first_step = 0
+#     second_step = 0
+#     for i in range(len(obj_str) // 2):
+#         first_step += ord(obj_str[i]) * ord(obj_str[-i - 1])
+#     if len(obj_str) % 2 != 0:
+#         first_step += ord(obj_str[len(obj_str) // 2])
+#     for i in range(len(obj_str)):
+#         second_step += (-1) ** i * ord(obj_str[i]) * (i + 1)
+#     return (first_step * second_step) % 123456791
+
+# print(hash_function('python'))
+
+# print(hash_function(12345))
+
+# ===
+
+# from contextlib import contextmanager
+
+# @contextmanager
+# def make_tag(tag):
+#     print(tag)  # Вывод строки tag при входе в блок with
+#     yield
+#     print(tag)  # Вывод строки tag после выхода из блока with
+
+# ===
+
+# import sys
+# from contextlib import contextmanager
+
+# @contextmanager
+# def reversed_print():
+#     old_stdout = sys.stdout
+#     sys.stdout = ReversedOutput(old_stdout)
+#     yield
+#     sys.stdout = old_stdout
+
+# class ReversedOutput:
+#     def __init__(self, stdout):
+#         self.stdout = stdout
+
+#     def write(self, text):
+#         self.stdout.write(text[::-1])
+
+#     def flush(self):
+#         pass
+
+# ===
+
+# from contextlib import contextmanager
+
+# @contextmanager
+# def safe_open(filename, mode='r'):
+#     file = None
+#     try:
+#         file = open(filename, mode)
+#         yield file, None
+#     except Exception as e:
+#         yield None, e
+#     finally:
+#         if file:
+#             file.close()
+
+# ===
+
+# import keyword
+
+# class NonKeyword:
+#     def __init__(self, name):
+#         self.name = name
+
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         try:
+#             return instance.__dict__[self.name]
+#         except KeyError:
+#             raise AttributeError('Атрибут не найден')
+
+#     def __set__(self, instance, value):
+#         if isinstance(value, str) and value in keyword.kwlist:
+#             raise ValueError('Некорректное значение')
+#         instance.__dict__[self.name] = value
+
+#     def __delete__(self, instance):
+#         del instance.__dict__[self.name]
+
+# ===
+
+# class MaxCallsException(Exception):
+#     pass
+
+# class LimitedTakes:
+#     def __init__(self, times):
+#         self.times = times
+#         self.count = 0
+#         self.value = None
+
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self.count >= self.times:
+#             raise MaxCallsException('Превышено количество доступных обращений')
+#         if self.value is None:
+#             raise AttributeError('Атрибут не найден')
+#         self.count += 1
+#         return self.value
+
+#     def __set__(self, instance, value):
+#         self.value = value
+
+#     def __delete__(self, instance):
+#         self.value = None
+#         self.count = 0
+
+# ===
+
+# class TypeChecked:
+#     def __init__(self, *types):
+#         self.types = types
+#         self.value = None
+
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self.value is None:
+#             raise AttributeError('Атрибут не найден')
+#         return self.value
+
+#     def __set__(self, instance, value):
+#         if not any(isinstance(value, t) for t in self.types):
+#             raise TypeError('Некорректное значение')
+#         self.value = value
+
+#     def __delete__(self, instance):
+#         self.value = None
+
+# ===
+
+# import random
+
+# class RandomNumber:
+#     def __init__(self, start, end, cache=False):
+#         self.start = start
+#         self.end = end
+#         self.cache = cache
+#         self.value = None
+
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self.cache and self.value is not None:
+#             return self.value
+#         self.value = random.randint(self.start, self.end)
+#         return self.value
+
+#     def __set__(self, instance, value):
+#         raise AttributeError('Изменение невозможно')
+
+#     def __delete__(self, instance):
+#         self.value = None
+
+# ===
+
+# class Versioned:
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if not hasattr(instance, '_values'):
+#             raise AttributeError('Атрибут не найден')
+#         values = instance._values
+#         if values:
+#             return values[-1]
+#         raise AttributeError('Атрибут не найден')
+
+#     def __set__(self, instance, value):
+#         if not hasattr(instance, '_values'):
+#             instance._values = []
+#         instance._values.append(value)
+
+#     def get_version(self, instance, n):
+#         if not hasattr(instance, '_values'):
+#             raise AttributeError('Атрибут не найден')
+#         values = instance._values
+#         if 1 <= n <= len(values):
+#             return values[n-1]
+#         raise ValueError('Некорректный номер версии')
+
+#     def set_version(self, instance, n):
+#         if not hasattr(instance, '_values'):
+#             raise AttributeError('Атрибут не найден')
+#         values = instance._values
+#         if 1 <= n <= len(values):
+#             instance._values = values[:n]
+#         else:
+#             raise ValueError('Некорректный номер версии')
+
+# ===
+
+# class Vehicle:
+#     pass
+
+# class LandVehicle(Vehicle):
+#     pass
+
+# class WaterVehicle(Vehicle):
+#     pass
+
+# class AirVehicle(Vehicle):
+#     pass
+
+# class Car(LandVehicle):
+#     pass
+
+# class Motorcycle(LandVehicle):
+#     pass
+
+# class Bicycle(LandVehicle):
+#     pass
+
+# class Propeller(AirVehicle):
+#     pass
+
+# class Jet(AirVehicle):
+#     pass
+
+# ===
+
+# class Shape:
+#     pass
+
+# class Polygon(Shape):
+#     pass
+
+# class Circle(Shape):
+#     pass
+
+# class Triangle(Polygon):
+#     pass
+
+# class Quadrilateral(Polygon):
+#     pass
+
+# class IsoscelesTriangle(Triangle):
+#     pass
+
+# class EquilateralTriangle(Triangle):
+#     pass
+
+# class Parallelogram(Quadrilateral):
+#     pass
+
+# class Rectangle(Parallelogram):
+#     pass
+
+# class Square(Rectangle):
+#     pass
+
+# ===
+
+# class Animal:
+#     def sleep(self):
+#         pass
+
+#     def eat(self):
+#         pass
+
+# class Fish(Animal):
+#     def swim(self):
+#         pass
+
+# class Bird(Animal):
+#     def lay_eggs(self):
+#         pass
+
+# class FlyingBird(Bird):
+#     def fly(self):
+#         pass
+
+# ===
+
+# class User:
+#     def __init__(self, name):
+#         self.name = name
+
+#     def skip_ads(self):
+#         return False
+
+# class PremiumUser(User):
+#     def skip_ads(self):
+#         return True
+
+# ===
+
+# class Validator:
+#     def __init__(self, obj):
+#         self.obj = obj
+
+#     def is_valid(self):
+#         return None
+
+
+# class NumberValidator(Validator):
+#     def is_valid(self):
+#         return isinstance(self.obj, (int, float))
+
+# ===
+
+# class Counter:
+#     def __init__(self, start=0):
+#         self.value = start
+
+#     def inc(self, num=1):
+#         self.value += num
+
+#     def dec(self, num=1):
+#         self.value -= num
+#         if self.value < 0:
+#             self.value = 0
+
+
+# class NonDecCounter(Counter):
+#     def dec(self, num=1):
+#         pass
+
+
+# class LimitedCounter(Counter):
+#     def __init__(self, start=0, limit=10):
+#         super().__init__(start)
+#         self.limit = limit
+
+#     def inc(self, num=1):
+#         super().inc(num)
+#         if self.value > self.limit:
+#             self.value = self.limit
+
+# ===
+
+# class WeatherWarning:
+#     def rain(self):
+#         print("Ожидаются сильные дожди и ливни с грозой")
+
+#     def snow(self):
+#         print("Ожидается снег и усиление ветра")
+
+#     def low_temperature(self):
+#         print("Ожидается сильное понижение температуры")
+
+
+# class WeatherWarningWithDate(WeatherWarning):
+#     def rain(self, date):
+#         print(date.strftime("%d.%m.%Y"))
+#         print("Ожидаются сильные дожди и ливни с грозой")
+
+#     def snow(self, date):
+#         print(date.strftime("%d.%m.%Y"))
+#         print("Ожидается снег и усиление ветра")
+
+#     def low_temperature(self, date):
+#         print(date.strftime("%d.%m.%Y"))
+#         print("Ожидается сильное понижение температуры")
+
+# ===
+
+# class Triangle:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+
+#     def perimeter(self):
+#         return self.a + self.b + self.c
+
+
+# class EquilateralTriangle(Triangle):
+#     def __init__(self, side):
+#         super().__init__(side, side, side)
+
+# ===
+
+# class Counter:
+#     def __init__(self, start=0):
+#         self.value = start
+
+#     def inc(self, n=1):
+#         self.value += n
+
+#     def dec(self, n=1):
+#         self.value = max(self.value - n, 0)
+        
+# class DoubledCounter(Counter):
+#     def inc(self, num=None):
+#         if num is None:
+#             self.value += 2
+#         else:
+#             self.value += 2 * num
+
+#     def dec(self, num=None):
+#         if num is None:
+#             self.value -= 2
+#         else:
+#             self.value -= 2 * num
+#         if self.value < 0:
+#             self.value = 0
+
+# ===
+
+# class Summator:
+#     def total(self, n):
+#         return sum(range(1, n+1))
+
+# class SquareSummator(Summator):
+#     def total(self, n):
+#         return sum(i*i for i in range(1, n+1))
+
+# class QubeSummator(Summator):
+#     def total(self, n):
+#         return sum(i*i*i for i in range(1, n+1))
+
+# class CustomSummator(Summator):
+#     def __init__(self, m):
+#         self.m = m
+    
+#     def total(self, n):
+#         return sum(i**self.m for i in range(1, n+1))
+
+# ===
+
+# class BasicPlan:
+#     can_stream = True
+#     can_download = True
+#     has_SD = True
+#     has_HD = False
+#     has_UHD = False
+#     num_of_devices = 1
+#     price = "8.99$"
+
+
+# class SilverPlan(BasicPlan):
+#     has_HD = True
+#     num_of_devices = 2
+#     price = "12.99$"
+
+
+# class GoldPlan(BasicPlan):
+#     has_HD = True
+#     has_UHD = True
+#     num_of_devices = 4
+#     price = "15.99$"
+
+# ===
+
+# class UpperPrintString(str):
+#     def __str__(self):
+#         return super().__str__().upper()
+
+# ===
+
+# class LowerString(str):
+#     def __new__(cls, obj=''):
+#         return super().__new__(cls, str(obj).lower())
+
+# ===
+
+# class FuzzyString(str):
+#     def __eq__(self, other):
+#         if isinstance(other, str):
+#             return self.lower() == other.lower()
+#         return NotImplemented
+
+#     def __ne__(self, other):
+#         if isinstance(other, str):
+#             return self.lower() != other.lower()
+#         return NotImplemented
+
+#     def __lt__(self, other):
+#         if isinstance(other, str):
+#             return self.lower() < other.lower()
+#         return NotImplemented
+
+#     def __gt__(self, other):
+#         if isinstance(other, str):
+#             return self.lower() > other.lower()
+#         return NotImplemented
+
+#     def __le__(self, other):
+#         if isinstance(other, str):
+#             return self.lower() <= other.lower()
+#         return NotImplemented
+
+#     def __ge__(self, other):
+#         if isinstance(other, str):
+#             return self.lower() >= other.lower()
+#         return NotImplemented
+
+#     def __contains__(self, item):
+#         if isinstance(item, str):
+#             return item.lower() in self.lower()
+#         return False
+
+# ===
+
+# class TitledText(str):
+#     def __new__(cls, content, text_title):
+#         instance = super().__new__(cls, content)
+#         instance.text_title = text_title
+#         return instance
+
+#     def title(self):
+#         return str(self.text_title)
+
+# ===
+
+# class RoundedInt(int):
+#     def __new__(cls, num, even=True):
+#         if even:
+#             rounded_num = num + 1 if num % 2 != 0 else num
+#         else:
+#             rounded_num = num if num % 2 != 0 else num + 1
+#         return super().__new__(cls, rounded_num)
+
+# ===
+
+# class ModularTuple(tuple):
+#     def __new__(cls, iterable=None, size=100):
+#         if iterable is None:
+#             iterable = []
+#         return super(ModularTuple, cls).__new__(cls, (x % size for x in iterable))
+
+# ===
+
+# from collections import UserList
+
+# class DefaultList(UserList):
+#     def __init__(self, iterable=None, default=None):
+#         super().__init__(iterable)
+#         self.default = default
+
+#     def __getitem__(self, index):
+#         try:
+#             return self.data[index]
+#         except IndexError:
+#             return self.default
+
+# ===
+
+# from collections import UserDict
+
+# class TwoWayDict(UserDict):
+#     def __setitem__(self, key, value):
+#         self.data[key] = value
+#         self.data[value] = key
+
+# ===
+
+# class AdvancedList(list):
+#     def join(self, separator=' '):
+#         return separator.join(map(str, self))
+
+#     def map(self, func):
+#         for i in range(len(self)):
+#             self[i] = func(self[i])
+
+#     def filter(self, func):
+#         self[:] = [x for x in self if func(x)]
+
+# ===
+
+# class ValueDict(dict):
+#     def key_of(self, value):
+#         for key, val in self.items():
+#             if val == value:
+#                 return key
+#         return None
+
+#     def keys_of(self, value):
+#         return [key for key, val in self.items() if val == value]
+
+# ===
+
+# from collections import UserDict
+
+# class BirthdayDict(UserDict):
+#     def __setitem__(self, key, value):
+#         if value in self.values():
+#             duplicate_keys = [k for k, v in self.items() if v == value]
+#             print(f"Хей, {key}, не только ты празднуешь день рождения в этот день!")
+#             for duplicate_key in duplicate_keys:
+#                 del self.data[duplicate_key]
+#         super().__setitem__(key, value)
+
+#     def update(self, other=None, **kwargs):
+#         if other:
+#             for key, value in other.items():
+#                 self[key] = value
+#         if kwargs:
+#             self.update(kwargs)
+
+# ===
+
+# from abc import ABC, abstractmethod
+
+# class Middle(ABC):
+#     def __init__(self, user_votes, expert_votes):
+#         self.user_votes = user_votes
+#         self.expert_votes = expert_votes
+
+#     def get_correct_user_votes(self):
+#         return [vote for vote in self.user_votes if 10 < vote < 90]
+
+#     def get_correct_expert_votes(self):
+#         return [vote for vote in self.expert_votes if 5 < vote < 95]
+
+#     @abstractmethod
+#     def get_average(self, users=True):
+#         pass
+
+# class Average(Middle):
+#     def get_average(self, users=True):
+#         if users:
+#             votes = self.get_correct_user_votes()
+#         else:
+#             votes = self.get_correct_expert_votes()
+
+#         return sum(votes) / len(votes)
+
+# class Median(Middle):
+#     def get_average(self, users=True):
+#         if users:
+#             votes = sorted(self.get_correct_user_votes())
+#         else:
+#             votes = sorted(self.get_correct_expert_votes())
+
+#         return votes[len(votes) // 2]
+
+# class Harmonic(Middle):
+#     def get_average(self, users=True):
+#         if users:
+#             votes = self.get_correct_user_votes()
+#         else:
+#             votes = self.get_correct_expert_votes()
+
+#         return len(votes) / sum(map(lambda vote: 1 / vote, votes))
+
+# ===
+
+from abc import ABC, abstractmethod
+
+class Validator(ABC):
+    def __set_name__(self, owner, name):
+        self.name = name
+
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+        return instance.__dict__.get(self.name, self)
+
+    def __set__(self, instance, value):
+        self.validate(value)
+        instance.__dict__[self.name] = value
+
+    @abstractmethod
+    def validate(self, value):
+        pass
+
+    def get_name(self, instance):
+        for attr_name, attr_value in instance.__class__.__dict__.items():
+            if attr_value is self:
+                return attr_name
+        raise AttributeError("Атрибут не найден")
+
+class Number(Validator):
+    def __init__(self, minvalue=None, maxvalue=None):
+        self.minvalue = minvalue
+        self.maxvalue = maxvalue
+
+    def validate(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError("Устанавливаемое значение должно быть числом")
+        if self.minvalue is not None and value < self.minvalue:
+            raise ValueError(f"Устанавливаемое число должно быть больше или равно {self.minvalue}")
+        if self.maxvalue is not None and value > self.maxvalue:
+            raise ValueError(f"Устанавливаемое число должно быть меньше или равно {self.maxvalue}")
+
+class String(Validator):
+    def __init__(self, minsize=None, maxsize=None, predicate=None):
+        self.minsize = minsize
+        self.maxsize = maxsize
+        self.predicate = predicate
+
+    def validate(self, value):
+        if not isinstance(value, str):
+            raise TypeError("Устанавливаемое значение должно быть строкой")
+        if self.minsize is not None and len(value) < self.minsize:
+            raise ValueError(f"Длина устанавливаемой строки должна быть больше или равна {self.minsize}")
+        if self.maxsize is not None and len(value) > self.maxsize:
+            raise ValueError(f"Длина устанавливаемой строки должна быть меньше или равна {self.maxsize}")
+        if self.predicate is not None and not self.predicate(value):
+            raise ValueError("Устанавливаемая строка не удовлетворяет дополнительным условиям")
+
+class Student:
+    age = Number(18, 99)
+
+student = Student()
+try:
+    print(student.age)
+except AttributeError as e:
+    print("Атрибут не найден")
